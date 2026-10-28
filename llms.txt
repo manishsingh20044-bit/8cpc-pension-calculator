@@ -1,0 +1,26 @@
+# 8th CPC Pension Calculator
+
+> Free, bilingual (English + Hindi) calculators for Indian central government pensioners and family pensioners to estimate their pension under the 8th Central Pay Commission. All 8th CPC figures are estimates: the official fitment factor has not been announced.
+
+Key facts (as of 28 October 2026):
+- 8th Central Pay Commission constituted 3 November 2025; chair Justice Ranjana Prakash Desai; report expected around mid-2027.
+- Official 8th CPC fitment factor: not yet announced. 7th CPC factor was 2.57. Common estimates range 1.92 to 2.86; unions demand 3.833.
+- Dearness Relief (DR): 60% from 1 January 2026. July 2026 DR not yet officially announced.
+- Formula: new basic pension = current basic pension x fitment factor (rounded up to the next rupee). Additional pension for age 80+ (20%), 85+ (30%), 90+ (40%), 95+ (50%), 100+ (100%).
+- Family pension: 30% of last pay (normal), 50% enhanced for the first period.
+
+## Calculators
+- [8th Pay Commission pension calculator](https://8cpc-pension-calculator.vercel.app/): new pension, DR comparison and arrears
+- [Hindi version / हिंदी](https://8cpc-pension-calculator.vercel.app/hi/)
+- [Basic pension finder](https://8cpc-pension-calculator.vercel.app/basic-pension-finder/): basic pension from the monthly bank credit or PPO
+- [Pre-2016 pensioners](https://8cpc-pension-calculator.vercel.app/pre-2016-pensioners/): higher of 2.57x and notional pay fixation
+- [DA / DR calculator](https://8cpc-pension-calculator.vercel.app/da-dr-calculator/)
+- [Fitment factor calculator](https://8cpc-pension-calculator.vercel.app/fitment-factor-calculator/)
+- [Family pension calculator](https://8cpc-pension-calculator.vercel.app/family-pension-calculator/)
+- [Defence pension calculator](https://8cpc-pension-calculator.vercel.app/defence-pension-calculator/)
+- [8th CPC pension chart](https://8cpc-pension-calculator.vercel.app/pension-chart/)
+
+## Sources and method
+- [How we calculate](https://8cpc-pension-calculator.vercel.app/how-we-calculate/)
+- [Latest 8th CPC update](https://8cpc-pension-calculator.vercel.app/latest-update/)
+- [Changelog](https://8cpc-pension-calculator.vercel.app/changelog/)
