@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 # `python3 tools/build.py`: canonicals, hreflang, OG/Twitter images, JSON-LD,
 # sitemap.xml, robots.txt and the contact address are all regenerated from it.
 # ---------------------------------------------------------------------------
-DOMAIN = "https://YOURDOMAIN.com"          # <<< replace with your real domain (no trailing slash)
+DOMAIN = "https://8cpc-pension-calculator.vercel.app"          # <<< replace with your real domain (no trailing slash)
 CONTACT_EMAIL = "contact@" + (urlparse(DOMAIN).hostname or "example.com").removeprefix("www.")  # override if you use another inbox
 SITE_NAME = "8th Pay Commission Pension Calculator"
 LAST_UPDATED = "2026-10-28"

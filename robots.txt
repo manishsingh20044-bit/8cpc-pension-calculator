@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 Disallow: /tools/
 
-Sitemap: https://YOURDOMAIN.com/sitemap.xml
+Sitemap: https://8cpc-pension-calculator.vercel.app/sitemap.xml
