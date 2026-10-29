@@ -10,6 +10,8 @@ page text below or change DOMAIN.
 import json, os, re, html, subprocess, sys
 from decimal import Decimal, ROUND_CEILING
 from urllib.parse import urlparse
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from seo_meta import SEO_META
 
 # ---------------------------------------------------------------------------
 # DOMAIN is the ONLY place the site address lives. Change it here and run
@@ -289,6 +291,10 @@ def page(p):
             f'<li><a href="{L(lang, h)}">{html.escape(t)}</a> — {html.escape(d)}</li>' for h, t, d in p["related"]) + "</ul></section>"
     calc = calc_block(lang, p.get("default_type", "sup"), p.get("extra", "")) if p.get("calc") else p.get("widget", "")
     skip = f'<a class="skip" href="#{"calc" if (p.get("calc") or p.get("widget")) else "main"}">{U["skip"]}</a>'
+    _o = SEO_META.get(path)
+    if _o:
+        if _o[0]: p["title"] = _o[0]
+        if _o[1]: p["desc"] = _o[1]
     title = html.escape(p["title"])
     desc = html.escape(p["desc"])
     verified_line = ""
