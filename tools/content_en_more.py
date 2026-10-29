@@ -318,7 +318,7 @@ _p["body"] = f"""
 <p>The method follows the way the 7th Pay Commission revised pensions in 2016: your basic pension is multiplied by a fitment factor and rounded up to the next rupee; additional pension for age is applied at the same percentage; and Dearness Relief is assumed to restart at zero on the new pension. Arrears are estimated as the monthly increase multiplied by the number of months between the assumed date of effect and the month the revised pension is first paid. Full details are on <a href="/how-we-calculate/">How we calculate</a>.</p>
 
 <h2>Accessibility and languages</h2>
-<p>The site is designed to work on low-cost phones and slow connections: no external fonts, no tracking scripts and no heavy images. Text can be enlarged with your browser's zoom, form fields have clear labels, and every page has a full Hindi version — tap "हिंदी" at the top of any page.</p>
+<p>The site is designed to work on low-cost phones and slow connections: no external fonts, only a lightweight analytics tag and no heavy images. Text can be enlarged with your browser's zoom, form fields have clear labels, and every page has a full Hindi version — tap "हिंदी" at the top of any page.</p>
 <p>Data last updated: {LAST_UPDATED_HUMAN}.</p>
 """
 _p["faqs"] = [

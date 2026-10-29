@@ -25,7 +25,7 @@ SEO_META = {
       "8th Pay Commission pension chart from ₹9,000 to ₹1,25,000 basic pension at every fitment factor. Find your row in seconds."),
 "/pre-2016-pensioners/": ("Pre-2016 Pensioners: 2.57× vs Notional Pay – 8th CPC Estimate",
       "Pre-2016 pensioners: compare the 2.57× route with notional pay fixation and see your estimated 8th CPC pension with examples."),
-"/privacy/": (None, "Privacy policy: calculations run in your browser, we collect no personal data and use no tracking cookies or sign-ups."),
+"/privacy/": (None, "Privacy policy: calculations run in your browser, no sign-ups; only Google Analytics for visitor counts."),
 "/hi/": ("8वां वेतन आयोग पेंशन कैलकुलेटर 2026 – नई पेंशन, DR, एरियर",
       "मुफ़्त 8वां वेतन आयोग पेंशन कैलकुलेटर: फिटमेंट फैक्टर 1.92 से 3.833 पर अपनी नई पेंशन, DR और एरियर का अनुमान तुरंत देखें।"),
 "/hi/basic-pension-finder/": (None, "बैंक में आई रकम या PPO से अपनी मूल पेंशन पता करें और 8वें वेतन आयोग में नई पेंशन का अनुमान देखें।"),

@@ -334,6 +334,8 @@ def page(p):
 <meta name="twitter:image" content="{DOMAIN}/og-image.png">
 <link rel="stylesheet" href="/assets/style.css">
 <script src="/assets/app.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-563KPY9L7M"></script>
+<script src="/assets/ga.js"></script>
 <!-- AdSense loader goes here after approval (see README.md and update CSP in vercel.json) -->
 {"".join(jsonld(x) for x in ld)}
 </head>
@@ -831,7 +833,7 @@ PAGES.append(dict(
 <p>If you spot a mistake — a wrong rule, a broken calculation or an outdated date — please write to us through the <a href="/contact/">contact page</a> with a link to the official order if you have one. Verified corrections are made promptly and the "last updated" date is changed.</p>
 
 <h2>Accessibility and languages</h2>
-<p>The site is designed to work on low-cost phones and slow connections: no external fonts, no tracking libraries and no heavy images. Text can be enlarged with your browser's zoom, form fields have clear labels, and the whole interface can be switched to Hindi with one tap. A full Hindi guide is available at <a href="/hi/">8वां वेतन आयोग पेंशन कैलकुलेटर</a>.</p>
+<p>The site is designed to work on low-cost phones and slow connections: no external fonts, only a lightweight analytics tag and no heavy images. Text can be enlarged with your browser's zoom, form fields have clear labels, and the whole interface can be switched to Hindi with one tap. A full Hindi guide is available at <a href="/hi/">8वां वेतन आयोग पेंशन कैलकुलेटर</a>.</p>
 <p>Data last updated: {LAST_UPDATED_HUMAN}.</p>
 """,
     faqs=[
@@ -846,7 +848,7 @@ PAGES.append(dict(
 PAGES.append(dict(
     path="/privacy/", crumb="Privacy Policy",
     title="Privacy Policy – 8th Pay Commission Pension Calculator",
-    desc="Privacy policy: the pension calculator runs in your browser, stores no personal data, uses no tracking cookies by default and explains what changes if advertising is enabled.",
+    desc="Privacy policy: the pension calculator runs in your browser, stores no personal data, uses only Google Analytics cookies for visitor counts and explains what changes if advertising is enabled.",
     h1="Privacy Policy",
     lead="Short version: the numbers you type stay on your device. We do not collect your name, PPO number, bank details or any other personal information.",
     body=f"""
@@ -856,13 +858,13 @@ PAGES.append(dict(
 <p>The calculator runs entirely in your web browser using JavaScript. The values you enter — basic pension, age, pension type, fitment factor, DR and months — are processed on your own device and are <strong>not sent to our server</strong> or to anyone else. When you press "Calculate", the values are added to the address bar of your browser (for example <code>?bp=20000&amp;ff=2.57</code>) so that you can bookmark or share the result. That link is only shared if you choose to share it.</p>
 
 <h2>2. Information stored on your device</h2>
-<p>If you switch between English and Hindi, your language choice is saved in your browser's local storage so the Site remembers it next time. It contains only the word "en" or "hi". You can clear it at any time from your browser settings. We do not set tracking cookies.</p>
+<p>If you switch between English and Hindi, your language choice is saved in your browser's local storage so the Site remembers it next time. It contains only the word "en" or "hi". You can clear it at any time from your browser settings. Apart from the Google Analytics cookies described in section 4, we do not set tracking cookies.</p>
 
 <h2>3. Server logs</h2>
 <p>The Site is hosted on Vercel. Like every web host, Vercel may automatically process technical information such as your IP address, browser type, the page requested and the time of the request, for security, abuse prevention and to deliver the Site. This processing is governed by Vercel's own privacy policy. We do not use these logs to identify individual visitors.</p>
 
 <h2>4. Analytics</h2>
-<p>At present the Site does not use any third-party analytics. If privacy-friendly, aggregate analytics are added in future, this policy will be updated before they are switched on.</p>
+<p>The Site uses Google Analytics 4 to understand, in aggregate, how many people visit and which pages and calculators are useful. Google Analytics sets first-party cookies (such as <code>_ga</code>) and collects information like pages viewed, approximate location (city/country), device and browser type, and how the visitor arrived. It does <strong>not</strong> receive the values you type into the calculator. IP addresses are not logged or stored by Google Analytics 4. You can block it with your browser's cookie settings, a content blocker, or the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt-out add-on</a>. See <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses data from sites that use its services</a>.</p>
 
 <h2>5. Advertising</h2>
 <p>The Site may in future display advertisements through Google AdSense to cover running costs. If that happens:</p>
@@ -895,7 +897,7 @@ PAGES.append(dict(
 """,
     faqs=[
         ("Do you store the pension amount I enter?", "No. The calculation runs in your browser and the numbers are not sent to our server."),
-        ("Do you use cookies?", "No tracking cookies are used. Only your language choice is saved in your browser's local storage. If ads are added in future, this policy will be updated first."),
+        ("Do you use cookies?", "Only Google Analytics cookies (such as _ga), used for aggregate visitor counts; the amounts you type are never sent to it. Your language choice is saved in your browser's local storage. If ads are added in future, this policy will be updated first."),
         ("Will you ever ask for my PPO or bank details?", "Never. Anyone asking for PPO, bank, Aadhaar, PAN or OTP details in our name is a fraud."),
     ],
     related=rel("/", "/hi/"),
