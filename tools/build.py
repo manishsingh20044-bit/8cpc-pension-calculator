@@ -28,6 +28,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Dated, newest first. Add an entry whenever a rate, rule or page changes.
 # (date ISO, date human, [entries as HTML strings])
 CHANGELOG = [
+    ("2026-10-29", "29 October 2026", [
+        "Added <a href=\"/pension-by-amount/\">pension by amount</a>: one page for each basic pension from ₹9,000 to ₹1,00,000 (18 amounts, English and Hindi) with the estimate at every fitment factor, DR, arrears, the 40% commutation case and family pension. Numbers come from the same settings and rounding as the calculator. No rates changed.",
+    ]),
     ("2026-10-28", "28 October 2026 (afternoon)", [
         "Added the <a href=\"/basic-pension-finder/\">basic pension finder</a>: works back from the monthly bank credit (DR, additional pension, commutation deduction, Fixed Medical Allowance and other deductions) or from PPO figures, and pre-fills the main calculator.",
         "Added the <a href=\"/pre-2016-pensioners/\">pre-2016 pensioners calculator</a>: both 7th CPC methods (pension on 31.12.2015 × 2.57, and 50%/30% of notional pay on 01.01.2016) as set out in DoPPW OMs dated 04.08.2016 and 12.05.2017, checked against the worked examples in the 12.05.2017 OM.",
@@ -91,7 +94,7 @@ NAV_TXT = {lg: {k: I18N[lg][k] for k in ("nav_home", "nav_finder", "nav_family",
                                          "nav_fitment", "nav_defence", "nav_chart")} for lg in ("en", "hi")}
 # footer: (href, i18n key)
 FOOTER_TOOLS = [("/fitment-factor-calculator/", "nav_fitment"), ("/defence-pension-calculator/", "nav_defence"),
-                ("/pension-chart/", "nav_chart"), ("/basic-pension-finder/", "nav_finder"), ("/pre-2016-pensioners/", "nav_pre2016"),
+                ("/pension-chart/", "nav_chart"), ("/pension-by-amount/", "nav_byamount"), ("/basic-pension-finder/", "nav_finder"), ("/pre-2016-pensioners/", "nav_pre2016"),
                 ("/da-dr-calculator/", "nav_dadr"), ("/commutation-calculator/", "nav_commutation"),
                 ("/minimum-pension-8th-pay-commission/", "nav_minpension"), ("/life-certificate/", "nav_lifecert")]
 FOOTER_SITE = [("/how-we-calculate/", "ftr_how"), ("/editorial-policy/", "ftr_editorial"), ("/changelog/", "ftr_changelog"), ("/latest-update/", "nav_updates"),
@@ -240,7 +243,7 @@ def page(p):
     path = p["path"]
     url = DOMAIN + path
     home = "/hi/" if lang == "hi" else "/"
-    crumbs = [(U["home"], home)] + ([(p["crumb"], path)] if path not in ("/", "/hi/") else [])
+    crumbs = [(U["home"], home)] + list(p.get("parents", [])) + ([(p["crumb"], path)] if path not in ("/", "/hi/") else [])
     cp = counterpart(path)
     cur_attr = ' aria-current="page"'
     nav = "".join(
@@ -265,7 +268,7 @@ def page(p):
     ld.append({"@context": "https://schema.org", "@type": "WebPage", "@id": url + "#webpage", "url": url,
                "name": p["title"], "description": p["desc"], "inLanguage": "hi-IN" if lang == "hi" else "en-IN",
                "isPartOf": {"@id": DOMAIN + "/#website"}, "publisher": {"@id": DOMAIN + "/#org"},
-               "dateModified": LAST_UPDATED, "datePublished": "2026-10-28",
+               "dateModified": p.get("lastmod", LAST_UPDATED), "datePublished": p.get("published", "2026-10-28"),
                **({"lastReviewed": LAST_UPDATED} if p.get("sources") else {}),
                **({"workTranslation" if lang == "en" else "translationOfWork": {"@id": DOMAIN + cp + "#webpage"}} if cp else {})})
     if path in ("/", "/hi/"):
@@ -1388,7 +1391,7 @@ PAGES.append(dict(
 
 
 # ------------------------------------------------------------------ bilingual content (added 28 Oct 2026)
-for _f in ("content_shared.py", "content_en_more.py", "content_hi_tools.py", "content_hi_tools2.py", "content_hi_info.py", "content_depth.py"):
+for _f in ("content_shared.py", "content_en_more.py", "content_hi_tools.py", "content_hi_tools2.py", "content_hi_info.py", "content_depth.py", "content_amounts.py"):
     exec(compile(open(os.path.join(ROOT, "tools", _f), encoding="utf-8").read(), _f, "exec"))
 
 
@@ -1427,6 +1430,10 @@ Key facts (as of 28 October 2026, verified against official orders):
 - [Defence pension calculator]({DOMAIN}/defence-pension-calculator/) | [हिंदी]({DOMAIN}/hi/defence-pension-calculator/)
 - [Commutation & restoration calculator]({DOMAIN}/commutation-calculator/) | [हिंदी]({DOMAIN}/hi/commutation-calculator/)
 - [8th CPC pension chart]({DOMAIN}/pension-chart/) | [हिंदी]({DOMAIN}/hi/pension-chart/)
+- [8th CPC pension by amount]({DOMAIN}/pension-by-amount/) | [हिंदी]({DOMAIN}/hi/pension-by-amount/): one page per basic pension, Rs 9,000 to Rs 1,00,000
+
+## Pension by amount (estimate at every fitment factor, DR, arrears, commutation, family pension)
+{AMOUNT_LINKS}
 
 ## Guides
 - [Minimum pension under the 8th CPC]({DOMAIN}/minimum-pension-8th-pay-commission/) | [हिंदी]({DOMAIN}/hi/minimum-pension-8th-pay-commission/)
@@ -1461,14 +1468,14 @@ def main():
     with open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8") as f:
         f.write(page(p404).replace(f'<link rel="canonical" href="{DOMAIN}/404/">\n', ""))
     # sitemap
-    urls = "".join(f"<url><loc>{DOMAIN}{p['path']}</loc><lastmod>{LAST_UPDATED}</lastmod></url>\n" for p in PAGES)
+    urls = "".join(f"<url><loc>{DOMAIN}{p['path']}</loc><lastmod>{p.get('lastmod', LAST_UPDATED)}</lastmod></url>\n" for p in PAGES)
     with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
     export_rates()
     with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"# Generated by tools/build.py from DOMAIN\nUser-agent: *\nAllow: /\nDisallow: /tools/\n\n# AI / answer engines welcome (GEO)\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Bingbot\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
     with open(os.path.join(ROOT, "llms.txt"), "w", encoding="utf-8") as f:
-        f.write(LLMS_TXT.replace("{DOMAIN}", DOMAIN))
+        f.write(LLMS_TXT.replace("{AMOUNT_LINKS}", "\n".join(f"- [Rs {b:,} basic pension]({{DOMAIN}}/pension-{b}-8th-pay-commission/) | [हिंदी]({{DOMAIN}}/hi/pension-{b}-8th-pay-commission/)" for b in AMT_LIST)).replace("{DOMAIN}", DOMAIN))
     for r in report:
         print(f"{r[0]:32s} words={r[1]:5d} html={r[2]/1024:.1f}KB")
 

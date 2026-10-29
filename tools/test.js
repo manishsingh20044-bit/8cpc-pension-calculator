@@ -124,4 +124,36 @@ delete rates._note;
 assert.deepStrictEqual(rates, JSON.parse(JSON.stringify(A.CONFIG)), "assets/rates.json is stale: run node tools/export-rates.js");
 console.log("DA/DR: OK; rates.json in sync with CONFIG");
 
+/* ===== amount pages (29 Oct 2026): every row of every /pension-<amount>-8th-pay-commission/ table must equal calcPension() ===== */
+const AMTS = [9000, 10000, 12000, 15000, 18000, 20000, 22000, 25000, 30000, 35000, 40000, 45000, 50000, 60000, 70000, 75000, 80000, 100000];
+let amtRows = 0;
+for (const b of AMTS) for (const pre of ["", "hi/"]) {
+  const file = path.join(__dirname, "..", pre + `pension-${b}-8th-pay-commission`, "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  const rows = [...html.matchAll(/data-f="([\d.]+)" data-nb="(\d+)" data-total="(\d+)" data-today="(\d+)" data-inc="(-?\d+)" data-arrears="(\d+)"/g)];
+  assert.strictEqual(rows.length, A.CONFIG.presetFactors.length, `${file}: one row per preset factor`);
+  for (const m of rows) {
+    const r = A.calcPension({ basic: b, type: "sup", age: 70, factor: Number(m[1]) });
+    assert.strictEqual(Number(m[2]), r.revised.basic, `${b} x${m[1]} new basic`);
+    assert.strictEqual(Number(m[3]), r.revised.total, `${b} x${m[1]} total`);
+    assert.strictEqual(Number(m[4]), r.current.total, `${b} today`);
+    assert.strictEqual(Number(m[5]), r.increase, `${b} x${m[1]} increase`);
+    assert.strictEqual(Number(m[6]), r.arrears, `${b} x${m[1]} arrears`);
+    amtRows++;
+  }
+  // the first paragraph states the 1.92-3.833 range
+  const lo = A.calcPension({ basic: b, type: "sup", age: 70, factor: 1.92 }).revised.basic;
+  const hi = A.calcPension({ basic: b, type: "sup", age: 70, factor: 3.833 }).revised.basic;
+  const lead = html.match(/<p class="lead">([\s\S]*?)<\/p>/)[1];
+  assert.ok(lead.includes(F(lo)) && lead.includes(F(hi)), `${file}: lead range`);
+}
+// spot checks against hand-worked figures
+let q = A.calcPension({ basic: 25000, type: "sup", age: 70, factor: 2.57 });
+assert.strictEqual(q.revised.basic, 64250); assert.strictEqual(q.current.total, 40000); assert.strictEqual(q.arrears, 24250 * 21);
+q = A.calcPension({ basic: 100000, type: "sup", age: 70, factor: 3.833 });
+assert.strictEqual(q.revised.basic, 383300); assert.ok(!q.capApplied);
+q = A.calcPension({ basic: 25000, type: "sup", age: 82, factor: 2.57 });
+assert.strictEqual(q.current.total, 48000); assert.strictEqual(q.revised.total, 77100);
+console.log(`amount pages: ${amtRows} table rows match calcPension()`);
+
 console.log("\nAll assertions passed. i18n keys:", en.length);

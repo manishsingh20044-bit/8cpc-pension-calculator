@@ -22,6 +22,27 @@ Key facts (as of 28 October 2026, verified against official orders):
 - [Defence pension calculator](https://8cpc-pension-calculator.vercel.app/defence-pension-calculator/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/defence-pension-calculator/)
 - [Commutation & restoration calculator](https://8cpc-pension-calculator.vercel.app/commutation-calculator/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/commutation-calculator/)
 - [8th CPC pension chart](https://8cpc-pension-calculator.vercel.app/pension-chart/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-chart/)
+- [8th CPC pension by amount](https://8cpc-pension-calculator.vercel.app/pension-by-amount/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-by-amount/): one page per basic pension, Rs 9,000 to Rs 1,00,000
+
+## Pension by amount (estimate at every fitment factor, DR, arrears, commutation, family pension)
+- [Rs 9,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-9000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-9000-8th-pay-commission/)
+- [Rs 10,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-10000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-10000-8th-pay-commission/)
+- [Rs 12,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-12000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-12000-8th-pay-commission/)
+- [Rs 15,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-15000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-15000-8th-pay-commission/)
+- [Rs 18,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-18000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-18000-8th-pay-commission/)
+- [Rs 20,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-20000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-20000-8th-pay-commission/)
+- [Rs 22,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-22000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-22000-8th-pay-commission/)
+- [Rs 25,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-25000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-25000-8th-pay-commission/)
+- [Rs 30,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-30000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-30000-8th-pay-commission/)
+- [Rs 35,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-35000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-35000-8th-pay-commission/)
+- [Rs 40,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-40000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-40000-8th-pay-commission/)
+- [Rs 45,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-45000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-45000-8th-pay-commission/)
+- [Rs 50,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-50000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-50000-8th-pay-commission/)
+- [Rs 60,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-60000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-60000-8th-pay-commission/)
+- [Rs 70,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-70000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-70000-8th-pay-commission/)
+- [Rs 75,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-75000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-75000-8th-pay-commission/)
+- [Rs 80,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-80000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-80000-8th-pay-commission/)
+- [Rs 100,000 basic pension](https://8cpc-pension-calculator.vercel.app/pension-100000-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/pension-100000-8th-pay-commission/)
 
 ## Guides
 - [Minimum pension under the 8th CPC](https://8cpc-pension-calculator.vercel.app/minimum-pension-8th-pay-commission/) | [हिंदी](https://8cpc-pension-calculator.vercel.app/hi/minimum-pension-8th-pay-commission/)

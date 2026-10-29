@@ -576,7 +576,7 @@ var I18N = {
 /* ---- strings added 28 Oct 2026 (bilingual pages, commutation calculator, new pages) ---- */
 (function (X) { for (var lg in X) for (var k in X[lg]) I18N[lg][k] = X[lg][k]; })({
   en: {
-    nav_commutation: "Commutation & Restoration", nav_lifecert: "Life Certificate Guide", nav_minpension: "Minimum Pension",
+    nav_commutation: "Commutation & Restoration", nav_lifecert: "Life Certificate Guide", nav_minpension: "Minimum Pension", nav_byamount: "Pension by Amount",
     ftr_editorial: "Editorial Policy",
     cm_title: "Commutation & restoration calculator",
     cm_lbl_basic: "Basic pension before commutation, ₹ per month", cm_hint_basic: "The full basic pension on your PPO (7th CPC), not the reduced amount.",
@@ -599,7 +599,7 @@ var I18N = {
     cm_badge: "Estimate — not official"
   },
   hi: {
-    nav_commutation: "कम्यूटेशन और बहाली", nav_lifecert: "जीवन प्रमाण पत्र गाइड", nav_minpension: "न्यूनतम पेंशन",
+    nav_commutation: "कम्यूटेशन और बहाली", nav_lifecert: "जीवन प्रमाण पत्र गाइड", nav_minpension: "न्यूनतम पेंशन", nav_byamount: "राशि के अनुसार पेंशन",
     ftr_editorial: "संपादकीय नीति",
     cm_title: "कम्यूटेशन और बहाली कैलकुलेटर",
     cm_lbl_basic: "कम्यूटेशन से पहले की मूल पेंशन, ₹ प्रति माह", cm_hint_basic: "PPO में लिखी पूरी मूल पेंशन (7वाँ आयोग), कटौती के बाद वाली रकम नहीं।",
