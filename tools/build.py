@@ -90,8 +90,9 @@ NAV_TXT = {lg: {k: I18N[lg][k] for k in ("nav_home", "nav_finder", "nav_family",
 # footer: (href, i18n key)
 FOOTER_TOOLS = [("/fitment-factor-calculator/", "nav_fitment"), ("/defence-pension-calculator/", "nav_defence"),
                 ("/pension-chart/", "nav_chart"), ("/basic-pension-finder/", "nav_finder"), ("/pre-2016-pensioners/", "nav_pre2016"),
-                ("/da-dr-calculator/", "nav_dadr")]
-FOOTER_SITE = [("/how-we-calculate/", "ftr_how"), ("/changelog/", "ftr_changelog"), ("/latest-update/", "nav_updates"),
+                ("/da-dr-calculator/", "nav_dadr"), ("/commutation-calculator/", "nav_commutation"),
+                ("/minimum-pension-8th-pay-commission/", "nav_minpension"), ("/life-certificate/", "nav_lifecert")]
+FOOTER_SITE = [("/how-we-calculate/", "ftr_how"), ("/editorial-policy/", "ftr_editorial"), ("/changelog/", "ftr_changelog"), ("/latest-update/", "nav_updates"),
                ("/about/", "ftr_about"), ("/privacy/", "ftr_privacy"), ("/disclaimer/", "ftr_disclaimer"), ("/contact/", "ftr_contact")]
 
 UI = {
@@ -187,6 +188,46 @@ def calc_block(lang, default_type="sup", extra=""):
 {extra_html}'''
 
 
+ALL_PATHS = set()   # filled in main() before rendering
+
+
+def hi_path(p):
+    return "/hi/" if p == "/" else "/hi" + p
+
+
+def en_path(p):
+    return "/" if p == "/hi/" else p[3:]
+
+
+def counterpart(p):
+    """The same page in the other language, or None."""
+    c = en_path(p) if p.startswith("/hi/") else hi_path(p)
+    return c if c in ALL_PATHS else None
+
+
+def L(lang, h):
+    """An internal link in the page's own language."""
+    if lang != "hi" or not h.startswith("/") or h.startswith("/hi/") or h.startswith("/assets/"):
+        return h
+    return hi_path(h) if hi_path(h) in ALL_PATHS or not ALL_PATHS else h
+
+
+VERIFIED_HUMAN = {"en": "28 Oct 2026", "hi": "28 अक्टूबर 2026"}
+
+
+def sources_box(lang, keys):
+    if not keys:
+        return ""
+    h = {"en": ("Sources", "Last verified: " + VERIFIED_HUMAN["en"] + ". Every link below was opened and checked on that date. Official documents are primary sources; news reports are used only for demands and are labelled as such.",
+                "How we check facts"),
+         "hi": ("स्रोत", "अंतिम जाँच: " + VERIFIED_HUMAN["hi"] + "। नीचे दिया हर लिंक उसी दिन खोलकर जाँचा गया। सरकारी दस्तावेज़ मुख्य स्रोत हैं; समाचार रिपोर्टें केवल माँगों के लिए इस्तेमाल होती हैं और उन पर यह लिखा होता है।",
+                "हम तथ्य कैसे जाँचते हैं")}[lang]
+    items = "".join(f'<li><a href="{SRC[k][0]}" rel="noopener">{html.escape(SRC[k][1 if lang == "en" else 2])}</a></li>' for k in keys)
+    return (f'<section class="card sources" id="sources" aria-labelledby="srcH"><h2 id="srcH">{h[0]}</h2><p class="fine">{h[1]}</p>'
+            f'<ul>{items}</ul><p class="fine"><a href="{L(lang, "/editorial-policy/")}">{h[2]}</a> · <a href="{L(lang, "/how-we-calculate/")}">'
+            f'{"How we calculate" if lang == "en" else "हम गणना कैसे करते हैं"}</a></p></section>')
+
+
 def jsonld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(",", ":")) + "</script>"
 
@@ -196,13 +237,15 @@ def page(p):
     U = UI[lang]
     path = p["path"]
     url = DOMAIN + path
-    crumbs = [(U["home"], "/")] + ([(p["crumb"], path)] if path not in ("/",) else [])
-    if path == "/hi/":
-        crumbs = [("होम", "/"), (p["crumb"], path)]
+    home = "/hi/" if lang == "hi" else "/"
+    crumbs = [(U["home"], home)] + ([(p["crumb"], path)] if path not in ("/", "/hi/") else [])
+    cp = counterpart(path)
     cur_attr = ' aria-current="page"'
     nav = "".join(
-        f'<li><a href="{h}"{cur_attr if h == path else ""} data-i18n="{k}">{NAV_TXT[lang][k]}</a></li>' for h, k in NAV)
-    nav += f'<li><a href="{"/" if lang == "hi" else "/hi/"}" lang="{"en" if lang == "hi" else "hi"}">{U["hindi"]}</a></li>'
+        f'<li><a href="{L(lang, h)}"{cur_attr if L(lang, h) == path else ""} data-i18n="{k}">{NAV_TXT[lang][k]}</a></li>' for h, k in NAV)
+    other = "en" if lang == "hi" else "hi"
+    switch_href = cp or ("/" if lang == "hi" else "/hi/")
+    nav += f'<li><a href="{switch_href}" lang="{other}" hreflang="{other}-IN">{U["hindi"]}</a></li>'
     ld = [{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + h} for i, (n, h) in enumerate(crumbs)]}]
     if p.get("faqs"):
@@ -214,21 +257,25 @@ def page(p):
                    "inLanguage": "hi-IN" if lang == "hi" else "en-IN", "isAccessibleForFree": True,
                    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"},
                    "description": p["desc"], "dateModified": LAST_UPDATED, "publisher": {"@id": DOMAIN + "/#org"}})
-    org = {"@type": "Organization", "@id": DOMAIN + "/#org", "name": SITE_NAME, "url": DOMAIN + "/",
-           "logo": DOMAIN + "/icon-512.png"}
+    org = {"@type": "Organization", "@id": DOMAIN + "/#org", "name": SITE_NAME, "alternateName": "8CPC Pension Calculator team",
+           "url": DOMAIN + "/", "logo": DOMAIN + "/icon-512.png", "email": CONTACT_EMAIL,
+           "publishingPrinciples": DOMAIN + "/editorial-policy/"}
     ld.append({"@context": "https://schema.org", "@type": "WebPage", "@id": url + "#webpage", "url": url,
                "name": p["title"], "description": p["desc"], "inLanguage": "hi-IN" if lang == "hi" else "en-IN",
                "isPartOf": {"@id": DOMAIN + "/#website"}, "publisher": {"@id": DOMAIN + "/#org"},
-               "dateModified": LAST_UPDATED, "datePublished": "2026-10-28"})
+               "dateModified": LAST_UPDATED, "datePublished": "2026-10-28",
+               **({"lastReviewed": LAST_UPDATED} if p.get("sources") else {}),
+               **({"workTranslation" if lang == "en" else "translationOfWork": {"@id": DOMAIN + cp + "#webpage"}} if cp else {})})
     if path in ("/", "/hi/"):
         ld.append(dict({"@context": "https://schema.org"}, **org))
         ld.append({"@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "/#website", "url": DOMAIN + "/",
                    "name": SITE_NAME, "inLanguage": ["en-IN", "hi-IN"], "publisher": {"@id": DOMAIN + "/#org"}})
     alt = ""
-    if path in ("/", "/hi/"):
-        alt = (f'<link rel="alternate" hreflang="en-IN" href="{DOMAIN}/">'
-               f'<link rel="alternate" hreflang="hi-IN" href="{DOMAIN}/hi/">'
-               f'<link rel="alternate" hreflang="x-default" href="{DOMAIN}/">')
+    if cp:
+        en_u, hi_u = (cp, path) if lang == "hi" else (path, cp)
+        alt = (f'<link rel="alternate" hreflang="en-IN" href="{DOMAIN}{en_u}">'
+               f'<link rel="alternate" hreflang="hi-IN" href="{DOMAIN}{hi_u}">'
+               f'<link rel="alternate" hreflang="x-default" href="{DOMAIN}{en_u}">')
     crumb_html = "".join(
         (f'<li><a href="{h}">{html.escape(n)}</a></li>' if i < len(crumbs) - 1 else f'<li aria-current="page">{html.escape(n)}</li>')
         for i, (n, h) in enumerate(crumbs))
@@ -239,11 +286,15 @@ def page(p):
     rel_html = ""
     if p.get("related"):
         rel_html = f'<section class="related" aria-labelledby="relH"><h2 id="relH">{U["related"]}</h2><ul>' + "".join(
-            f'<li><a href="{h}">{html.escape(t)}</a> — {html.escape(d)}</li>' for h, t, d in p["related"]) + "</ul></section>"
+            f'<li><a href="{L(lang, h)}">{html.escape(t)}</a> — {html.escape(d)}</li>' for h, t, d in p["related"]) + "</ul></section>"
     calc = calc_block(lang, p.get("default_type", "sup"), p.get("extra", "")) if p.get("calc") else p.get("widget", "")
     skip = f'<a class="skip" href="#{"calc" if (p.get("calc") or p.get("widget")) else "main"}">{U["skip"]}</a>'
     title = html.escape(p["title"])
     desc = html.escape(p["desc"])
+    verified_line = ""
+    if p.get("sources"):
+        verified_line = ({"en": f'<p class="verified"><strong>Last verified: {VERIFIED_HUMAN["en"]}</strong> against official orders · <a href="#sources">Sources</a></p>',
+                          "hi": f'<p class="verified"><strong>अंतिम जाँच: {VERIFIED_HUMAN["hi"]}</strong> — सरकारी आदेशों से मिलान · <a href="#sources">स्रोत</a></p>'}[lang])
     return f'''<!doctype html>
 <html lang="{lang}">
 <head>
@@ -280,10 +331,10 @@ def page(p):
 <body>
 {skip}
 <header class="site"><div class="wrap">
-<a class="brand" href="{"/hi/" if lang == "hi" else "/"}"><img src="/favicon.svg" alt="" width="30" height="30"><span>{"8वाँ वेतन आयोग पेंशन कैलकुलेटर" if lang == "hi" else "8th CPC Pension Calculator"}</span></a>
+<a class="brand" href="{home}"><img src="/favicon.svg" alt="" width="30" height="30"><span>{"8वाँ वेतन आयोग पेंशन कैलकुलेटर" if lang == "hi" else "8th CPC Pension Calculator"}</span></a>
 <button type="button" class="hbtn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" data-i18n="nav_menu">{U["menu"]}</button>
 <nav class="main" id="mainNav" aria-label="Main"><ul>{nav}</ul></nav>
-<button type="button" class="hbtn" id="langBtn" lang="{"en" if lang == "hi" else "hi"}" aria-label="Switch language / भाषा बदलें">{U["langbtn"]}</button>
+<a class="hbtn" id="langLink" href="{switch_href}" lang="{other}" hreflang="{other}-IN" aria-label="{"Read this page in English" if lang == "hi" else "यह पेज हिंदी में पढ़ें"}">{U["langbtn"]}</a>
 </div></header>
 <div class="strip" role="note"><div class="wrap"><strong data-i18n="status_label">{U["status"]}</strong>: <span data-i18n="status_text">{U["status_text"]}</span> · <span data-i18n="updated">{U["updated"]}</span> <span data-cfg="lastUpdated">{LAST_UPDATED}</span></div></div>
 <main id="main" class="wrap">
@@ -291,18 +342,20 @@ def page(p):
 <h1>{p["h1"]}</h1>
 <p class="lead">{p["lead"]}</p>
 <p class="estbar" data-i18n="est_banner">{U["est"]}</p>
+{verified_line}
 {calc}
 <article>
 {p["body"]}
 </article>
+{sources_box(lang, p.get("sources"))}
 {faq_html}
 {rel_html}
 </main>
 <footer class="site"><div class="wrap">
 <p data-i18n="footer_disc">{U["disc"]}</p>
 <p><strong data-i18n="ftr_tools">{T(lang, "ftr_tools")}</strong></p>
-<ul>{"".join(f'<li><a href="{h}" data-i18n="{k}">{T(lang, k)}</a></li>' for h, k in FOOTER_TOOLS)}</ul>
-<ul>{"".join(f'<li><a href="{h}" data-i18n="{k}">{T(lang, k)}</a></li>' for h, k in FOOTER_SITE)}</ul>
+<ul>{"".join(f'<li><a href="{L(lang, h)}" data-i18n="{k}">{T(lang, k)}</a></li>' for h, k in FOOTER_TOOLS)}</ul>
+<ul>{"".join(f'<li><a href="{L(lang, h)}" data-i18n="{k}">{T(lang, k)}</a></li>' for h, k in FOOTER_SITE)}</ul>
 <p><span data-i18n="updated">{U["updated"]}</span> <span data-cfg="lastUpdated">{LAST_UPDATED}</span> · © 2026 {SITE_NAME}</p>
 </div></footer>
 </body>
@@ -1328,6 +1381,11 @@ PAGES.append(dict(
 ))
 
 
+# ------------------------------------------------------------------ bilingual content (added 28 Oct 2026)
+for _f in ("content_shared.py", "content_en_more.py", "content_hi_tools.py", "content_hi_tools2.py", "content_hi_info.py", "content_depth.py"):
+    exec(compile(open(os.path.join(ROOT, "tools", _f), encoding="utf-8").read(), _f, "exec"))
+
+
 # ------------------------------------------------------------------ write
 def words(s):
     return len(re.sub(r"<[^>]+>", " ", s).split())
@@ -1341,33 +1399,44 @@ def export_rates():
 
 LLMS_TXT = """# 8th CPC Pension Calculator
 
-> Free, bilingual (English + Hindi) calculators for Indian central government pensioners and family pensioners to estimate their pension under the 8th Central Pay Commission. All 8th CPC figures are estimates: the official fitment factor has not been announced.
+> Free, bilingual (English + Hindi) calculators and guides for Indian central government pensioners and family pensioners to estimate their pension under the 8th Central Pay Commission. Every page exists in English and in Hindi (/hi/...). All 8th CPC figures are estimates: the official fitment factor has not been announced. Published by the independent 8CPC Pension Calculator team; not a government website.
 
-Key facts (as of 28 October 2026):
+Key facts (as of 28 October 2026, verified against official orders):
 - 8th Central Pay Commission constituted 3 November 2025; chair Justice Ranjana Prakash Desai; report expected around mid-2027.
-- Official 8th CPC fitment factor: not yet announced. 7th CPC factor was 2.57. Common estimates range 1.92 to 2.86; unions demand 3.833.
-- Dearness Relief (DR): 60% from 1 January 2026. July 2026 DR not yet officially announced.
+- Official 8th CPC fitment factor: not yet announced. 7th CPC factor was 2.57. Common estimates range 1.92 to 2.86; 3.833 is a union (NC-JCM staff side) demand.
+- Date of effect: 1 January 2026 is expected based on past practice, not officially decided.
+- Dearness Relief (DR): 60% from 1 January 2026 (DoPPW OM 24.04.2026). July 2026 DR not officially announced as of 28 October 2026.
 - Formula: new basic pension = current basic pension x fitment factor (rounded up to the next rupee). Additional pension for age 80+ (20%), 85+ (30%), 90+ (40%), 95+ (50%), 100+ (100%).
-- Family pension: 30% of last pay (normal), 50% enhanced for the first period.
+- Minimum pension Rs 9,000 (raised from Rs 3,500 in 2016); maximum Rs 1,25,000. Family pension: 30% of last pay (normal), 50% enhanced for a limited period.
+- Commutation: up to 40% of pension; restored after 15 years; DR is paid on the full pension; commuted value = commuted pension x factor (8.194 at age next birthday 61) x 12.
+- Life certificate: every November; pensioners aged 80+ from 1 October.
 
-## Calculators
-- [8th Pay Commission pension calculator]({DOMAIN}/): new pension, DR comparison and arrears
-- [Hindi version / हिंदी]({DOMAIN}/hi/)
-- [Basic pension finder]({DOMAIN}/basic-pension-finder/): basic pension from the monthly bank credit or PPO
-- [Pre-2016 pensioners]({DOMAIN}/pre-2016-pensioners/): higher of 2.57x and notional pay fixation
-- [DA / DR calculator]({DOMAIN}/da-dr-calculator/)
-- [Fitment factor calculator]({DOMAIN}/fitment-factor-calculator/)
-- [Family pension calculator]({DOMAIN}/family-pension-calculator/)
-- [Defence pension calculator]({DOMAIN}/defence-pension-calculator/)
-- [8th CPC pension chart]({DOMAIN}/pension-chart/)
+## Calculators (English | Hindi)
+- [8th Pay Commission pension calculator]({DOMAIN}/) | [हिंदी]({DOMAIN}/hi/): new pension, DR comparison and arrears
+- [Basic pension finder]({DOMAIN}/basic-pension-finder/) | [हिंदी]({DOMAIN}/hi/basic-pension-finder/): basic pension from the monthly bank credit or PPO
+- [Pre-2016 pensioners]({DOMAIN}/pre-2016-pensioners/) | [हिंदी]({DOMAIN}/hi/pre-2016-pensioners/): higher of 2.57x and notional pay fixation
+- [DA / DR calculator]({DOMAIN}/da-dr-calculator/) | [हिंदी]({DOMAIN}/hi/da-dr-calculator/)
+- [Fitment factor calculator]({DOMAIN}/fitment-factor-calculator/) | [हिंदी]({DOMAIN}/hi/fitment-factor-calculator/)
+- [Family pension calculator]({DOMAIN}/family-pension-calculator/) | [हिंदी]({DOMAIN}/hi/family-pension-calculator/)
+- [Defence pension calculator]({DOMAIN}/defence-pension-calculator/) | [हिंदी]({DOMAIN}/hi/defence-pension-calculator/)
+- [Commutation & restoration calculator]({DOMAIN}/commutation-calculator/) | [हिंदी]({DOMAIN}/hi/commutation-calculator/)
+- [8th CPC pension chart]({DOMAIN}/pension-chart/) | [हिंदी]({DOMAIN}/hi/pension-chart/)
 
-## Sources and method
-- [How we calculate]({DOMAIN}/how-we-calculate/)
-- [Latest 8th CPC update]({DOMAIN}/latest-update/)
-- [Changelog]({DOMAIN}/changelog/)
+## Guides
+- [Minimum pension under the 8th CPC]({DOMAIN}/minimum-pension-8th-pay-commission/) | [हिंदी]({DOMAIN}/hi/minimum-pension-8th-pay-commission/)
+- [Life certificate (Jeevan Pramaan) guide]({DOMAIN}/life-certificate/) | [हिंदी]({DOMAIN}/hi/life-certificate/)
+- [Latest 8th CPC update]({DOMAIN}/latest-update/) | [हिंदी]({DOMAIN}/hi/latest-update/)
+
+## Sources, method and trust
+- [How we calculate]({DOMAIN}/how-we-calculate/) | [हिंदी]({DOMAIN}/hi/how-we-calculate/)
+- [Editorial policy]({DOMAIN}/editorial-policy/) | [हिंदी]({DOMAIN}/hi/editorial-policy/)
+- [About]({DOMAIN}/about/) | [हिंदी]({DOMAIN}/hi/about/)
+- [Changelog]({DOMAIN}/changelog/) | [हिंदी]({DOMAIN}/hi/changelog/)
+- [Machine-readable rates]({DOMAIN}/assets/rates.json)
 """
 
 def main():
+    ALL_PATHS.update(p["path"] for p in PAGES)
     report = []
     for p in PAGES:
         out_dir = os.path.join(ROOT, p["path"].strip("/"))

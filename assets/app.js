@@ -573,6 +573,55 @@ var I18N = {
     dr_hist: "इस साइट में इस्तेमाल DR का इतिहास"
   }
 };
+/* ---- strings added 28 Oct 2026 (bilingual pages, commutation calculator, new pages) ---- */
+(function (X) { for (var lg in X) for (var k in X[lg]) I18N[lg][k] = X[lg][k]; })({
+  en: {
+    nav_commutation: "Commutation & Restoration", nav_lifecert: "Life Certificate Guide", nav_minpension: "Minimum Pension",
+    ftr_editorial: "Editorial Policy",
+    cm_title: "Commutation & restoration calculator",
+    cm_lbl_basic: "Basic pension before commutation, ₹ per month", cm_hint_basic: "The full basic pension on your PPO (7th CPC), not the reduced amount.",
+    cm_lbl_mode: "How do you know the commuted part?", cm_mode_pct: "As a percentage (up to 40%)", cm_mode_amt: "As a rupee amount (from PPO)",
+    cm_lbl_pct: "Percentage commuted", cm_hint_pct: "Up to 40% of pension can be commuted.",
+    cm_lbl_amt: "Commuted pension, ₹ per month", cm_hint_amt: "Printed on the PPO as the amount of monthly pension commuted. More accurate than a percentage.",
+    cm_lbl_start: "Month the commutation deduction started", cm_hint_start: "Usually the month the lump sum was credited. Restoration is 15 years after this.",
+    cm_lbl_cvf: "Commutation factor (optional)", cm_hint_cvf: "From the commutation table for your age next birthday. 8.194 applies at age next birthday 61 (retirement at 60).",
+    cm_btn: "Calculate deduction & restoration", cm_res: "Your commutation at a glance",
+    cm_r_ded: "Monthly deduction", cm_r_restore: "Full pension restored from", cm_r_left: "{m} months to go", cm_r_restored: "Already restored",
+    cm_r_cvp: "Lump sum (commuted value), approx.", cm_col_now: "Now (until restoration)", cm_col_after: "After restoration",
+    cm_r_credit: "Monthly credit (basic + additional + DR − deduction)", cm_r_8cpc: "8th CPC estimate at ×{f} (DR restarts at 0%)",
+    cm_r_total: "Total deducted over 15 years",
+    cm_s1: "Deduction = {b} × {p}% = {c} a month (rounded to the nearest rupee; the PPO amount is exact).",
+    cm_s2: "Lump sum = {c} × {f} × 12 = {v} (approximate; the official figure is on your sanction).",
+    cm_s3: "DR is paid on the full basic pension {b}, not on the reduced amount.",
+    cm_s4: "Restoration: 15 years after {s} = {r}. The bank restores it automatically.",
+    cm_s5: "8th CPC estimate assumes the deduction stays at the same rupee amount until restoration, as happened in the 7th CPC revision. Estimate — not official.",
+    cm_err: "Please enter a basic pension (₹1,000 to ₹2,50,000) and a commuted part between 1% and 40% (or a rupee amount up to 40% of basic).",
+    cm_badge: "Estimate — not official"
+  },
+  hi: {
+    nav_commutation: "कम्यूटेशन और बहाली", nav_lifecert: "जीवन प्रमाण पत्र गाइड", nav_minpension: "न्यूनतम पेंशन",
+    ftr_editorial: "संपादकीय नीति",
+    cm_title: "कम्यूटेशन और बहाली कैलकुलेटर",
+    cm_lbl_basic: "कम्यूटेशन से पहले की मूल पेंशन, ₹ प्रति माह", cm_hint_basic: "PPO में लिखी पूरी मूल पेंशन (7वाँ आयोग), कटौती के बाद वाली रकम नहीं।",
+    cm_lbl_mode: "कम्यूट किया हिस्सा कैसे पता है?", cm_mode_pct: "प्रतिशत में (40% तक)", cm_mode_amt: "रुपये में (PPO से)",
+    cm_lbl_pct: "कम्यूट किया गया प्रतिशत", cm_hint_pct: "पेंशन का अधिकतम 40% कम्यूट हो सकता है।",
+    cm_lbl_amt: "कम्यूट की गई पेंशन, ₹ प्रति माह", cm_hint_amt: "PPO में 'कम्यूट की गई मासिक पेंशन' के रूप में लिखी होती है। प्रतिशत से ज़्यादा सटीक।",
+    cm_lbl_start: "कटौती किस महीने से शुरू हुई", cm_hint_start: "आमतौर पर वह महीना जब एकमुश्त राशि खाते में आई। बहाली इसके 15 साल बाद होती है।",
+    cm_lbl_cvf: "कम्यूटेशन फैक्टर (वैकल्पिक)", cm_hint_cvf: "अगले जन्मदिन की आयु के हिसाब से कम्यूटेशन तालिका से। अगले जन्मदिन पर 61 वर्ष (60 पर रिटायरमेंट) के लिए 8.194।",
+    cm_btn: "कटौती और बहाली निकालें", cm_res: "आपका कम्यूटेशन एक नज़र में",
+    cm_r_ded: "मासिक कटौती", cm_r_restore: "पूरी पेंशन बहाल होगी", cm_r_left: "{m} महीने बाकी", cm_r_restored: "बहाली हो चुकी है",
+    cm_r_cvp: "एकमुश्त राशि (कम्यूटेड वैल्यू), लगभग", cm_col_now: "अभी (बहाली तक)", cm_col_after: "बहाली के बाद",
+    cm_r_credit: "मासिक रकम (मूल + अतिरिक्त + DR − कटौती)", cm_r_8cpc: "8वें आयोग का अनुमान ×{f} पर (DR 0% से शुरू)",
+    cm_r_total: "15 साल में कुल कटौती",
+    cm_s1: "कटौती = {b} × {p}% = {c} प्रति माह (नज़दीकी रुपये तक; PPO में लिखी रकम सटीक है)।",
+    cm_s2: "एकमुश्त राशि = {c} × {f} × 12 = {v} (लगभग; असली रकम आपके स्वीकृति पत्र में है)।",
+    cm_s3: "DR पूरी मूल पेंशन {b} पर मिलती है, कटौती के बाद वाली रकम पर नहीं।",
+    cm_s4: "बहाली: {s} के 15 साल बाद = {r}। बैंक इसे अपने-आप बहाल करता है।",
+    cm_s5: "8वें आयोग के अनुमान में माना गया है कि बहाली तक कटौती उतने ही रुपये रहेगी, जैसा 7वें आयोग के संशोधन में हुआ था। अनुमान — आधिकारिक नहीं।",
+    cm_err: "कृपया मूल पेंशन (₹1,000 से ₹2,50,000) और 1% से 40% के बीच कम्यूट हिस्सा (या मूल पेंशन के 40% तक की रकम) दर्ज करें।",
+    cm_badge: "अनुमान — आधिकारिक नहीं"
+  }
+});
 var MONTHS = {
   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
   hi: ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
@@ -581,12 +630,40 @@ function ymLabel(ym, lang) { var p = ym.split("-"); return MONTHS[lang || "en"][
 function fmtPct(x) { return (x >= 0 ? "+" : "") + x.toFixed(1) + "%"; }
 function fill(tpl, o) { return tpl.replace(/\{(\w+)\}/g, function (m, k) { return o[k] !== undefined ? o[k] : m; }); }
 
+/* Commutation of pension: deduction, lump sum, restoration after 15 years, 8th CPC estimate.
+   Pensioners' Portal (DoPPW): up to 40% may be commuted; CVP = commuted pension x commutation factor x 12;
+   restored 15 years after the reduction became operative; DR on the original pension.
+   OM 04.08.2016 para 4.3: on revision the commuted portion is deducted from the revised (consolidated) pension. */
+function addMonthsYM(ym, n) {
+  var p = String(ym).split("-").map(Number), t = p[0] * 12 + (p[1] - 1) + n, y = Math.floor(t / 12), m = t % 12 + 1;
+  return y + "-" + (m < 10 ? "0" + m : m);
+}
+function calcCommutation(o) {
+  var basic = Math.round(Number(o.basic) || 0);
+  var dr = (o.dr === undefined || o.dr === null || o.dr === "") ? CONFIG.currentDR : Number(o.dr);
+  var commuted = o.mode === "amount" ? Math.round(Number(o.amount) || 0) : Math.round(basic * Number(o.pct) / 100);
+  var cvf = Number(o.cvFactor) || 8.194;
+  var restoreYM = addMonthsYM(o.start, 180);
+  var monthsLeft = Math.max(0, monthsBetween(o.nowYM, restoreYM));
+  var restored = monthsLeft === 0;
+  var addPct = additionalPct(o.age);
+  var add = up(basic * addPct / 100), drAmt = up((basic + add) * dr / 100), gross = basic + add + drAmt;
+  var rev = calcPension({ basic: basic, type: "sup", age: o.age, factor: o.fitment, dr: dr });
+  var newGross = rev.revised.basic + rev.revised.add;
+  return { basic: basic, commuted: commuted, pct: basic ? commuted / basic * 100 : 0, cvFactor: cvf,
+    cvp: Math.round(commuted * cvf * 12), start: o.start, restoreYM: restoreYM, monthsLeft: monthsLeft, restored: restored,
+    addPct: addPct, add: add, dr: dr, drAmt: drAmt, gross: gross, creditNow: gross - (restored ? 0 : commuted), creditAfter: gross,
+    fitment: Number(o.fitment), newBasic: rev.revised.basic, newAdd: rev.revised.add,
+    newCredit: newGross - (restored ? 0 : commuted), newCreditAfter: newGross, totalDeducted: commuted * 180 };
+}
+
 /* Node export for tests */
 if (typeof module !== "undefined" && module.exports) {
   module.exports = { CONFIG: CONFIG, calcPension: calcPension, formatINR: formatINR, up: up,
     additionalPct: additionalPct, familyFromLastPay: familyFromLastPay, monthsBetween: monthsBetween, I18N: I18N,
     pensionParts: pensionParts, creditFromBasic: creditFromBasic, basicFromCredit: basicFromCredit, basicFromPPO: basicFromPPO,
-    pre2016Revision: pre2016Revision, calcDR: calcDR, drDefaults: drDefaults };
+    pre2016Revision: pre2016Revision, calcDR: calcDR, drDefaults: drDefaults,
+    calcCommutation: calcCommutation, addMonthsYM: addMonthsYM };
 }
 
 /* ------------------------------ Browser UI -------------------------- */
@@ -747,7 +824,6 @@ if (typeof module !== "undefined" && module.exports) {
     p.set("bp", Math.round(Number(inp.basic))); p.set("type", inp.type);
     if (Number(inp.age)) p.set("age", inp.age);
     p.set("ff", inp.factor); p.set("dr", inp.dr); p.set("from", inp.effFrom); p.set("pay", inp.payMonth);
-    if (lang !== "en") p.set("lang", lang);
     return p;
   }
   function shareURL() { return location.origin + location.pathname + "?" + paramsFrom(readForm()).toString(); }
@@ -836,8 +912,9 @@ if (typeof module !== "undefined" && module.exports) {
   var rerenders = [];          // called after a language switch
   function num(id) { var e = $(id); return e ? Number(e.value) : NaN; }
   function trustLinks() {
-    return '<p class="fine"><a href="/how-we-calculate/">' + esc(t("lnk_how")) + '</a> · <a href="/changelog/">' + esc(t("lnk_changelog")) + "</a></p>";
+    return '<p class="fine"><a href="' + L("/how-we-calculate/") + '">' + esc(t("lnk_how")) + '</a> · <a href="' + L("/changelog/") + '">' + esc(t("lnk_changelog")) + "</a></p>";
   }
+  function L(p) { return lang === "hi" ? (p === "/" ? "/hi/" : "/hi" + p) : p; }   // same page in the current language
   function calcHref(b, type, age) {
     var q = "?bp=" + b + "&type=" + (type || "sup") + (Number(age) ? "&age=" + Number(age) : "");
     return (lang === "hi" ? "/hi/" : "/") + q;
@@ -928,8 +1005,8 @@ if (typeof module !== "undefined" && module.exports) {
       }
       r.warnings.forEach(function (w) { h += '<p class="warn">' + esc(t(w)) + "</p>"; });
       h += '<div class="actions"><a class="btn" id="bfUse" href="' + esc(calcHref(r.basic, r.type, r.age)) + '">' + esc(fill(t("bf_use"), { b: F(r.basic) })) + "</a>" +
-           '<a class="btn sec" href="/da-dr-calculator/?bp=' + r.basic + (r.age ? "&age=" + r.age : "") + '">' + esc(fill(t("bf_use_dr"), { b: F(r.basic) })) + "</a>";
-      if (r.mode === "ppo6") h += '<a class="btn sec" href="/pre-2016-pensioners/?pre=' + r.value + "&type=" + r.type + '">' + esc(t("bf_use_pre")) + "</a>";
+           '<a class="btn sec" href="' + L("/da-dr-calculator/") + '?bp=' + r.basic + (r.age ? "&age=" + r.age : "") + '">' + esc(fill(t("bf_use_dr"), { b: F(r.basic) })) + "</a>";
+      if (r.mode === "ppo6") h += '<a class="btn sec" href="' + L("/pre-2016-pensioners/") + '?pre=' + r.value + "&type=" + r.type + '">' + esc(t("bf_use_pre")) + "</a>";
       h += "</div>";
       h += '<p class="fine">' + esc(t("bf_disc")) + "</p>" + trustLinks();
       out.innerHTML = h; out.hidden = false;
@@ -1025,15 +1102,66 @@ if (typeof module !== "undefined" && module.exports) {
     rerenders.push(function () { months(); hint(); if (last) renderDR(last); });
   }
 
+  /* ---------------- commutation & restoration ---------------- */
+  function setupCommutation() {
+    var btn = $("cmBtn"); if (!btn) return;
+    var last = null, now = new Date(), nowYM = now.getFullYear() + "-" + ("0" + (now.getMonth() + 1)).slice(-2);
+    function opts() { fillMonths($("cmStart"), "2005-01", nowYM, "2020-01"); factorOptions($("cmFit")); }
+    function mode() { var a = $("cmMode").value === "amount"; $("cmPctWrap").hidden = a; $("cmAmtWrap").hidden = !a; }
+    opts(); mode(); $("cmMode").addEventListener("change", mode);
+    function run(scroll) {
+      var b = num("cmBasic"), m = $("cmMode").value, pc = num("cmPct"), am = num("cmAmt");
+      var ok = b >= 1000 && b <= 250000 && (m === "amount" ? (am >= 1 && am <= Math.ceil(b * 0.4)) : (pc >= 1 && pc <= 40));
+      if (!ok) { showErr("cmErr", "cm_err"); $("cmOut").hidden = true; return; }
+      showErr("cmErr", null);
+      last = calcCommutation({ basic: b, mode: m, pct: pc, amount: am, cvFactor: $("cmCvf").value, start: $("cmStart").value,
+        nowYM: nowYM, age: num("cmAge") || 0, dr: CONFIG.currentDR, fitment: Number($("cmFit").value) || CONFIG.defaultFactor });
+      render(last);
+      if (scroll) $("cmOut").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function render(r) {
+      var F = formatINR, h = "";
+      h += '<div class="res-head"><h2>' + esc(t("cm_res")) + '</h2><span class="badge">' + esc(t("cm_badge")) + "</span></div>";
+      h += '<div class="big"><div><span>' + esc(t("cm_r_ded")) + "</span><strong>" + F(r.restored ? 0 : r.commuted) + "</strong></div>" +
+           "<div><span>" + esc(t("cm_r_restore")) + "</span><strong>" + esc(ymLabel(r.restoreYM, lang)) + " <small>" +
+           esc(r.restored ? t("cm_r_restored") : fill(t("cm_r_left"), { m: r.monthsLeft })) + "</small></strong></div>" +
+           "<div><span>" + esc(t("cm_r_cvp")) + "</span><strong>" + F(r.cvp) + "</strong></div></div>";
+      h += '<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col"></th><th scope="col">' + esc(t("cm_col_now")) + '</th><th scope="col">' + esc(t("cm_col_after")) + "</th></tr></thead><tbody>";
+      h += '<tr><th scope="row">' + esc(t("cm_r_credit")) + "</th><td>" + F(r.creditNow) + "</td><td>" + F(r.creditAfter) + "</td></tr>";
+      h += '<tr><th scope="row">' + esc(fill(t("cm_r_8cpc"), { f: r.fitment })) + "</th><td>" + F(r.newCredit) + "</td><td>" + F(r.newCreditAfter) + "</td></tr>";
+      h += '<tr><th scope="row">' + esc(t("cm_r_total")) + "</th><td colspan=\"2\">" + F(r.totalDeducted) + "</td></tr>";
+      h += "</tbody></table></div>";
+      h += '<details class="steps" open><summary>' + esc(t("steps_title")) + "</summary><ol>" +
+           "<li>" + esc(fill(t("cm_s1"), { b: F(r.basic), p: r.pct.toFixed(1), c: F(r.commuted) })) + "</li>" +
+           "<li>" + esc(fill(t("cm_s2"), { c: F(r.commuted), f: r.cvFactor, v: F(r.cvp) })) + "</li>" +
+           "<li>" + esc(fill(t("cm_s3"), { b: F(r.basic) })) + "</li>" +
+           "<li>" + esc(fill(t("cm_s4"), { s: ymLabel(r.start, lang), r: ymLabel(r.restoreYM, lang) })) + "</li>" +
+           "<li>" + esc(t("cm_s5")) + "</li></ol></details>";
+      h += '<div class="actions"><a class="btn sec" href="' + esc(calcHref(r.basic, "sup", num("cmAge") || 0)) + '">' + esc(fill(t("bf_use"), { b: F(r.basic) })) + "</a></div>";
+      h += trustLinks();
+      $("cmOut").innerHTML = h; $("cmOut").hidden = false;
+    }
+    btn.addEventListener("click", function () { run(true); });
+    rerenders.push(function () { opts(); if (last) render(last); });
+    var q = new URLSearchParams(location.search);
+    if (q.get("bp")) { $("cmBasic").value = q.get("bp"); if (q.get("age")) $("cmAge").value = q.get("age"); run(false); }
+  }
+
   function init() {
-    var stored = null; try { stored = localStorage.getItem("uiLang"); } catch (e) {}
-    var qp = new URLSearchParams(location.search).get("lang");
+    // Every page now exists in English and Hindi, so the page language decides the UI language.
+    // Old share links with ?lang=xx are sent to the counterpart page (rel=alternate hreflang).
+    var qs = new URLSearchParams(location.search), qp = qs.get("lang");
     var pageLang = doc.documentElement.getAttribute("lang") === "hi" ? "hi" : "en";
-    lang = qp || (pageLang === "hi" ? "hi" : (stored || "en"));
+    lang = pageLang;
+    if (qp && qp !== pageLang) {
+      var alt = doc.querySelector('link[rel="alternate"][hreflang="' + (qp === "hi" ? "hi-IN" : "en-IN") + '"]');
+      if (alt) { qs.delete("lang"); var rest = qs.toString(); try { location.replace(alt.getAttribute("href") + (rest ? "?" + rest : "")); return; } catch (e) {} }
+    }
     // menu
     var mb = $("menuBtn");
     if (mb) mb.addEventListener("click", function () { var nav = $("mainNav"); var open = nav.classList.toggle("open"); mb.setAttribute("aria-expanded", open ? "true" : "false"); });
     var lb = $("langBtn"); if (lb) lb.addEventListener("click", function () { applyLang(lang === "en" ? "hi" : "en"); });
+    var ll = $("langLink"); if (ll) ll.addEventListener("click", function () { try { localStorage.setItem("uiLang", lang === "en" ? "hi" : "en"); } catch (e) {} });
     var up1 = doc.querySelectorAll("[data-cfg='lastUpdated']"); for (var i = 0; i < up1.length; i++) up1[i].textContent = CONFIG.lastUpdated;
     var form = $("calcForm");
     if (form) {
@@ -1054,7 +1182,7 @@ if (typeof module !== "undefined" && module.exports) {
       }
       if (loadFromURL()) onCalc();
     } else { applyLang(lang); }
-    setupReverse(); setupFamily(); setupFinder(); setupPre2016(); setupDR();
+    setupReverse(); setupFamily(); setupFinder(); setupPre2016(); setupDR(); setupCommutation();
   }
   if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", init); else init();
 })();

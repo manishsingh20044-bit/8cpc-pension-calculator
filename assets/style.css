@@ -87,3 +87,9 @@ footer.site ul{list-style:none;padding:0;margin:8px 0;display:flex;flex-wrap:wra
 main{padding-bottom:10px}
 article p,article li{max-width:72ch}
 @media print{header.site,nav,footer.site,.no-print,.strip,.crumbs,.ad-slot,article,.faq,.related,#calcForm,.extra{display:none!important}body{background:#fff;font-size:12pt}.card{border:0;box-shadow:none;padding:0}#results{display:block!important}.big div{border:1px solid #999}}
+/* added 28 Oct 2026: verification line + sources box */
+.verified{font-size:.95rem;margin:.25rem 0 1rem;color:#1d4a1d}
+.verified a{white-space:nowrap}
+.sources ul{padding-left:1.2rem}
+.sources li{margin:.35rem 0;word-break:break-word}
+a.hbtn{text-decoration:none;display:inline-flex;align-items:center}
