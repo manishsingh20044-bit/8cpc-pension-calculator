@@ -2,11 +2,11 @@
 
 > Free, bilingual (English + Hindi) calculators and guides for Indian central government pensioners and family pensioners to estimate their pension under the 8th Central Pay Commission. Every page exists in English and in Hindi (/hi/...). All 8th CPC figures are estimates: the official fitment factor has not been announced. Published by the independent 8CPC Pension Calculator team; not a government website.
 
-Key facts (as of 28 October 2026, verified against official orders):
+Key facts (as of 30 October 2026, verified against official orders):
 - 8th Central Pay Commission constituted 3 November 2025; chair Justice Ranjana Prakash Desai; report expected around mid-2027.
 - Official 8th CPC fitment factor: not yet announced. 7th CPC factor was 2.57. Common estimates range 1.92 to 2.86; 3.833 is a union (NC-JCM staff side) demand.
 - Date of effect: 1 January 2026 is expected based on past practice, not officially decided.
-- Dearness Relief (DR): 60% from 1 January 2026 (DoPPW OM 24.04.2026). July 2026 DR not officially announced as of 28 October 2026.
+- Dearness Relief (DR): 63% from 1 July 2026 (Cabinet decision 28 October 2026, PIB release ID 2329485; DoPPW order awaited as of 30 October 2026). Previously 60% from 1 January 2026.
 - Formula: new basic pension = current basic pension x fitment factor (rounded up to the next rupee). Additional pension for age 80+ (20%), 85+ (30%), 90+ (40%), 95+ (50%), 100+ (100%).
 - Minimum pension Rs 9,000 (raised from Rs 3,500 in 2016); maximum Rs 1,25,000. Family pension: 30% of last pay (normal), 50% enhanced for a limited period.
 - Commutation: up to 40% of pension; restored after 15 years; DR is paid on the full pension; commuted value = commuted pension x factor (8.194 at age next birthday 61) x 12.

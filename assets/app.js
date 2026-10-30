@@ -7,7 +7,7 @@
    below, bump `lastUpdated`, and redeploy. Nothing else needs editing.
    ===================================================================== */
 var CONFIG = {
-  lastUpdated: "2026-10-28",            // shown on every page (YYYY-MM-DD)
+  lastUpdated: "2026-10-30",            // shown on every page (YYYY-MM-DD)
 
   /* ---- Official fitment factor ----
      null = not announced (as of 28 Oct 2026). When announced, put the
@@ -31,24 +31,27 @@ var CONFIG = {
   defaultFactor: 2.57,
 
   /* ---- Dearness Relief ----
-     60% of basic pension (incl. additional pension) from 01.01.2026:
-     Cabinet decision, PIB 18.04.2026; DoPPW OM No.42/02/2024-P&PW(D)/E-9475 dt 24.04.2026.
-     July 2026 instalment NOT announced as of 28.10.2026. */
-  currentDR: 60,
-  drNote: "DR 60% from 1 Jan 2026 (PIB 18.04.2026; DoPPW OM 24.04.2026). July 2026 DR not announced as of 28 Oct 2026.",
+     63% of basic pension (incl. additional pension) from 01.07.2026:
+     Cabinet decision 28.10.2026 (PIB release ID 2329485). DoPPW OM implementing it
+     for pensioners not yet issued as of 30.10.2026 (awaited).
+     Previous: 60% from 01.01.2026 (PIB 18.04.2026; DoPPW OM No.42/02/2024-P&PW(D)/E-9475 dt 24.04.2026). */
+  currentDR: 63,
+  drNote: "DR 63% from 1 Jul 2026 (Cabinet decision 28 Oct 2026, PIB release 2329485; DoPPW order awaited as of 30 Oct 2026). Previously 60% from 1 Jan 2026.",
   /* DR history (official instalments only), oldest first. The LAST entry
      must equal currentDR (checked by tools/test.js). When a new DR order is
      issued: append it here, set currentDR to it, and set drNextAssumed to null
      (the DA/DR calculator then shows the arrears of that latest official hike). */
   drHistory: [
     { from: "2025-07", pct: 58, ref: "DoPPW OM No.42/02/2024-P&PW(D) dt 08.10.2025" },
-    { from: "2026-01", pct: 60, ref: "DoPPW OM No.42/02/2024-P&PW(D)/E-9475 dt 24.04.2026" }
+    { from: "2026-01", pct: 60, ref: "DoPPW OM No.42/02/2024-P&PW(D)/E-9475 dt 24.04.2026" },
+    { from: "2026-07", pct: 63, ref: "Cabinet decision 28.10.2026 (PIB release 2329485)" }
   ],
   /* Next instalment, NOT announced. Used only as the pre-filled "new DR" in the
-     DA/DR calculator, always labelled as an estimate. Set drNextAssumed: null
-     once the real order is out (see above). 63 = press / CPI-IW formula estimate. */
-  drNextFrom: "2026-07",
-  drNextAssumed: 63,
+     DA/DR calculator, always labelled as an estimate. null = no estimate shown:
+     the calculator shows the latest official hike (60% -> 63% from July 2026).
+     Next instalment would normally take effect from 1 January 2027. */
+  drNextFrom: "2027-01",
+  drNextAssumed: null,
 
   /* Fixed Medical Allowance for pensioners in non-CGHS areas: Rs 1,000/month
      from 01.07.2017 (DoPPW OM 4/34/2017-P&PW(D) dt 19.07.2017; Rajya Sabha
@@ -109,6 +112,7 @@ var CONFIG = {
   /* ---- Sources (for the owner; also listed on /latest-update/) ---- */
   sources: [
     "https://pib.gov.in/PressReleasePage.aspx?PRID=2183289 (8th CPC ToR, 28.10.2025)",
+    "https://pib.gov.in/PressReleasePage.aspx?PRID=2329485 (DR 63% w.e.f. 01.07.2026, Cabinet 28.10.2026)",
     "https://www.pmindia.gov.in/en/news_updates/cabinet-approves-additional-instalment-of-dearness-allowance-to-central-government-employees-and-dearness-relief-dr-to-pensioners-w-e-f-01-01-2026/ (DR 60%, 18.04.2026)",
     "https://pensionersportal.gov.in/Document/CCS-Pension-Rules%202021-English.pdf (min/max pension, additional pension, family pension)",
     "https://8cpc.gov.in/composition/ (Commission composition)",
@@ -340,7 +344,7 @@ var I18N = {
     nav_defence: "Defence Pension", nav_chart: "Pension Chart", nav_updates: "Latest Update",
     nav_menu: "Menu", lang_btn: "हिंदी",
     est_banner: "Estimate — not official. The 8th Pay Commission has not announced a fitment factor.",
-    status_label: "Status", status_text: "8th CPC constituted 3 Nov 2025 · Report due about May 2027 · No official fitment factor · DR 60% from 1 Jan 2026",
+    status_label: "Status", status_text: "8th CPC constituted 3 Nov 2025 · Report due about May 2027 · No official fitment factor · DR 63% from 1 Jul 2026 (Cabinet 28 Oct 2026)",
     updated: "Data last updated:",
     calc_title: "8th CPC pension calculator",
     lbl_basic: "Current basic pension (7th CPC), ₹ per month",
@@ -351,7 +355,7 @@ var I18N = {
     hint_age: "Additional pension starts at 80 (20%), 85 (30%), 90 (40%), 95 (50%), 100 (100%).",
     lbl_factor: "Fitment factor", opt_custom: "Custom…", lbl_custom: "Custom fitment factor",
     f_est: "estimate", f_7cpc: "7th CPC used", f_demand: "staff/pensioner demand", f_official: "OFFICIAL",
-    lbl_dr: "Current Dearness Relief (DR) %", hint_dr: "60% from 1 Jan 2026. Change it if a new DR is announced.",
+    lbl_dr: "Current Dearness Relief (DR) %", hint_dr: "63% from 1 Jul 2026 (Cabinet decision 28 Oct 2026). Change it if a new DR is announced.",
     lbl_eff: "Assumed date of effect (arrears from)", hint_eff: "Widely expected 1 Jan 2026 — not official.",
     lbl_pay: "Month revised pension starts being paid", hint_pay: "Arrears are counted up to the month before this.",
     btn_calc: "Calculate", btn_reset: "Reset",
@@ -402,7 +406,7 @@ var I18N = {
     bf_mode_credit: "Monthly amount credited to my bank account", bf_mode_ppo7: "PPO showing basic pension from 2016 onwards (7th CPC)",
     bf_mode_ppo6: "Old PPO: pension as on 31.12.2015 (6th CPC)", bf_mode_lastpay: "Last basic pay drawn (7th CPC)",
     bf_lbl_credit: "Pension credited for one normal month, ₹", bf_hint_credit: "Pick a month with no arrears or extra payments (passbook / bank SMS).",
-    bf_lbl_dr: "DR % included in that credit", bf_hint_dr: "60% now. If you use a credit from before the 60% rate reached your bank (around April–May 2026), use 58%.",
+    bf_lbl_dr: "DR % included in that credit", bf_hint_dr: "63% from 1 Jul 2026. If you use a credit from before the 63% rate reached your bank (expected around November 2026), use 60%.",
     bf_lbl_comm: "Commutation deduction", bf_comm_none: "None / already restored", bf_comm_amt: "I know the monthly deduction in ₹", bf_comm_pct: "I know the % commuted (approximate)",
     bf_lbl_commval: "Deduction (₹) or percentage commuted (%)", bf_hint_commval: "Shown as 'commuted pension' in the PPO or bank pension slip. It stops after 15 years.",
     bf_lbl_fma: "The credit includes Fixed Medical Allowance (₹1,000)", bf_hint_fma: "Paid to pensioners living outside CGHS areas who do not use CGHS OPD.",
@@ -459,7 +463,7 @@ var I18N = {
     nav_defence: "रक्षा पेंशन", nav_chart: "पेंशन चार्ट", nav_updates: "ताज़ा अपडेट",
     nav_menu: "मेनू", lang_btn: "English",
     est_banner: "अनुमान — आधिकारिक नहीं। 8वें वेतन आयोग ने अभी कोई फिटमेंट फैक्टर घोषित नहीं किया है।",
-    status_label: "स्थिति", status_text: "8वाँ वेतन आयोग 3 नवंबर 2025 को गठित · रिपोर्ट लगभग मई 2027 तक · कोई आधिकारिक फिटमेंट फैक्टर नहीं · 1 जनवरी 2026 से DR 60%",
+    status_label: "स्थिति", status_text: "8वाँ वेतन आयोग 3 नवंबर 2025 को गठित · रिपोर्ट लगभग मई 2027 तक · कोई आधिकारिक फिटमेंट फैक्टर नहीं · 1 जुलाई 2026 से DR 63% (कैबिनेट 28 अक्टूबर 2026)",
     updated: "डेटा अंतिम बार अपडेट:",
     calc_title: "8वाँ वेतन आयोग पेंशन कैलकुलेटर",
     lbl_basic: "वर्तमान मूल पेंशन (7वाँ वेतन आयोग), ₹ प्रति माह",
@@ -470,7 +474,7 @@ var I18N = {
     hint_age: "अतिरिक्त पेंशन: 80 वर्ष पर 20%, 85 पर 30%, 90 पर 40%, 95 पर 50%, 100 पर 100%।",
     lbl_factor: "फिटमेंट फैक्टर", opt_custom: "अपना फैक्टर…", lbl_custom: "अपना फिटमेंट फैक्टर",
     f_est: "अनुमान", f_7cpc: "7वें आयोग में लागू", f_demand: "कर्मचारी/पेंशनभोगी माँग", f_official: "आधिकारिक",
-    lbl_dr: "वर्तमान महंगाई राहत (DR) %", hint_dr: "1 जनवरी 2026 से 60%। नई DR घोषित हो तो बदलें।",
+    lbl_dr: "वर्तमान महंगाई राहत (DR) %", hint_dr: "1 जुलाई 2026 से 63% (कैबिनेट निर्णय 28 अक्टूबर 2026)। नई DR घोषित हो तो बदलें।",
     lbl_eff: "मानी गई लागू तिथि (एरियर कब से)", hint_eff: "1 जनवरी 2026 की व्यापक उम्मीद — आधिकारिक नहीं।",
     lbl_pay: "नई पेंशन का भुगतान किस महीने से", hint_pay: "एरियर इससे पिछले महीने तक गिना जाता है।",
     btn_calc: "गणना करें", btn_reset: "रीसेट",
@@ -521,7 +525,7 @@ var I18N = {
     bf_mode_credit: "बैंक खाते में हर महीने आने वाली पेंशन", bf_mode_ppo7: "2016 या बाद का PPO जिसमें मूल पेंशन लिखी है (7वाँ आयोग)",
     bf_mode_ppo6: "पुराना PPO: 31.12.2015 की पेंशन (6ठा आयोग)", bf_mode_lastpay: "अंतिम मूल वेतन (7वाँ आयोग)",
     bf_lbl_credit: "किसी सामान्य महीने में आई पेंशन, ₹", bf_hint_credit: "ऐसा महीना चुनें जिसमें एरियर या कोई अतिरिक्त रकम न हो (पासबुक / बैंक SMS)।",
-    bf_lbl_dr: "उस रकम में शामिल DR %", bf_hint_dr: "अभी 60%। अगर 60% की दर बैंक में लागू होने (लगभग अप्रैल–मई 2026) से पहले की रकम ले रहे हैं, तो 58% लें।",
+    bf_lbl_dr: "उस रकम में शामिल DR %", bf_hint_dr: "1 जुलाई 2026 से 63%। अगर 63% की दर बैंक में लागू होने (लगभग नवंबर 2026) से पहले की रकम ले रहे हैं, तो 60% लें।",
     bf_lbl_comm: "कम्यूटेशन कटौती", bf_comm_none: "नहीं / बहाल हो चुकी", bf_comm_amt: "मासिक कटौती ₹ में पता है", bf_comm_pct: "कम्यूट किया गया % पता है (लगभग)",
     bf_lbl_commval: "कटौती (₹) या कम्यूट किया गया प्रतिशत (%)", bf_hint_commval: "PPO या बैंक पेंशन स्लिप में 'commuted pension' के रूप में लिखा होता है। 15 साल बाद बंद हो जाती है।",
     bf_lbl_fma: "रकम में फिक्स्ड मेडिकल अलाउंस (₹1,000) शामिल है", bf_hint_fma: "CGHS क्षेत्र से बाहर रहने वाले और CGHS OPD न लेने वाले पेंशनभोगियों को मिलता है।",

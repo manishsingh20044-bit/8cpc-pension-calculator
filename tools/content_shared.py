@@ -1,5 +1,5 @@
 # Shared data for the bilingual pages. Executed inside tools/build.py (same globals).
-# Every URL in SRC was opened and checked on 28 Oct 2026 (see the changelog entry for that date).
+# Every URL in SRC was opened and checked on 28 Oct 2026 (pib_dr63 on 30 Oct 2026).
 
 SRC = {
     "pib_tor": ("https://pib.gov.in/PressReleasePage.aspx?PRID=2183289",
@@ -15,8 +15,11 @@ SRC = {
     "om_dr": ("https://documents.doptcirculars.nic.in/D3/D03ppw/DR%20OrderxUYZn.pdf",
               "DoPPW OM No. 42/02/2024-P&PW(D)/E-9475 dated 24.04.2026 — DR 60% on basic + additional pension",
               "DoPPW कार्यालय ज्ञापन 42/02/2024-P&PW(D)/E-9475, दिनांक 24.04.2026 — मूल + अतिरिक्त पेंशन पर 60% DR"),
-    "pib_all": ("https://pib.gov.in/allRel.aspx", "PIB — all press releases (checked for a July 2026 DA/DR decision)",
-                "PIB — सभी प्रेस विज्ञप्तियाँ (जुलाई 2026 DA/DR निर्णय के लिए जाँची गईं)"),
+    "pib_all": ("https://pib.gov.in/allRel.aspx", "PIB — all press releases",
+                "PIB — सभी प्रेस विज्ञप्तियाँ"),
+    "pib_dr63": ("https://pib.gov.in/PressReleasePage.aspx?PRID=2329485",
+                 "PIB release ID 2329485, 28.10.2026 — Cabinet approves DA/DR from 60% to 63% w.e.f. 01.07.2026",
+                 "PIB विज्ञप्ति 2329485, 28.10.2026 — 01.07.2026 से DA/DR 60% से 63% करने को कैबिनेट की मंज़ूरी"),
     "om_0816": ("https://documents.doptcirculars.nic.in/D3/D03ppw/PPWA_7thCPC3_040816_S.pdf",
                 "DoPPW OM dated 04.08.2016 — pre-2016 pension × 2.57, minimum ₹9,000, additional pension slabs, commuted portion",
                 "DoPPW कार्यालय ज्ञापन 04.08.2016 — 2016 से पहले की पेंशन × 2.57, न्यूनतम ₹9,000, अतिरिक्त पेंशन, कम्यूटेड हिस्सा"),
@@ -127,7 +130,7 @@ def ex_table(lang, rows, cols):
     return f'<div class="tbl-wrap"><table class="data"><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'
 
 
-def gain_rows(basics, factors, dr=60):
+def gain_rows(basics, factors, dr=63):
     """[basic, total today, new basic at each factor, real gain at each factor] using the site's rounding."""
     out = []
     for b in basics:

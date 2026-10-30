@@ -2,7 +2,7 @@
 import re as _re
 
 FX = ["1.92", "2.57", "2.86", "3.833"]
-_gain_cols_en = ["Basic pension", "Total today (60% DR)"] + [f"New basic at ×{f} (real gain)" for f in FX]
+_gain_cols_en = ["Basic pension", "Total today (63% DR)"] + [f"New basic at ×{f} (real gain)" for f in FX]
 
 
 def _hi_link(path, label):
@@ -40,13 +40,13 @@ extend("/", body=f"""
 <li><strong>Find your basic pension.</strong> It is printed on your PPO or pension slip as "basic pension". It is not the amount credited to your bank. If you only know the bank credit, use the <a href="/basic-pension-finder/">basic pension finder</a> first.</li>
 <li><strong>Enter your age.</strong> From 80 years the additional pension (20% to 100%) is added automatically, and it also rises with the fitment factor.</li>
 <li><strong>Pick a fitment factor.</strong> Start with 2.57 (what the 7th CPC used), then compare 1.92 and 3.833 to see the full range. None of these is official.</li>
-<li><strong>Check the assumptions.</strong> DR is set to today's 60%, the date of effect to 1 January 2026 and the payment month to a date you can change. Press Calculate and read the "how this was worked out" box.</li>
+<li><strong>Check the assumptions.</strong> DR is set to today's 63% (from 1 July 2026), the date of effect to 1 January 2026 and the payment month to a date you can change. Press Calculate and read the "how this was worked out" box.</li>
 </ol>
 
 <h2>Worked examples: what different pensions could become</h2>
-<p>The table applies four fitment factors to four common basic pensions for a pensioner below 80. "Real gain" is the new basic pension minus today's total pension (basic + 60% DR), because DR is expected to restart from zero. All figures are estimates.</p>
+<p>The table applies four fitment factors to four common basic pensions for a pensioner below 80. "Real gain" is the new basic pension minus today's total pension (basic + 63% DR), because DR is expected to restart from zero. All figures are estimates.</p>
 {ex_table("en", gain_rows([9000, 15000, 25000, 50000], FX), _gain_cols_en)}
-<p>Two things stand out. First, at 1.92 a pensioner on ₹25,000 would gain ₹8,000 a month (20%), not the 92% that the factor alone suggests. Second, the minimum pension rises with the factor too: if ₹9,000 × factor becomes the new floor, nobody falls below it.</p>
+<p>Two things stand out. First, at 1.92 a pensioner on ₹25,000 would gain ₹7,250 a month (about 18%), not the 92% that the factor alone suggests. Second, the minimum pension rises with the factor too: if ₹9,000 × factor becomes the new floor, nobody falls below it.</p>
 
 <h2>Common mistakes to avoid</h2>
 <ul>
@@ -62,7 +62,7 @@ extend("/", body=f"""
     ("Does the 8th Pay Commission cover pensioners who retired before 2016?", "Pension matters are within the Commission's Terms of Reference, and every past pay commission revised the pensions of earlier retirees. How older pensioners will be treated — a single factor or a notional-pay method like the 7th CPC's — will be known only from the report."),
     ("How do I find my basic pension?", "It is on your PPO or pension slip. If you only know the amount credited to your bank, the basic pension finder works backwards from it, removing DR, Fixed Medical Allowance and the commutation deduction."),
     ("Is the commuted part of pension revised by the fitment factor?", "Under the 7th CPC the full basic pension (including the commuted portion) was multiplied by 2.57, and the commuted amount continued to be deducted in rupees until restoration. The calculator assumes the 8th CPC will work the same way."),
-    ("Why is my real increase smaller than the fitment factor?", "Because Dearness Relief (60% now) is expected to restart from zero. A factor of 1.60 would only keep your total pension the same; only the part above that is a real increase."),
+    ("Why is my real increase smaller than the fitment factor?", "Because Dearness Relief (63% from July 2026) is expected to restart from zero. A factor of 1.63 would only keep your total pension the same; only the part above that is a real increase."),
     ("Will the minimum pension of ₹9,000 also go up?", "The 7th CPC raised the minimum from ₹3,500 to ₹9,000 (×2.57). The calculator assumes the new minimum will be ₹9,000 × the chosen factor. The actual figure will be in the 8th CPC report."),
 ], sources=SRC_TOOL + ["pib_all", "portal_faq"], related_add=("/commutation-calculator/", "/minimum-pension-8th-pay-commission/", "/life-certificate/"))
 
@@ -80,7 +80,7 @@ extend("/fitment-factor-calculator/", body=f"""
 </ol>
 
 <h2>Worked example: how the break-even point moves with DR</h2>
-<p>For a ₹20,000 basic pension, the break-even factor is simply 1 + DR. If more DR instalments are granted before the 8th CPC is implemented, a given factor delivers a smaller real gain. The 63% and 66% rows are hypothetical — only 60% is official.</p>
+<p>For a ₹20,000 basic pension, the break-even factor is simply 1 + DR. If more DR instalments are granted before the 8th CPC is implemented, a given factor delivers a smaller real gain. The 60% row is the rate from January 2026, 63% is the official rate from 1 July 2026, and the 66% row is hypothetical.</p>
 {ex_table("en", _be, ["DR at implementation", "Break-even factor", "Total today on ₹20,000", "New basic at ×2.57", "Real gain at ×2.57"])}
 
 <h2>Common mistakes with fitment factors</h2>
@@ -93,9 +93,9 @@ extend("/fitment-factor-calculator/", body=f"""
 """, faqs=[
     ("What is the formula for the fitment factor?", "Fitment factor = new basic pension ÷ old basic pension. Historically it has been derived from the proposed minimum pay: the 7th CPC raised minimum pay from ₹7,000 to ₹18,000, a ratio of 2.57."),
     ("Is the fitment factor the same for pensioners and employees?", "Under the 7th CPC the same 2.57 multiplier was used for employees' pay and for pre-2016 pensioners' pension (with a notional-pay alternative for pensioners). The 8th CPC's approach is not known yet."),
-    ("How much will pension increase at a fitment factor of 2.86?", "Basic pension rises 2.86 times. Because DR (60%) restarts at zero, the total monthly pension rises by about 79% — for example, ₹20,000 basic goes from ₹32,000 today to ₹57,200."),
+    ("How much will pension increase at a fitment factor of 2.86?", "Basic pension rises 2.86 times. Because DR (63%) restarts at zero, the total monthly pension rises by about 75% — for example, ₹20,000 basic goes from ₹32,600 today to ₹57,200."),
     ("Why do media reports quote 1.92 or 2.28?", "These are analysts' estimates based on assumptions about inflation and fiscal space. They are not recommendations of the Commission or decisions of the Government."),
-    ("Can the fitment factor be lower than 2.57?", "Yes, it is possible. The Terms of Reference ask the Commission to keep fiscal prudence and the unfunded cost of pensions in view. Any factor above about 1.60 (with DR at 60%) still increases the total pension."),
+    ("Can the fitment factor be lower than 2.57?", "Yes, it is possible. The Terms of Reference ask the Commission to keep fiscal prudence and the unfunded cost of pensions in view. Any factor above about 1.63 (with DR at 63%) still increases the total pension."),
     ("When will the fitment factor be announced?", "Only after the Commission submits its report (due around May 2027) and the Government decides on it. The 7th CPC reported in November 2015 and the Cabinet decided in June 2016."),
 ], sources=SRC_TOOL + ["labour"], related_add=("/minimum-pension-8th-pay-commission/",))
 
@@ -136,7 +136,7 @@ extend("/family-pension-calculator/", body=f"""
 ], sources=["portal_faq", "pib_min", "om_dr", "om_0816", "doppw", "pib_tor", "cpc8_comp"], related_add=("/life-certificate/",))
 
 # ------------------------------------------------------------------ defence
-_dr_rows = [[inr(b), inr(b + up(Decimal(b) * 60 / 100)), inr(ceil_mul(b, "2.57")), inr(ceil_mul(b, "2.86")), inr(ceil_mul(b, "3.833"))] for b in (9000, 18000, 25000, 40000)]
+_dr_rows = [[inr(b), inr(b + up(Decimal(b) * 63 / 100)), inr(ceil_mul(b, "2.57")), inr(ceil_mul(b, "2.86")), inr(ceil_mul(b, "3.833"))] for b in (9000, 18000, 25000, 40000)]
 extend("/defence-pension-calculator/", body=f"""
 <h2>Who should use this page</h2>
 <p>Ex-servicemen of the Army, Navy and Air Force drawing service pension, their widows drawing ordinary family pension, and families helping them read the numbers. If your pension includes a disability or war injury element, or you are awaiting an OROP revision, use the result only as a rough guide to the service element.</p>
@@ -150,7 +150,7 @@ extend("/defence-pension-calculator/", body=f"""
 </ol>
 
 <h2>Worked examples (service element only)</h2>
-{ex_table("en", _dr_rows, ["Basic pension", "Total today (60% DR)", "New basic ×2.57", "New basic ×2.86", "New basic ×3.833"])}
+{ex_table("en", _dr_rows, ["Basic pension", "Total today (63% DR)", "New basic ×2.57", "New basic ×2.86", "New basic ×3.833"])}
 <p>No official rank-wise 8th CPC table exists. We have deliberately not published a rank-wise table, because the 7th CPC's rank-wise figures for armed forces pensioners came from separate Ministry of Defence orders and OROP tables, and no equivalent exists for the 8th CPC.</p>
 
 <h2>Common mistakes</h2>
@@ -173,7 +173,7 @@ extend("/pension-chart/", body=f"""
 <ol>
 <li>Find your 7th CPC basic pension (PPO or pension slip) in the first column, or the row just below it.</li>
 <li>Read across to the factor you want to test. 2.57 shows a repeat of the 7th CPC; 3.833 shows the staff-side demand.</li>
-<li>Add the additional pension for your age if you are 80 or older, then compare with your total today (basic × 1.6).</li>
+<li>Add the additional pension for your age if you are 80 or older, then compare with your total today (basic × 1.63).</li>
 </ol>
 
 <h2>Common mistakes when reading pension charts</h2>
@@ -185,7 +185,7 @@ extend("/pension-chart/", body=f"""
 </ul>
 <p>See also: <a href="/minimum-pension-8th-pay-commission/">minimum pension under the 8th CPC</a>.</p>
 """, faqs=[
-    ("What will ₹20,000 basic pension be after the 8th Pay Commission?", "Estimated new basic pension: ₹38,400 at 1.92, ₹51,400 at 2.57, ₹57,200 at 2.86 and ₹76,660 at 3.833. Today's total with 60% DR is ₹32,000."),
+    ("What will ₹20,000 basic pension be after the 8th Pay Commission?", "Estimated new basic pension: ₹38,400 at 1.92, ₹51,400 at 2.57, ₹57,200 at 2.86 and ₹76,660 at 3.833. Today's total with 63% DR is ₹32,600."),
     ("What will ₹50,000 basic pension be after the 8th Pay Commission?", "₹96,000 at 1.92, ₹1,28,500 at 2.57, ₹1,43,000 at 2.86 and ₹1,91,650 at 3.833 (estimates; the current maximum pension is ₹1,25,000)."),
     ("Is there an official 8th CPC pension chart?", "No. An official table can exist only after the Government accepts the Commission's recommendations. Until then every chart, including this one, is an estimate."),
     ("Does the chart apply to defence pensioners?", "It shows the arithmetic for any basic pension, but armed forces pensions are revised by separate Ministry of Defence orders and OROP tables."),
@@ -200,7 +200,7 @@ extend("/basic-pension-finder/", body="""
 <h2>Who this tool is for and how to use it</h2>
 <p>It is for any central civil or family pensioner who knows the monthly bank credit but not the basic pension, and for children doing the sums for a parent. Pick the mode that matches the paper you have:</p>
 <ol>
-<li><strong>Bank credit:</strong> take a normal month's credit from the passbook (not a month with arrears), enter age, DR (60% now), the commutation deduction if any, and tick FMA if you live outside a CGHS area.</li>
+<li><strong>Bank credit:</strong> take a normal month's credit from the passbook (not a month with arrears), enter age, DR (63% from July 2026), the commutation deduction if any, and tick FMA if you live outside a CGHS area.</li>
 <li><strong>PPO (post-2016):</strong> type the basic pension printed on it.</li>
 <li><strong>PPO (pension on 31.12.2015):</strong> the tool multiplies by 2.57 (minimum ₹9,000).</li>
 <li><strong>Last pay only:</strong> the tool takes 50% (pension) or 30%/50% (family pension).</li>
@@ -249,8 +249,8 @@ extend("/da-dr-calculator/", body="""
 <p>Any central government pensioner or family pensioner — civil, railway, defence or All India Services — who wants to check the DR in their credit or estimate the effect of a new instalment.</p>
 <ol>
 <li>Enter your basic pension (before commutation) and age.</li>
-<li>Keep 60% as the old rate. The new rate is pre-filled at 63% only as an estimate; change it when the official rate is announced.</li>
-<li>Choose the month the new rate takes effect (1 July for the July instalment) and the month you expect it to be credited.</li>
+<li>The official change is pre-filled: 60% old rate, 63% new rate from 1 July 2026 (Cabinet decision 28 October 2026). For a later instalment, enter it as the new rate once announced.</li>
+<li>Choose the month the new rate takes effect (July 2026 for this instalment) and the month you expect it to be credited (typically November 2026).</li>
 <li>Read the monthly increase and arrears. If you entered a commutation deduction, the net credit is shown too.</li>
 </ol>
 
@@ -265,15 +265,15 @@ extend("/da-dr-calculator/", body="""
     ("When is the July DA/DR usually announced?", "There is no fixed date. The rate takes effect from 1 July, and the decision has often come in September–October, with arrears paid afterwards."),
     ("Do railway and defence pensioners get the same DR?", "Yes. The DoPPW order applies the same rate to armed forces, railway and All India Services pensioners and family pensioners."),
     ("Is DR taxable?", "DR forms part of pension income and is taxed with it under the normal rules; the bank deducts TDS where applicable."),
-], sources=["om_dr", "pm_dr", "pib_all", "labour", "portal_faq", "doppw", "pib_tor"])
+], sources=["pib_dr63", "om_dr", "pm_dr", "labour", "portal_faq", "doppw", "pib_tor"])
 
 # ------------------------------------------------------------------ latest update / how we calculate / info pages
 extend("/latest-update/", faqs=[
     ("What is the official website of the 8th Pay Commission?", "8cpc.gov.in. Notices about visits, consultations and memorandums are posted there."),
-    ("When is the next DA/DR instalment due?", "The July 2026 instalment (effective 1 July 2026) had not been announced as of 28 October 2026. The next one would normally take effect from 1 January 2027."),
+    ("When is the next DA/DR instalment due?", "The July 2026 instalment was approved by the Cabinet on 28 October 2026: DR 63% from 1 July 2026. The next one would normally take effect from 1 January 2027."),
     ("Is the 8th Pay Commission going to exclude pensioners?", "Pension matters are within the Terms of Reference. A viral claim that retired employees would lose pay commission revisions was declared fake by PIB Fact Check on 13 November 2025."),
     ("What happens after the report is submitted?", "The Government examines it, the Cabinet takes a decision, and the departments concerned (DoE, DoPPW and, for the forces, DESW) issue orders. Only then are revised pensions paid."),
-], sources=["pib_tor", "cpc8", "cpc8_comp", "pm_dr", "om_dr", "pib_all", "labour", "doe"])
+], sources=["pib_tor", "cpc8", "cpc8_comp", "pib_dr63", "pm_dr", "om_dr", "labour", "doe"])
 
 _SOURCES_NEW = [(SRC[k][0], SRC[k][1]) for k in ("pib_tor", "cpc8_comp", "pm_dr", "om_dr", "pib_all", "om_0816", "om_0517", "portal_rb", "portal_faq", "comm_table", "uidai_lc", "pib_min")]
 _p = page_by_path("/how-we-calculate/")
@@ -344,8 +344,8 @@ CM_EX = [(20000, 40), (30000, 40), (45000, 40), (30000, 20)]
 _cm_rows = []
 for b, pc in CM_EX:
     c = round(b * pc / 100); v = round(c * 8.194 * 12)
-    _cm_rows.append([inr(b), f"{pc}%", inr(c), inr(v), inr(b + up(Decimal(b) * 60 / 100) - c), inr(b + up(Decimal(b) * 60 / 100))])
-_cm_cols_en = ["Basic pension", "Commuted", "Monthly deduction", "Lump sum at 8.194", "Credit now (60% DR)", "Credit after restoration"]
+    _cm_rows.append([inr(b), f"{pc}%", inr(c), inr(v), inr(b + up(Decimal(b) * 63 / 100) - c), inr(b + up(Decimal(b) * 63 / 100))])
+_cm_cols_en = ["Basic pension", "Commuted", "Monthly deduction", "Lump sum at 8.194", "Credit now (63% DR)", "Credit after restoration"]
 
 PAGES.append(dict(
     path="/commutation-calculator/", crumb="Commutation Calculator", webapp=True, widget=commutation_widget("en"),
@@ -410,7 +410,7 @@ PAGES.append(dict(
 ))
 
 # ------------------------------------------------------------------ NEW: minimum pension
-_mn = [[f"×{f}", n, inr(ceil_mul(9000, f)), inr(ceil_mul(9000, f) - 14400)] for f, n in
+_mn = [[f"×{f}", n, inr(ceil_mul(9000, f)), inr(ceil_mul(9000, f) - 14670)] for f, n in
        [("1.92", "Media estimate"), ("2.28", "Media estimate"), ("2.57", "7th CPC factor"), ("2.86", "Media estimate"), ("3.0", "Round-number estimate"), ("3.833", "NC-JCM staff-side demand")]]
 PAGES.append(dict(
     path="/minimum-pension-8th-pay-commission/", crumb="Minimum Pension", webapp=True, calc=True,
@@ -420,12 +420,12 @@ PAGES.append(dict(
     lead="Central government pensioners and family pensioners on the minimum get ₹9,000 basic plus DR today. See how the minimum has moved in past pay commissions and what each 8th CPC fitment factor would make it.",
     body=f"""
 <h2>The minimum pension today</h2>
-<p>Since 1 January 2016 the minimum pension and minimum family pension for central government civil pensioners is <strong>₹9,000 a month</strong>, excluding the additional pension paid to pensioners aged 80 and above (DoPPW OM dated 04.08.2016, para 4.4). The 7th CPC orders raised it from ₹3,500 — PIB listed the increase "from Rs.3500/- per month to Rs.9000/- per month" among DoPPW's reforms. With Dearness Relief at 60% from 1 January 2026, a pensioner on the minimum receives ₹14,400 a month (₹9,000 + ₹5,400 DR), plus additional pension if 80 or older and Fixed Medical Allowance of ₹1,000 if living outside a CGHS area.</p>
+<p>Since 1 January 2016 the minimum pension and minimum family pension for central government civil pensioners is <strong>₹9,000 a month</strong>, excluding the additional pension paid to pensioners aged 80 and above (DoPPW OM dated 04.08.2016, para 4.4). The 7th CPC orders raised it from ₹3,500 — PIB listed the increase "from Rs.3500/- per month to Rs.9000/- per month" among DoPPW's reforms. With Dearness Relief at 63% from 1 July 2026, a pensioner on the minimum receives ₹14,670 a month (₹9,000 + ₹5,670 DR), plus additional pension if 80 or older and Fixed Medical Allowance of ₹1,000 if living outside a CGHS area.</p>
 <p>The maximum, for comparison, is 50% of the highest pay in the Government — ₹1,25,000 — and ₹75,000 for normal family pension.</p>
 
 <h2>What the minimum could become (estimates)</h2>
 <p>In 2016 the minimum went up by exactly the fitment factor: ₹3,500 × 2.57 = ₹8,995, rounded to ₹9,000. If the 8th CPC again applies one factor across the board, the new minimum would be ₹9,000 × factor. None of these factors is official.</p>
-{ex_table("en", _mn, ["Factor", "Where it comes from", "New minimum basic", "Real gain vs ₹14,400 today"])}
+{ex_table("en", _mn, ["Factor", "Where it comes from", "New minimum basic", "Real gain vs ₹14,670 today"])}
 <p>The 7th CPC also set the minimum by first fixing minimum pay (₹18,000) and taking 50% of it. Staff-side bodies have proposed a minimum pay of ₹69,000 for the 8th CPC; 50% of that would be ₹34,500, close to ₹9,000 × 3.833 = ₹34,497. That is a demand, not a decision.</p>
 
 <h2>Who is on the minimum pension?</h2>
@@ -444,13 +444,13 @@ PAGES.append(dict(
 
 <h2>Common mistakes</h2>
 <ul>
-<li><strong>Comparing the new minimum with ₹9,000.</strong> Compare it with ₹14,400 — what you receive today with DR.</li>
+<li><strong>Comparing the new minimum with ₹9,000.</strong> Compare it with ₹14,670 — what you receive today with DR.</li>
 <li><strong>Including additional pension in the minimum.</strong> The minimum excludes it; additional pension is paid on top.</li>
 <li><strong>Assuming the minimum is announced.</strong> The 8th CPC has not recommended a minimum as of {LAST_UPDATED_HUMAN}.</li>
 </ul>
 """,
     faqs=[
-        ("What is the minimum pension for central government pensioners now?", "₹9,000 a month from 1 January 2016, excluding additional pension for age, plus DR (60% from 1 January 2026) — a total of ₹14,400 for a pensioner below 80."),
+        ("What is the minimum pension for central government pensioners now?", "₹9,000 a month from 1 January 2016, excluding additional pension for age, plus DR (63% from 1 July 2026) — a total of ₹14,670 for a pensioner below 80."),
         ("What will the minimum pension be under the 8th Pay Commission?", "Not announced. If a single factor is applied as in 2016, it would be ₹9,000 × factor: ₹17,280 at 1.92, ₹23,130 at 2.57, ₹25,740 at 2.86 or ₹34,497 at 3.833."),
         ("Is the minimum family pension also ₹9,000?", "Yes. Minimum family pension is ₹9,000 a month, plus DR."),
         ("What was the minimum pension under the 6th CPC?", "₹3,500 a month. The 7th CPC orders raised it to ₹9,000 from 1 January 2016."),

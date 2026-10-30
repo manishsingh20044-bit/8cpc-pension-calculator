@@ -21,12 +21,12 @@ for (const c of cases) {
 }
 // assertions
 let r = A.calcPension({ basic: 9000, type: "sup", age: 70, factor: 2.57 });
-assert.strictEqual(r.revised.basic, 23130); assert.strictEqual(r.current.total, 14400); assert.strictEqual(r.months, 21);
-assert.strictEqual(r.arrears, (23130 - 14400) * 21);
+assert.strictEqual(r.revised.basic, 23130); assert.strictEqual(r.current.total, 14670); assert.strictEqual(r.months, 21);
+assert.strictEqual(r.arrears, (23130 - 14670) * 21);
 r = A.calcPension({ basic: 20000, type: "sup", age: 65, factor: 2.86 });
-assert.strictEqual(r.revised.basic, 57200); assert.strictEqual(r.current.total, 32000);
+assert.strictEqual(r.revised.basic, 57200); assert.strictEqual(r.current.total, 32600);
 r = A.calcPension({ basic: 20000, type: "sup", age: 82, factor: 2.86 });
-assert.strictEqual(r.current.add, 4000); assert.strictEqual(r.current.dr, 14400); assert.strictEqual(r.current.total, 38400);
+assert.strictEqual(r.current.add, 4000); assert.strictEqual(r.current.dr, 15120); assert.strictEqual(r.current.total, 39120);
 assert.strictEqual(r.revised.add, 11440); assert.strictEqual(r.revised.total, 68640);
 assert.strictEqual(A.additionalPct(79), 0); assert.strictEqual(A.additionalPct(80), 20); assert.strictEqual(A.additionalPct(85), 30);
 assert.strictEqual(A.additionalPct(90), 40); assert.strictEqual(A.additionalPct(95), 50); assert.strictEqual(A.additionalPct(100), 100);
@@ -149,11 +149,11 @@ for (const b of AMTS) for (const pre of ["", "hi/"]) {
 }
 // spot checks against hand-worked figures
 let q = A.calcPension({ basic: 25000, type: "sup", age: 70, factor: 2.57 });
-assert.strictEqual(q.revised.basic, 64250); assert.strictEqual(q.current.total, 40000); assert.strictEqual(q.arrears, 24250 * 21);
+assert.strictEqual(q.revised.basic, 64250); assert.strictEqual(q.current.total, 40750); assert.strictEqual(q.arrears, 23500 * 21);
 q = A.calcPension({ basic: 100000, type: "sup", age: 70, factor: 3.833 });
 assert.strictEqual(q.revised.basic, 383300); assert.ok(!q.capApplied);
 q = A.calcPension({ basic: 25000, type: "sup", age: 82, factor: 2.57 });
-assert.strictEqual(q.current.total, 48000); assert.strictEqual(q.revised.total, 77100);
+assert.strictEqual(q.current.total, 48900); assert.strictEqual(q.revised.total, 77100);
 console.log(`amount pages: ${amtRows} table rows match calcPension()`);
 
 console.log("\nAll assertions passed. i18n keys:", en.length);

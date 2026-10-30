@@ -45,6 +45,10 @@
     {
       "source": "/google5ecfe2c8c4b64171.html",
       "destination": "/gsc-verify.txt"
+    },
+    {
+      "source": "/site.xml",
+      "destination": "/sitemap.xml"
     }
   ]
 }

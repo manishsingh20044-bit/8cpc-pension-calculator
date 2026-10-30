@@ -28,7 +28,7 @@ const txt = (d, sel) => [...d.querySelectorAll(sel)].map(e => e.textContent.trim
 
   // --- finder: credit mode
   ({ w, d, errors } = await load("basic-pension-finder/index.html"));
-  d.getElementById("bfAge").value = "70"; d.getElementById("bfCredit").value = "25000";
+  d.getElementById("bfAge").value = "70"; d.getElementById("bfCredit").value = "25600";  // 20000 + 63% DR 12600 - 8000 + 1000 FMA
   d.getElementById("bfCommMode").value = "amount"; d.getElementById("bfCommMode").dispatchEvent(new w.Event("change"));
   assert.ok(!d.getElementById("bfCommValWrap").hidden);
   d.getElementById("bfCommVal").value = "8000"; d.getElementById("bfFma").checked = true;
@@ -36,7 +36,7 @@ const txt = (d, sel) => [...d.querySelectorAll(sel)].map(e => e.textContent.trim
   assert.strictEqual(txt(d, "#bfOut .big strong")[0], "₹20,000");
   const use = d.getElementById("bfUse").getAttribute("href");
   assert.strictEqual(use, "/?bp=20000&type=sup&age=70");
-  console.log("finder credit 25000 →", txt(d, "#bfOut .big strong")[0], "| use link:", use, "|", txt(d, "#bfOut p.note")[0]);
+  console.log("finder credit 25600 →", txt(d, "#bfOut .big strong")[0], "| use link:", use, "|", txt(d, "#bfOut p.note")[0]);
   // Hindi toggle re-renders
   d.getElementById("langBtn").click();
   assert.strictEqual(d.querySelector("#bfOut h2").textContent, "आपकी मूल पेंशन (अनुमानित)");
@@ -63,8 +63,8 @@ const txt = (d, sel) => [...d.querySelectorAll(sel)].map(e => e.textContent.trim
   const kv = txt(d, "#p6Out table.kv td");
   assert.deepStrictEqual(kv.slice(0, 3), ["₹32,382", "₹35,900", "₹35,900"]);
   const big = txt(d, "#p6Out .big strong");
-  // today: 35900 + 30% 10770 = 46670; DR 60% = 28002 → 74672. 8th @2.57: 92263; +30% 27679 → 119942
-  assert.strictEqual(big[0], "₹74,672"); assert.strictEqual(big[1], "₹92,263");
+  // today: 35900 + 30% 10770 = 46670; DR 63% = 29402.1 → 29403 → 76073. 8th @2.57: 92263; +30% 27679 → 119942
+  assert.strictEqual(big[0], "₹76,073"); assert.strictEqual(big[1], "₹92,263");
   console.log("pre-2016 12600/71800 age 86 →", kv.slice(0, 3).join(" / "), "| big:", big.join(" | "));
   // prefill from URL
   ({ w, d, errors } = await load("pre-2016-pensioners/index.html", "?pre=39500&type=fpe"));
@@ -77,11 +77,11 @@ const txt = (d, sel) => [...d.querySelectorAll(sel)].map(e => e.textContent.trim
   ({ w, d, errors } = await load("da-dr-calculator/index.html", "?bp=20000&age=70"));
   assert.strictEqual(d.getElementById("drOld").value, "60"); assert.strictEqual(d.getElementById("drNew").value, "63");
   assert.strictEqual(d.getElementById("drFrom").value, "2026-07");
-  assert.ok(/not announced/i.test(d.getElementById("drNewHint").textContent));
+  assert.ok(/latest official rate/i.test(d.getElementById("drNewHint").textContent));
   d.getElementById("drPay").value = "2026-11"; d.getElementById("drBtn").click();
   const drBig = txt(d, "#drOut .big strong");
   assert.strictEqual(drBig[0], "₹600"); assert.ok(drBig[1].startsWith("₹2,400"));
-  assert.ok(d.querySelector("#drOut .badge").textContent.includes("not announced"));
+  assert.ok(d.querySelector("#drOut .badge").textContent.includes("Official rates"));
   console.log("DR 20000 60→63 Jul–Oct →", drBig.join(" | "), "| badge:", d.querySelector("#drOut .badge").textContent);
   d.getElementById("langBtn").click();
   assert.strictEqual(d.querySelector("#drOut h2").textContent, "आपकी महंगाई राहत (DR)");

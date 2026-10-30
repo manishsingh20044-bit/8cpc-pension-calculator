@@ -21,13 +21,17 @@ from seo_meta import SEO_META
 DOMAIN = "https://8cpc-pension-calculator.vercel.app"          # <<< replace with your real domain (no trailing slash)
 CONTACT_EMAIL = "contact@" + (urlparse(DOMAIN).hostname or "example.com").removeprefix("www.")  # override if you use another inbox
 SITE_NAME = "8th Pay Commission Pension Calculator"
-LAST_UPDATED = "2026-10-28"
-LAST_UPDATED_HUMAN = "28 October 2026"
+LAST_UPDATED = "2026-10-30"
+LAST_UPDATED_HUMAN = "30 October 2026"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Dated, newest first. Add an entry whenever a rate, rule or page changes.
 # (date ISO, date human, [entries as HTML strings])
 CHANGELOG = [
+    ("2026-10-30", "30 October 2026", [
+        "Dearness Relief updated to the official <strong>63% from 1 July 2026</strong> (was 60%). The Union Cabinet approved the 3-point increase on 28 October 2026 (<a href=\"https://pib.gov.in/PressReleasePage.aspx?PRID=2329485\" rel=\"noopener\">PIB release ID 2329485</a>): about 48.54 lakh employees and 68.71 lakh pensioners, Rs 10,016.10 crore a year. The DoPPW order for pensioners was still awaited on 30 October 2026.",
+        "All calculators now use 63% as today's DR. Worked examples and tables recomputed (for example ₹20,000 + 63% DR = ₹32,600; break-even fitment factor 1.63). The <a href=\"/da-dr-calculator/\">DA/DR calculator</a> now shows the actual 60% → 63% increase and arrears instead of an estimate.",
+    ]),
     ("2026-10-29", "29 October 2026", [
         "Added <a href=\"/pension-by-amount/\">pension by amount</a>: one page for each basic pension from ₹9,000 to ₹1,00,000 (18 amounts, English and Hindi) with the estimate at every fitment factor, DR, arrears, the 40% commutation case and family pension. Numbers come from the same settings and rounding as the calculator. No rates changed.",
     ]),
@@ -103,14 +107,14 @@ FOOTER_SITE = [("/how-we-calculate/", "ftr_how"), ("/editorial-policy/", "ftr_ed
 UI = {
     "en": dict(skip="Skip to calculator", menu="Menu", langbtn="हिंदी",
                est="Estimate — not official. The 8th Pay Commission has not announced a fitment factor.",
-               status="Status", status_text="8th CPC constituted 3 Nov 2025 · Report due about May 2027 · No official fitment factor · DR 60% from 1 Jan 2026",
+               status="Status", status_text="8th CPC constituted 3 Nov 2025 · Report due about May 2027 · No official fitment factor · DR 63% from 1 Jul 2026 (Cabinet 28 Oct 2026)",
                updated="Data last updated:",
                disc="Independent, unofficial calculator. Not affiliated with, endorsed by or part of the Government of India, DoPPW, CPAO or the 8th Central Pay Commission. All results are estimates for information only.",
                about="About", privacy="Privacy", disclaimer="Disclaimer", contact="Contact", hindi="हिंदी में पढ़ें", faq="Frequently asked questions",
                related="Related calculators and guides", home="Home"),
     "hi": dict(skip="कैलकुलेटर पर जाएँ", menu="मेनू", langbtn="English",
                est="अनुमान — आधिकारिक नहीं। 8वें वेतन आयोग ने अभी कोई फिटमेंट फैक्टर घोषित नहीं किया है।",
-               status="स्थिति", status_text="8वाँ वेतन आयोग 3 नवंबर 2025 को गठित · रिपोर्ट लगभग मई 2027 तक · कोई आधिकारिक फिटमेंट फैक्टर नहीं · 1 जनवरी 2026 से DR 60%",
+               status="स्थिति", status_text="8वाँ वेतन आयोग 3 नवंबर 2025 को गठित · रिपोर्ट लगभग मई 2027 तक · कोई आधिकारिक फिटमेंट फैक्टर नहीं · 1 जुलाई 2026 से DR 63% (कैबिनेट 28 अक्टूबर 2026)",
                updated="डेटा अंतिम बार अपडेट:",
                disc="स्वतंत्र, अनौपचारिक कैलकुलेटर। भारत सरकार, DoPPW, CPAO या 8वें केंद्रीय वेतन आयोग से कोई संबंध, समर्थन या हिस्सा नहीं। सभी परिणाम केवल जानकारी हेतु अनुमान हैं।",
                about="हमारे बारे में", privacy="गोपनीयता", disclaimer="अस्वीकरण", contact="संपर्क", hindi="Read in English", faq="अक्सर पूछे जाने वाले सवाल",
@@ -124,7 +128,7 @@ CALC_LABELS = {
                opt_fpe="Family pension — enhanced rate (50%)", lbl_age="Age of pensioner / family pensioner (years)",
                hint_age="Additional pension starts at 80 (20%), 85 (30%), 90 (40%), 95 (50%), 100 (100%).",
                lbl_factor="Fitment factor", lbl_custom="Custom fitment factor", lbl_dr="Current Dearness Relief (DR) %",
-               hint_dr="60% from 1 Jan 2026. Change it if a new DR is announced.", lbl_eff="Assumed date of effect (arrears from)",
+               hint_dr="63% from 1 Jul 2026 (Cabinet decision 28 Oct 2026). Change it if a new DR is announced.", lbl_eff="Assumed date of effect (arrears from)",
                hint_eff="Widely expected 1 Jan 2026 — not official.", lbl_pay="Month revised pension starts being paid",
                hint_pay="Arrears are counted up to the month before this.", btn_calc="Calculate", btn_reset="Reset"),
     "hi": dict(calc_title="8वाँ वेतन आयोग पेंशन कैलकुलेटर", lbl_basic="वर्तमान मूल पेंशन (7वाँ वेतन आयोग), ₹ प्रति माह",
@@ -133,7 +137,7 @@ CALC_LABELS = {
                opt_fpe="पारिवारिक पेंशन — बढ़ी हुई दर (50%)", lbl_age="पेंशनभोगी / पारिवारिक पेंशनभोगी की आयु (वर्ष)",
                hint_age="अतिरिक्त पेंशन: 80 वर्ष पर 20%, 85 पर 30%, 90 पर 40%, 95 पर 50%, 100 पर 100%।",
                lbl_factor="फिटमेंट फैक्टर", lbl_custom="अपना फिटमेंट फैक्टर", lbl_dr="वर्तमान महंगाई राहत (DR) %",
-               hint_dr="1 जनवरी 2026 से 60%। नई DR घोषित हो तो बदलें।", lbl_eff="मानी गई लागू तिथि (एरियर कब से)",
+               hint_dr="1 जुलाई 2026 से 63% (कैबिनेट निर्णय 28 अक्टूबर 2026)। नई DR घोषित हो तो बदलें।", lbl_eff="मानी गई लागू तिथि (एरियर कब से)",
                hint_eff="1 जनवरी 2026 की व्यापक उम्मीद — आधिकारिक नहीं।", lbl_pay="नई पेंशन का भुगतान किस महीने से",
                hint_pay="एरियर इससे पिछले महीने तक गिना जाता है।", btn_calc="गणना करें", btn_reset="रीसेट"),
 }
@@ -174,7 +178,7 @@ def calc_block(lang, default_type="sup", extra=""):
 <div><label for="factor">{s("lbl_factor")}</label><select id="factor" name="ff"><option value="2.57">2.57</option></select></div>
 <div id="customWrap" hidden><label for="customFactor">{s("lbl_custom")}</label><input id="customFactor" type="number" inputmode="decimal" min="1" max="6" step="0.001" placeholder="e.g. 2.95"></div>
 <div><label for="dr">{s("lbl_dr")}<span class="hint" data-i18n="hint_dr">{L["hint_dr"]}</span></label>
-<input id="dr" name="dr" type="number" inputmode="decimal" min="0" max="200" step="0.01" value="60"></div>
+<input id="dr" name="dr" type="number" inputmode="decimal" min="0" max="200" step="0.01" value="63"></div>
 <div><label for="effFrom">{s("lbl_eff")}<span class="hint" data-i18n="hint_eff">{L["hint_eff"]}</span></label><select id="effFrom" name="from"></select></div>
 <div><label for="payMonth">{s("lbl_pay")}<span class="hint" data-i18n="hint_pay">{L["hint_pay"]}</span></label><select id="payMonth" name="pay"></select></div>
 </div>
@@ -217,7 +221,7 @@ def L(lang, h):
     return hi_path(h) if hi_path(h) in ALL_PATHS or not ALL_PATHS else h
 
 
-VERIFIED_HUMAN = {"en": "28 Oct 2026", "hi": "28 अक्टूबर 2026"}
+VERIFIED_HUMAN = {"en": "30 Oct 2026", "hi": "30 अक्टूबर 2026"}
 
 
 def sources_box(lang, keys):
@@ -432,12 +436,12 @@ PAGES.append(dict(
 <h2>How the calculator works</h2>
 <p>The 7th Pay Commission revised pensions by multiplying the existing basic pension by a single fitment factor (2.57) and rounding up to the next rupee. Dearness Relief then started again from zero on the new pension. This calculator applies the same method to your current 7th CPC basic pension:</p>
 <ol>
-<li><strong>Your pension today</strong> = basic pension + additional pension for age (if 80 or older) + Dearness Relief (currently 60% of basic plus additional pension).</li>
+<li><strong>Your pension today</strong> = basic pension + additional pension for age (if 80 or older) + Dearness Relief (63% of basic plus additional pension from 1 July 2026).</li>
 <li><strong>New basic pension</strong> = current basic pension × fitment factor, rounded up. If the result falls below an estimated new minimum (₹9,000 × the same factor), it is raised to that minimum.</li>
 <li><strong>New total</strong> = new basic + new additional pension (same percentage for your age) + DR on the new pension (assumed 0% at the start).</li>
 <li><strong>Arrears</strong> = monthly increase × number of months from the assumed date of effect to the month before the revised pension is first paid.</li>
 </ol>
-<p>Because DR is already 60%, a factor needs to be above 1.60 just for your total pension to stay the same once DR resets. That is why the comparison table shows a much smaller jump in total pension than the factor alone suggests. At 2.57, ₹9,000 basic becomes ₹23,130 — but today's ₹9,000 pension already pays ₹14,400 with DR, so the real monthly gain is ₹8,730 (about 61%).</p>
+<p>Because DR is already 63%, a factor needs to be above 1.63 just for your total pension to stay the same once DR resets. That is why the comparison table shows a much smaller jump in total pension than the factor alone suggests. At 2.57, ₹9,000 basic becomes ₹23,130 — but today's ₹9,000 pension already pays ₹14,670 with DR, so the real monthly gain is ₹8,460 (about 58%).</p>
 
 <h2>Current 7th CPC rules used in the calculation</h2>
 <div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Item</th><th scope="col">Current rule</th><th scope="col">Source</th></tr></thead><tbody>
@@ -445,7 +449,7 @@ PAGES.append(dict(
 <tr><td>Maximum pension</td><td>₹1,25,000 (50% of highest pay ₹2,50,000)</td><td>CCS (Pension) Rules, 2021</td></tr>
 <tr><td>Maximum family pension</td><td>₹75,000 normal (30%); ₹1,25,000 enhanced (50%)</td><td>Rule 50, CCS (Pension) Rules, 2021</td></tr>
 <tr><td>Additional pension for age</td><td>80–84: 20% · 85–89: 30% · 90–94: 40% · 95–99: 50% · 100+: 100%</td><td>Rules 44 &amp; 50, CCS (Pension) Rules, 2021</td></tr>
-<tr><td>Dearness Relief</td><td>60% from 1 January 2026; July 2026 instalment not announced as of {LAST_UPDATED_HUMAN}</td><td>Cabinet decision, PIB 18.04.2026; DoPPW OM 24.04.2026</td></tr>
+<tr><td>Dearness Relief</td><td>63% from 1 July 2026 (60% from 1 January 2026 before that)</td><td>Cabinet decision 28.10.2026, PIB release 2329485; DoPPW order awaited as of {LAST_UPDATED_HUMAN}</td></tr>
 </tbody></table></div>
 
 <h2>Which fitment factor should you pick?</h2>
@@ -455,17 +459,17 @@ PAGES.append(dict(
 <ul>
 <li><strong>Commutation:</strong> if you commuted part of your pension, the monthly deduction continues until restoration. Enter your full basic pension, not the reduced amount credited. If you only know what reaches your bank, the <a href="/basic-pension-finder/">basic pension finder</a> works it out.</li>
 <li><strong>Income tax, Fixed Medical Allowance and CGHS:</strong> not part of the calculation.</li>
-<li><strong>Changes in DR before implementation:</strong> if a July 2026 or January 2027 DR increase is announced, your current pension rises and the arrears change. Update the DR box to reflect it, or use the <a href="/da-dr-calculator/">DA/DR calculator</a> for the DR arrears alone.</li>
+<li><strong>Changes in DR before implementation:</strong> the July 2026 increase (to 63%) is already in the DR box; if a January 2027 or later DR increase is announced, your current pension rises and the arrears change. Update the DR box to reflect it, or use the <a href="/da-dr-calculator/">DA/DR calculator</a> for the DR arrears alone.</li>
 <li><strong>Special rules the Commission may recommend:</strong> for example a different method for older pensioners (the 7th CPC gave <a href="/pre-2016-pensioners/">pre-2016 pensioners</a> the higher of two methods), a new minimum pension or changed age slabs. When official numbers arrive this site will be updated. Our formulas and sources are on <a href="/how-we-calculate/">How we calculate</a>.</li>
 </ul>
 <p>Family pensioners can use the <a href="/family-pension-calculator/">family pension calculator</a> to work out normal (30%) or enhanced (50%) family pension from last pay, and armed forces pensioners should read the notes on the <a href="/defence-pension-calculator/">defence pension calculator</a>. For a dated record of announcements, see the <a href="/latest-update/">latest update</a> page. यह जानकारी <a href="/hi/">हिंदी में</a> भी उपलब्ध है।</p>
 """,
     faqs=[
         ("What is the fitment factor for pensioners in the 8th Pay Commission?", "It has not been announced. As of " + LAST_UPDATED_HUMAN + " the Commission has not submitted its report. The 7th CPC used 2.57; the NC-JCM staff side and pensioner bodies have asked for 3.833. Figures like 1.92, 2.28 or 2.86 are estimates, not official numbers."),
-        ("How much will a ₹9,000 pension become under the 8th Pay Commission?", "At a factor of 2.57 it would become ₹23,130; at 2.86, ₹25,740; at 3.0, ₹27,000; at 3.833, ₹34,497. These are estimates. Remember that DR (now 60%) is expected to restart from zero, so the gain in total pension is smaller than the jump in basic pension."),
+        ("How much will a ₹9,000 pension become under the 8th Pay Commission?", "At a factor of 2.57 it would become ₹23,130; at 2.86, ₹25,740; at 3.0, ₹27,000; at 3.833, ₹34,497. These are estimates. Remember that DR (63% from July 2026) is expected to restart from zero, so the gain in total pension is smaller than the jump in basic pension."),
         ("When will the 8th Pay Commission be implemented for pensioners?", "The date has not been fixed. The Commission's report is due within 18 months of 3 November 2025, around May 2027. The Government has said the effect would normally be expected from 1 January 2026 based on past practice, which is why arrears are commonly estimated from that date."),
         ("Will pensioners get arrears from January 2026?", "If the Government sets 1 January 2026 as the date of effect, as happened with the 7th CPC (effective 1 January 2016, paid from mid-2016), pensioners would get arrears for the gap. This is not yet decided. The calculator lets you change both the date of effect and the payment month."),
-        ("Is Dearness Relief included in the new pension?", "Past pay commissions merged the DR into the new basic pension through the fitment factor and restarted DR at 0%. The calculator assumes the same. You can see DR today (60%) and after revision side by side."),
+        ("Is Dearness Relief included in the new pension?", "Past pay commissions merged the DR into the new basic pension through the fitment factor and restarted DR at 0%. The calculator assumes the same. You can see DR today (63%) and after revision side by side."),
         ("Is this calculator official?", "No. It is an independent tool and is not affiliated with the Government of India, DoPPW, CPAO or the 8th Pay Commission. Every result is an estimate. Your actual revised pension will be fixed by your Pension Disbursing Authority under official orders."),
     ],
     related=rel("/basic-pension-finder/", "/pre-2016-pensioners/", "/da-dr-calculator/", "/fitment-factor-calculator/", "/family-pension-calculator/", "/defence-pension-calculator/", "/pension-chart/", "/how-we-calculate/", "/latest-update/", "/hi/"),
@@ -485,16 +489,16 @@ PAGES.append(dict(
 {FACTOR_TABLE}
 <p class="note">None of these is official. The 7th CPC staff side had asked for a factor of about 3.7 in 2015 and got 2.57, which shows how far a final figure can be from the demand.</p>
 
-<h2>The break-even factor: why 1.60 matters</h2>
-<p>Dearness Relief is currently 60% of basic pension (from 1 January 2026). If DR resets to zero when the new pension starts, a fitment factor of exactly 1.60 would leave your total monthly pension unchanged. Only the part of the factor above 1.60 is a real increase. For a ₹20,000 basic pension:</p>
+<h2>The break-even factor: why 1.63 matters</h2>
+<p>Dearness Relief is 63% of basic pension from 1 July 2026 (Cabinet decision of 28 October 2026). If DR resets to zero when the new pension starts, a fitment factor of exactly 1.63 would leave your total monthly pension unchanged. Only the part of the factor above 1.63 is a real increase. For a ₹20,000 basic pension:</p>
 <ul>
-<li>Today: ₹20,000 + 60% DR (₹12,000) = <strong>₹32,000</strong></li>
-<li>At 1.92: ₹38,400 → an increase of ₹6,400 (20%)</li>
-<li>At 2.57: ₹51,400 → an increase of ₹19,400 (about 61%)</li>
-<li>At 2.86: ₹57,200 → an increase of ₹25,200 (about 79%)</li>
-<li>At 3.833: ₹76,660 → an increase of ₹44,660 (about 140%)</li>
+<li>Today: ₹20,000 + 63% DR (₹12,600) = <strong>₹32,600</strong></li>
+<li>At 1.92: ₹38,400 → an increase of ₹5,800 (about 18%)</li>
+<li>At 2.57: ₹51,400 → an increase of ₹18,800 (about 58%)</li>
+<li>At 2.86: ₹57,200 → an increase of ₹24,600 (about 75%)</li>
+<li>At 3.833: ₹76,660 → an increase of ₹44,060 (about 135%)</li>
 </ul>
-<p>If another DR instalment is announced before implementation (the July 2026 instalment was still pending on {LAST_UPDATED_HUMAN}), the break-even point moves up with it. Change the DR box in the calculator to see the effect.</p>
+<p>If another DR instalment is announced before implementation (the next would normally take effect from 1 January 2027), the break-even point moves up with it. Change the DR box in the calculator to see the effect.</p>
 
 <h2>How the 8th CPC is likely to arrive at its factor</h2>
 <p>Historically the factor has been worked out from a proposed minimum pay. The 7th CPC fixed the minimum pay at ₹18,000 against ₹7,000 earlier, a ratio of 2.57, and applied it uniformly. Employee bodies use the same logic for their demands: the NC-JCM staff side's proposed minimum pay of ₹69,000 divided by ₹18,000 gives 3.833. The Commission's Terms of Reference ask it to keep in view fiscal prudence, the unfunded cost of non-contributory pension schemes and the impact on state finances, which is why most analysts expect a final figure well below union demands. One railway supervisors' association has suggested graded factors (2.92 for lower levels up to 4.38 for the highest), but a single uniform factor for pensioners has been the norm so far.</p>
@@ -514,7 +518,7 @@ PAGES.append(dict(
         ("Has the 8th Pay Commission fitment factor been announced?", "No. As of " + LAST_UPDATED_HUMAN + " no fitment factor has been announced. The Commission's report is expected around May 2027."),
         ("What fitment factor did the 7th Pay Commission use for pensioners?", "2.57. Pension drawn on 31.12.2015 was multiplied by 2.57 and rounded up to the next rupee, with DR restarting at zero from 1 January 2016."),
         ("Why do unions demand 3.833?", "The NC-JCM staff side has proposed a minimum pay of ₹69,000. Divided by the current minimum pay of ₹18,000, that gives 3.833. Pensioner associations have backed the same figure."),
-        ("What fitment factor keeps my pension the same?", "With DR at 60%, a factor of 1.60 would leave the total unchanged if DR resets to zero. Any factor above that is a real increase."),
+        ("What fitment factor keeps my pension the same?", "With DR at 63%, a factor of 1.63 would leave the total unchanged if DR resets to zero. Any factor above that is a real increase."),
         ("Is 2.86 the confirmed fitment factor?", "No. 2.86 is one of several estimates in media reports. It has no official basis as of " + LAST_UPDATED_HUMAN + "."),
     ],
     related=rel("/", "/pension-chart/", "/pre-2016-pensioners/", "/family-pension-calculator/", "/how-we-calculate/", "/latest-update/"),
@@ -524,7 +528,7 @@ PAGES.append(dict(
 PAGES.append(dict(
     path="/family-pension-calculator/", crumb="Family Pension Calculator", webapp=True, calc=True, default_type="fpn", extra="family",
     title="8th Pay Commission Family Pension Calculator – Normal 30% & Enhanced 50%",
-    desc="Estimate revised family pension under the 8th CPC: normal (30%) and enhanced (50%) rates, minimum ₹9,000, additional family pension at 80+, DR 60% and arrears. Estimate, not official.",
+    desc="Estimate revised family pension under the 8th CPC: normal (30%) and enhanced (50%) rates, minimum ₹9,000, additional family pension at 80+, DR 63% and arrears. Estimate, not official.",
     h1="8th Pay Commission Family Pension Calculator",
     lead="For widows, widowers and other eligible family members of central government employees and pensioners. Work out your family pension from last pay if you need to, then see the estimated 8th CPC revision.",
     body=f"""
@@ -542,7 +546,7 @@ PAGES.append(dict(
 <p>After the enhanced period, family pension falls to the normal 30% rate. Your Pension Payment Order (PPO) shows both amounts and the date the enhanced rate ends.</p>
 
 <h2>Additional family pension for older family pensioners</h2>
-<p>Family pensioners aged 80 and above get additional family pension on the basic family pension: 20% from 80, 30% from 85, 40% from 90, 50% from 95 and 100% from 100 years, payable from the first day of the month in which the age is reached. Dearness Relief (60% since 1 January 2026) is paid on basic family pension plus additional family pension. Enter the family pensioner's age in the calculator and it is added automatically.</p>
+<p>Family pensioners aged 80 and above get additional family pension on the basic family pension: 20% from 80, 30% from 85, 40% from 90, 50% from 95 and 100% from 100 years, payable from the first day of the month in which the age is reached. Dearness Relief (63% from 1 July 2026) is paid on basic family pension plus additional family pension. Enter the family pensioner's age in the calculator and it is added automatically.</p>
 
 <h2>How the 8th CPC revision is estimated</h2>
 <p>Under the 7th CPC, family pension was revised the same way as pension: the family pension being drawn was multiplied by 2.57 and DR restarted at zero. This calculator applies your chosen fitment factor to your current basic family pension, raises it to an estimated new minimum (₹9,000 × factor) if needed, and limits it to the estimated new maximum for that rate. For example, a widow drawing the minimum ₹9,000 family pension at age 70 receives ₹14,400 today with DR. At a factor of 2.57 the estimated new family pension is ₹23,130; at 2.86 it is ₹25,740.</p>
@@ -556,7 +560,7 @@ PAGES.append(dict(
 <p>See also the <a href="/">main pension calculator</a>, the <a href="/pension-chart/">ready-reckoner chart</a> and the <a href="/latest-update/">latest update</a>.</p>
 """,
     faqs=[
-        ("What is the minimum family pension under the 7th CPC?", "₹9,000 per month, plus Dearness Relief (60% from 1 January 2026). The maximum is ₹75,000 at the normal rate and ₹1,25,000 at the enhanced rate."),
+        ("What is the minimum family pension under the 7th CPC?", "₹9,000 per month, plus Dearness Relief (63% from 1 July 2026). The maximum is ₹75,000 at the normal rate and ₹1,25,000 at the enhanced rate."),
         ("What is the difference between normal and enhanced family pension?", "Normal family pension is 30% of the employee's last basic pay. Enhanced family pension is 50% of last pay and is paid for a limited period: 10 years after a death in service, or seven years / until the deceased would have turned 67 (whichever is earlier) after a death following retirement."),
         ("Will family pensioners get the 8th Pay Commission benefit?", "Family pensions have been revised along with pensions after every past pay commission, and pension matters are within the 8th CPC's Terms of Reference. The method and amounts will be known only after the report and Government orders."),
         ("Is additional pension given to family pensioners above 80?", "Yes. Additional family pension is 20% at 80, 30% at 85, 40% at 90, 50% at 95 and 100% at 100 years, on the basic family pension, with DR on top."),
@@ -585,8 +589,8 @@ PAGES.append(dict(
 </ul>
 
 <h2>What the calculator assumes</h2>
-<p>The method is the same as for civilian pensioners because the 7th CPC used the same 2.57 multiplier for the basic pension of pre-2016 armed forces pensioners, with DR restarting from zero, and the ₹9,000 minimum pension applied to them too. Additional pension for age (20% at 80, rising to 100% at 100) is added automatically; confirm on your PPO that it applies to you. DR is set to 60% from 1 January 2026, the same rate announced for all central pensioners. If you prefer, choose "Family pension" in the pension type box for ordinary family pension.</p>
-<p>Example: an ex-Havildar with a basic pension of ₹25,000, aged 62, draws ₹40,000 a month today including DR. At a factor of 2.57 the estimated new basic pension is ₹64,250; at 2.86 it is ₹71,500. The increase in total monthly pension is ₹24,250 and ₹31,500 respectively — before any OROP effect.</p>
+<p>The method is the same as for civilian pensioners because the 7th CPC used the same 2.57 multiplier for the basic pension of pre-2016 armed forces pensioners, with DR restarting from zero, and the ₹9,000 minimum pension applied to them too. Additional pension for age (20% at 80, rising to 100% at 100) is added automatically; confirm on your PPO that it applies to you. DR is set to 63% from 1 July 2026, the same rate approved for all central pensioners. If you prefer, choose "Family pension" in the pension type box for ordinary family pension.</p>
+<p>Example: an ex-Havildar with a basic pension of ₹25,000, aged 62, draws ₹40,750 a month today including 63% DR. At a factor of 2.57 the estimated new basic pension is ₹64,250; at 2.86 it is ₹71,500. The increase in total monthly pension is ₹23,500 and ₹30,750 respectively — before any OROP effect.</p>
 
 <h2>Where to check your figures</h2>
 <ul>
@@ -604,7 +608,7 @@ PAGES.append(dict(
         ("Should I include MSP when entering my basic pension?", "Enter the basic pension shown on your PPO or SPARSH. Where MSP counted for pension, it is already included in that figure."),
         ("Does this calculator include disability pension or OROP?", "No. Disability and war injury elements and OROP revisions follow separate rules. The calculator estimates only the service or ordinary family pension element."),
         ("What is the minimum defence pension under the 7th CPC?", "The 7th CPC minimum pension of ₹9,000 per month applied to armed forces pensioners as well, plus Dearness Relief."),
-        ("What DR is paid to defence pensioners now?", "60% of basic pension from 1 January 2026, the same rate approved for all central government pensioners. The July 2026 instalment was not announced as of " + LAST_UPDATED_HUMAN + "."),
+        ("What DR is paid to defence pensioners now?", "63% of basic pension from 1 July 2026, the same rate approved for all central government pensioners (Cabinet decision of 28 October 2026). It was 60% from 1 January 2026."),
     ],
     related=rel("/", "/family-pension-calculator/", "/da-dr-calculator/", "/fitment-factor-calculator/", "/latest-update/"),
 ))
@@ -619,17 +623,17 @@ PAGES.append(dict(
     body="""
 <h2>8वें वेतन आयोग की ताज़ा स्थिति</h2>
 <p>केंद्रीय मंत्रिमंडल ने 28 अक्टूबर 2025 को 8वें केंद्रीय वेतन आयोग के कार्य-क्षेत्र (Terms of Reference) को मंज़ूरी दी और 3 नवंबर 2025 को आयोग का औपचारिक गठन हुआ। इसकी अध्यक्ष न्यायमूर्ति रंजना प्रकाश देसाई हैं। आयोग को गठन से 18 महीने के भीतर सिफारिशें देनी हैं, यानी रिपोर्ट लगभग मई 2027 तक आने की उम्मीद है। आयोग ने 15 जून 2026 तक ज्ञापन (memorandum) लिए और जयपुर, चंडीगढ़, बेंगलुरु और मुंबई जैसे शहरों में कर्मचारी व पेंशनभोगी संगठनों से चर्चा की है।</p>
-<p>28 अक्टूबर 2026 तक <strong>कोई फिटमेंट फैक्टर, नई पेंशन तालिका या लागू होने की तारीख घोषित नहीं हुई है</strong>। सरकार की प्रेस विज्ञप्ति में केवल यह कहा गया कि पिछले रुझान के अनुसार सिफारिशों का असर "सामान्यतः 01.01.2026 से अपेक्षित" होगा — यह निर्णय नहीं, केवल पिछली परंपरा का उल्लेख है। इसलिए यहाँ दिखाया गया हर आँकड़ा एक अनुमान है।</p>
+<p>30 अक्टूबर 2026 तक <strong>कोई फिटमेंट फैक्टर, नई पेंशन तालिका या लागू होने की तारीख घोषित नहीं हुई है</strong>। सरकार की प्रेस विज्ञप्ति में केवल यह कहा गया कि पिछले रुझान के अनुसार सिफारिशों का असर "सामान्यतः 01.01.2026 से अपेक्षित" होगा — यह निर्णय नहीं, केवल पिछली परंपरा का उल्लेख है। इसलिए यहाँ दिखाया गया हर आँकड़ा एक अनुमान है।</p>
 
 <h2>कैलकुलेटर कैसे काम करता है</h2>
 <p>7वें वेतन आयोग ने पेंशन को एक ही फिटमेंट फैक्टर (2.57) से गुणा करके अगले पूरे रुपये तक बढ़ाया था और महंगाई राहत (DR) शून्य से दोबारा शुरू हुई थी। यह कैलकुलेटर उसी तरीके को अपनाता है:</p>
 <ol>
-<li><strong>आज की पेंशन</strong> = मूल पेंशन + आयु के आधार पर अतिरिक्त पेंशन (80 वर्ष या अधिक होने पर) + DR (अभी मूल व अतिरिक्त पेंशन का 60%)।</li>
+<li><strong>आज की पेंशन</strong> = मूल पेंशन + आयु के आधार पर अतिरिक्त पेंशन (80 वर्ष या अधिक होने पर) + DR (1 जुलाई 2026 से मूल व अतिरिक्त पेंशन का 63%)।</li>
 <li><strong>नई मूल पेंशन</strong> = वर्तमान मूल पेंशन × फिटमेंट फैक्टर (अगले पूरे रुपये तक)। अगर यह अनुमानित नई न्यूनतम पेंशन (₹9,000 × फैक्टर) से कम हो, तो उसे न्यूनतम तक बढ़ा दिया जाता है।</li>
 <li><strong>नई कुल पेंशन</strong> = नई मूल पेंशन + उसी प्रतिशत से नई अतिरिक्त पेंशन + नई पेंशन पर DR (शुरुआत में 0% माना गया)।</li>
 <li><strong>एरियर</strong> = मासिक बढ़ोतरी × लागू तिथि से भुगतान शुरू होने से पहले के महीने तक के महीने।</li>
 </ol>
-<p>ध्यान दें: DR पहले से 60% है, इसलिए फैक्टर 1.60 होने पर कुल पेंशन लगभग उतनी ही रहेगी। उदाहरण के लिए, ₹9,000 मूल पेंशन वाले को आज DR सहित ₹14,400 मिलते हैं। 2.57 के फैक्टर पर नई पेंशन ₹23,130 होगी, यानी असली बढ़ोतरी ₹8,730 (लगभग 61%)।</p>
+<p>ध्यान दें: DR पहले से 63% है, इसलिए फैक्टर 1.63 होने पर कुल पेंशन लगभग उतनी ही रहेगी। उदाहरण के लिए, ₹9,000 मूल पेंशन वाले को आज DR सहित ₹14,670 मिलते हैं। 2.57 के फैक्टर पर नई पेंशन ₹23,130 होगी, यानी असली बढ़ोतरी ₹8,460 (लगभग 58%)।</p>
 
 <h2>7वें वेतन आयोग के मौजूदा नियम</h2>
 <div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">विषय</th><th scope="col">वर्तमान नियम</th></tr></thead><tbody>
@@ -637,7 +641,7 @@ PAGES.append(dict(
 <tr><td>अधिकतम पेंशन</td><td>₹1,25,000 (सर्वोच्च वेतन ₹2,50,000 का 50%)</td></tr>
 <tr><td>अधिकतम पारिवारिक पेंशन</td><td>सामान्य दर ₹75,000 (30%); बढ़ी हुई दर ₹1,25,000 (50%)</td></tr>
 <tr><td>आयु आधारित अतिरिक्त पेंशन</td><td>80–84: 20% · 85–89: 30% · 90–94: 40% · 95–99: 50% · 100+: 100%</td></tr>
-<tr><td>महंगाई राहत (DR)</td><td>1 जनवरी 2026 से 60% (कैबिनेट निर्णय 18.04.2026); जुलाई 2026 की किस्त 28 अक्टूबर 2026 तक घोषित नहीं</td></tr>
+<tr><td>महंगाई राहत (DR)</td><td>1 जुलाई 2026 से 63% (कैबिनेट निर्णय 28.10.2026, PIB विज्ञप्ति 2329485; DoPPW आदेश की प्रतीक्षा); इससे पहले 1 जनवरी 2026 से 60%</td></tr>
 </tbody></table></div>
 
 <h2>कौन-सा फिटमेंट फैक्टर चुनें?</h2>
@@ -662,13 +666,13 @@ PAGES.append(dict(
 <ul>
 <li><a href="/basic-pension-finder/">मूल पेंशन पता करें</a> — बैंक में हर महीने आने वाली रकम (DR, कम्यूटेशन कटौती और FMA घटाकर) या PPO से अपनी मूल पेंशन निकालें और सीधे कैलकुलेटर में भरें।</li>
 <li><a href="/pre-2016-pensioners/">2016 से पहले रिटायर पेंशनभोगी</a> — 7वें आयोग में मिली दो तरीकों (2.57 गुणा या नोशनल वेतन का 50%) में से ज़्यादा वाली पेंशन की गणना।</li>
-<li><a href="/da-dr-calculator/">DA/DR कैलकुलेटर</a> — DR बढ़ने पर मासिक बढ़ोतरी और एरियर। जुलाई 2026 की किस्त अभी घोषित नहीं है, इसलिए 63% केवल अनुमान के रूप में भरा है।</li>
+<li><a href="/da-dr-calculator/">DA/DR कैलकुलेटर</a> — DR बढ़ने पर मासिक बढ़ोतरी और एरियर। 1 जुलाई 2026 से 60% से 63% की आधिकारिक बढ़ोतरी पहले से भरी है।</li>
 <li><a href="/how-we-calculate/">हम गणना कैसे करते हैं</a> और <a href="/changelog/">बदलाव सूची</a> — हर सूत्र, मान्यता और सरकारी स्रोत।</li>
 </ul>
 <p>अंग्रेज़ी में विस्तृत गाइड: <a href="/">pension calculator</a>, <a href="/fitment-factor-calculator/">fitment factor</a>, <a href="/family-pension-calculator/">family pension</a>, <a href="/pension-chart/">pension chart</a>, <a href="/latest-update/">latest update</a>।</p>
 """,
     faqs=[
-        ("8वें वेतन आयोग में पेंशनभोगियों का फिटमेंट फैक्टर क्या है?", "अभी घोषित नहीं हुआ है। 28 अक्टूबर 2026 तक आयोग ने रिपोर्ट नहीं दी है। 7वें आयोग ने 2.57 लागू किया था; कर्मचारी पक्ष (NC-JCM) और पेंशनभोगी संगठनों ने 3.833 की माँग की है। 1.92, 2.28 या 2.86 जैसे आँकड़े केवल अनुमान हैं।"),
+        ("8वें वेतन आयोग में पेंशनभोगियों का फिटमेंट फैक्टर क्या है?", "अभी घोषित नहीं हुआ है। 30 अक्टूबर 2026 तक आयोग ने रिपोर्ट नहीं दी है। 7वें आयोग ने 2.57 लागू किया था; कर्मचारी पक्ष (NC-JCM) और पेंशनभोगी संगठनों ने 3.833 की माँग की है। 1.92, 2.28 या 2.86 जैसे आँकड़े केवल अनुमान हैं।"),
         ("₹9,000 पेंशन 8वें वेतन आयोग में कितनी हो जाएगी?", "2.57 फैक्टर पर ₹23,130, 2.86 पर ₹25,740, 3.0 पर ₹27,000 और 3.833 पर ₹34,497 (अनुमान)। DR शून्य से शुरू होने की संभावना के कारण कुल पेंशन में असली बढ़ोतरी कम होगी।"),
         ("8वां वेतन आयोग पेंशनभोगियों के लिए कब लागू होगा?", "तारीख तय नहीं है। रिपोर्ट 3 नवंबर 2025 से 18 महीने में, यानी लगभग मई 2027 तक आनी है। सरकार ने कहा है कि पिछली परंपरा के अनुसार असर सामान्यतः 1 जनवरी 2026 से अपेक्षित होगा।"),
         ("क्या जनवरी 2026 से एरियर मिलेगा?", "अगर सरकार 1 जनवरी 2026 को लागू तिथि तय करती है, जैसा 7वें आयोग में 1 जनवरी 2016 को हुआ था, तो एरियर मिलेगा। यह अभी तय नहीं है। कैलकुलेटर में लागू तिथि और भुगतान का महीना दोनों बदल सकते हैं।"),
@@ -700,12 +704,12 @@ PAGES.append(dict(
 <p>If your pension falls between two rows, use the <a href="/">calculator</a> for an exact figure, or multiply your basic pension by the factor yourself and round up to the next rupee.</p>
 
 <h2>Why the jump looks bigger than it is</h2>
-<p>The chart shows basic pension only. Today you also receive Dearness Relief at 60% of basic pension (since 1 January 2026). When the new pension starts, DR is expected to restart from zero, as it did after the 6th and 7th pay commissions. So compare the new basic pension with your <strong>current basic pension × 1.6</strong>, not with your basic pension alone:</p>
-<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Basic pension</th><th scope="col">Total today (with 60% DR)</th><th scope="col">New basic at 2.57</th><th scope="col">Real monthly gain</th></tr></thead><tbody>
-<tr><td>₹9,000</td><td>₹14,400</td><td>₹23,130</td><td>₹8,730</td></tr>
-<tr><td>₹20,000</td><td>₹32,000</td><td>₹51,400</td><td>₹19,400</td></tr>
-<tr><td>₹50,000</td><td>₹80,000</td><td>₹1,28,500</td><td>₹48,500</td></tr>
-<tr><td>₹1,00,000</td><td>₹1,60,000</td><td>₹2,57,000</td><td>₹97,000</td></tr>
+<p>The chart shows basic pension only. Today you also receive Dearness Relief at 63% of basic pension (from 1 July 2026). When the new pension starts, DR is expected to restart from zero, as it did after the 6th and 7th pay commissions. So compare the new basic pension with your <strong>current basic pension × 1.63</strong>, not with your basic pension alone:</p>
+<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Basic pension</th><th scope="col">Total today (with 63% DR)</th><th scope="col">New basic at 2.57</th><th scope="col">Real monthly gain</th></tr></thead><tbody>
+<tr><td>₹9,000</td><td>₹14,670</td><td>₹23,130</td><td>₹8,460</td></tr>
+<tr><td>₹20,000</td><td>₹32,600</td><td>₹51,400</td><td>₹18,800</td></tr>
+<tr><td>₹50,000</td><td>₹81,500</td><td>₹1,28,500</td><td>₹47,000</td></tr>
+<tr><td>₹1,00,000</td><td>₹1,63,000</td><td>₹2,57,000</td><td>₹94,000</td></tr>
 </tbody></table></div>
 
 <h2>Pensioners aged 80 and above</h2>
@@ -730,20 +734,20 @@ PAGES.append(dict(
 # ---------------- latest update
 PAGES.append(dict(
     path="/latest-update/", crumb="Latest Update",
-    title="8th Pay Commission Latest Update for Pensioners – Status as of 28 October 2026",
-    desc="Dated 8th Pay Commission timeline for pensioners as of 28 October 2026: ToR, constitution, consultations, DR 60% from Jan 2026, July 2026 DA pending, fitment factor status, report timeline.",
+    title="8th Pay Commission Latest Update for Pensioners – Status as of 30 October 2026",
+    desc="8th Pay Commission timeline for pensioners as of 30 October 2026: DA/DR raised to 63% from 1 July 2026 (Cabinet 28 Oct), ToR, consultations, fitment factor status.",
     h1="8th Pay Commission Latest Update for Pensioners",
     lead="Status as of " + LAST_UPDATED_HUMAN + ". Each entry is dated and labelled Official (order or Government release), Demand (union or association) or Estimate (calculation, not a decision).",
     body="""
 <h2>At a glance</h2>
-<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Item</th><th scope="col">Position on 28 Oct 2026</th><th scope="col">Label</th></tr></thead><tbody>
+<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Item</th><th scope="col">Position on 30 Oct 2026</th><th scope="col">Label</th></tr></thead><tbody>
 <tr><td>Commission constituted</td><td>3 November 2025</td><td>Official</td></tr>
 <tr><td>Chairperson</td><td>Justice Ranjana Prakash Desai; Prof. Pulak Ghosh (Member, part-time); Shri Pankaj Jain (Member-Secretary)</td><td>Official</td></tr>
 <tr><td>Report due</td><td>Within 18 months of constitution — about May 2027</td><td>Official deadline / estimated date</td></tr>
 <tr><td>Fitment factor</td><td>Not announced</td><td>Official</td></tr>
 <tr><td>Date of effect</td><td>Not decided; "would normally be expected from 01.01.2026" (past practice)</td><td>Official statement, not a decision</td></tr>
-<tr><td>Dearness Relief</td><td>60% from 1 January 2026</td><td>Official</td></tr>
-<tr><td>DA/DR from 1 July 2026</td><td>Not announced. CPI-IW formula points to about 63%</td><td>Estimate</td></tr>
+<tr><td>Dearness Relief</td><td>63% from 1 July 2026 (Cabinet decision 28 October 2026; DoPPW order awaited)</td><td>Official</td></tr>
+<tr><td>DR from 1 January 2026</td><td>60% (previous rate)</td><td>Official</td></tr>
 <tr><td>Fitment factor demanded</td><td>3.833 (NC-JCM staff side; pensioner associations)</td><td>Demand</td></tr>
 </tbody></table></div>
 
@@ -762,11 +766,12 @@ PAGES.append(dict(
 <li><time datetime="2026-09-30">30 September 2026</time>Labour Bureau releases CPI-IW for August 2026 at 154.4. <em>Official</em></li>
 <li><time datetime="2026-10-08">7–8 October 2026</time>Commission's consultations in Bengaluru. A pensioners' association seeks a 3.833 factor and higher annual increments. <em>Official visit / Demand</em></li>
 <li><time datetime="2026-10-23">22–23 October 2026</time>Commission's consultations in Mumbai. No further visits had been listed for November–December when checked on 23 October. <em>Official</em></li>
-<li><time datetime="2026-10-28">28 October 2026</time>July 2026 DA/DR instalment still not announced (pib.gov.in release list checked at about 2:00 pm IST); DR remains 60%. No fitment factor, pension matrix or date of effect. Use the <a href="/da-dr-calculator/">DA/DR calculator</a> to see what a 3-point rise would mean. <em>Official position</em></li>
+<li><time datetime="2026-10-28">28 October 2026</time>Union Cabinet approves a 3% increase in DA and DR, from 60% to 63% with effect from 1 July 2026, benefiting about 48.54 lakh employees and 68.71 lakh pensioners at a cost of Rs 10,016.10 crore a year (<a href="https://pib.gov.in/PressReleasePage.aspx?PRID=2329485" rel="noopener">PIB release ID 2329485</a>). Still no fitment factor, pension matrix or date of effect for the 8th CPC. <em>Official</em></li>
+<li><time datetime="2026-10-30">30 October 2026</time>This site updated to DR 63%. The DoPPW office memorandum implementing the increase for pensioners had not been published on doppw.gov.in or pensionersportal.gov.in as of 30 October 2026; banks pay the new rate once it is issued. Arrears from July are typically paid with the first pension at the new rate. See the <a href="/da-dr-calculator/">DA/DR calculator</a> for your increase and arrears. <em>Official position</em></li>
 </ol>
 
 <h2>What pensioners should expect next</h2>
-<p>The Commission may send interim reports if it chooses, but its final report is due around May 2027. Past experience suggests that implementation follows a few months after the report: the 7th CPC reported in November 2015, the Cabinet approved it in June 2016, and revised pensions with arrears from 1 January 2016 were paid later that year. Meanwhile, Dearness Relief continues to be revised twice a year under the 7th CPC formula, so the July 2026 and January 2027 instalments still matter for your current pension and for any arrears calculation.</p>
+<p>The Commission may send interim reports if it chooses, but its final report is due around May 2027. Past experience suggests that implementation follows a few months after the report: the 7th CPC reported in November 2015, the Cabinet approved it in June 2016, and revised pensions with arrears from 1 January 2016 were paid later that year. Meanwhile, Dearness Relief continues to be revised twice a year under the 7th CPC formula, so the July 2026 increase to 63% and the January 2027 instalment still matter for your current pension and for any arrears calculation.</p>
 
 <h2>How to verify an announcement</h2>
 <ul>
@@ -780,7 +785,8 @@ PAGES.append(dict(
 <ul>
 <li>PIB, Cabinet approves Terms of Reference of 8th CPC, 28.10.2025 — pib.gov.in (PRID 2183289)</li>
 <li>PIB / PM India, Cabinet approves additional DA and DR w.e.f. 01.01.2026, 18.04.2026</li>
-<li>DoPPW OM No. 42/02/2024-P&amp;PW(D)/E-9475 dated 24.04.2026 (DR 60%)</li>
+<li>PIB release ID 2329485, 28.10.2026 — Cabinet approves DA/DR from 60% to 63% w.e.f. 01.07.2026</li>
+<li>DoPPW OM No. 42/02/2024-P&amp;PW(D)/E-9475 dated 24.04.2026 (DR 60% from 01.01.2026)</li>
 <li>8cpc.gov.in — composition and notices of city visits</li>
 <li>CCS (Pension) Rules, 2021 — pensionersportal.gov.in</li>
 <li>Labour Bureau CPI-IW press release, 30.09.2026</li>
@@ -789,9 +795,9 @@ PAGES.append(dict(
 <p>Use the <a href="/">pension calculator</a> to see what any scenario means for you.</p>
 """,
     faqs=[
-        ("Has the 8th Pay Commission submitted its report?", "No. As of 28 October 2026 the report has not been submitted. It is due within 18 months of 3 November 2025, around May 2027."),
-        ("What is the current DR for central government pensioners?", "60% of basic pension (including additional pension) from 1 January 2026, approved by the Cabinet on 18 April 2026."),
-        ("Has the July 2026 DA/DR been announced?", "Not as of 28 October 2026. The CPI-IW formula suggests about 63%, but that is a calculation, not an announcement."),
+        ("Has the 8th Pay Commission submitted its report?", "No. As of 30 October 2026 the report has not been submitted. It is due within 18 months of 3 November 2025, around May 2027."),
+        ("What is the current DR for central government pensioners?", "63% of basic pension (including additional pension) from 1 July 2026, approved by the Cabinet on 28 October 2026. It was 60% from 1 January 2026."),
+        ("Has the July 2026 DA/DR been announced?", "Yes. On 28 October 2026 the Union Cabinet approved DA and DR of 63% from 1 July 2026, up from 60% (PIB release ID 2329485). The DoPPW order for pensioners was awaited as of 30 October 2026."),
         ("Who heads the 8th Pay Commission?", "Justice Ranjana Prakash Desai is the Chairperson. Prof. Pulak Ghosh is the part-time Member and Shri Pankaj Jain is the Member-Secretary."),
     ],
     related=rel("/", "/da-dr-calculator/", "/changelog/", "/fitment-factor-calculator/", "/pension-chart/", "/hi/"),
@@ -813,7 +819,7 @@ PAGES.append(dict(
 <ul>
 <li><strong>Calculate transparently.</strong> Each result shows the step-by-step formula, so you can check it with a pen and paper.</li>
 <li><strong>Label everything.</strong> Every result is marked "Estimate — not official". Figures on the <a href="/latest-update/">latest update</a> page are labelled Official, Demand or Estimate.</li>
-<li><strong>Use primary sources.</strong> Current rules — the ₹9,000 minimum pension, the ₹1,25,000 maximum, family pension rates, additional pension for age and the 60% Dearness Relief — are taken from the CCS (Pension) Rules, 2021, DoPPW office memoranda and Cabinet releases on pib.gov.in.</li>
+<li><strong>Use primary sources.</strong> Current rules — the ₹9,000 minimum pension, the ₹1,25,000 maximum, family pension rates, additional pension for age and the 63% Dearness Relief — are taken from the CCS (Pension) Rules, 2021, DoPPW office memoranda and Cabinet releases on pib.gov.in.</li>
 <li><strong>Update quickly.</strong> All official numbers sit in a single settings block in the site's code, so when the Government announces the fitment factor or a new DR rate, the calculator can be updated within minutes. The date of the last update is shown at the top of every page.</li>
 </ul>
 
@@ -1050,7 +1056,7 @@ def finder_widget(lang="en"):
 </div>
 <div class="grid" id="bfWrap_credit">
 {fld(lang, "bfCredit", "bf_lbl_credit", "bf_hint_credit", num_input("bfCredit", "e.g. 25000", 1000, 500000), full=True)}
-{fld(lang, "bfDR", "bf_lbl_dr", "bf_hint_dr", num_input("bfDR", "60", 0, 200, "0.01", 60))}
+{fld(lang, "bfDR", "bf_lbl_dr", "bf_hint_dr", num_input("bfDR", "63", 0, 200, "0.01", 63))}
 {fld(lang, "bfCommMode", "bf_lbl_comm", control=f'<select id="bfCommMode">{comm}</select>')}
 {fld(lang, "bfCommVal", "bf_lbl_commval", "bf_hint_commval", num_input("bfCommVal", "e.g. 8000 or 40", 0, 200000, "0.01"), wrap_id="bfCommValWrap", hidden=True)}
 {fld(lang, "bfOther", "bf_lbl_other", "bf_hint_other", num_input("bfOther", "0", 0, 200000))}
@@ -1105,19 +1111,19 @@ def credit_of(basic, age_pct, dr, comm=0, fma=0, other=0):
     return basic + add + d - comm + fma - other, add, d
 
 
-EX1 = credit_of(20000, 0, 60, comm=8000, fma=1000)      # (25000, 0, 12000)
-EX2 = credit_of(15000, 20, 60)                          # (28800, 3000, 10800)
+EX1 = credit_of(20000, 0, 63, comm=8000, fma=1000)      # (25600, 0, 12600)
+EX2 = credit_of(15000, 20, 63)                          # (29340, 3000, 11340)
 
 # ---------------- basic pension finder
 PAGES.append(dict(
     path="/basic-pension-finder/", crumb="Basic Pension Finder", webapp=True, widget=finder_widget("en"),
     title="Find Your Basic Pension from Bank Credit or PPO – 8th CPC Helper",
-    desc="Work out your basic pension from the amount credited to your bank each month (DR 60%, additional pension, commutation, FMA) or from PPO figures, then open the 8th Pay Commission calculator pre-filled.",
+    desc="Work out your basic pension from the amount credited to your bank each month (DR 63%, additional pension, commutation, FMA) or from PPO figures, then open the 8th Pay Commission calculator pre-filled.",
     h1="Basic Pension Finder: From Bank Credit or PPO",
     lead="Every 8th Pay Commission estimate starts from your basic pension — not the amount that reaches your bank. If you only know the monthly credit, or have an old PPO, work your basic pension out here and carry it straight into the calculator.",
     body=f"""
 <h2>Why the amount in your bank is not your basic pension</h2>
-<p>The figure in your passbook is built up from several pieces. Your <strong>basic pension</strong> is the starting point. If you are 80 or older, an <strong>additional pension</strong> for age is added (20% at 80, rising to 100% at 100). <strong>Dearness Relief</strong> — 60% since 1 January 2026 — is then paid on basic plus additional pension. If you commuted part of your pension at retirement, the <strong>commuted amount is deducted</strong> every month until it is restored after 15 years. Pensioners outside CGHS areas also receive <strong>Fixed Medical Allowance</strong> of ₹1,000 a month. Finally the bank may deduct <strong>income tax (TDS)</strong> or a recovery.</p>
+<p>The figure in your passbook is built up from several pieces. Your <strong>basic pension</strong> is the starting point. If you are 80 or older, an <strong>additional pension</strong> for age is added (20% at 80, rising to 100% at 100). <strong>Dearness Relief</strong> — 63% from 1 July 2026 — is then paid on basic plus additional pension. If you commuted part of your pension at retirement, the <strong>commuted amount is deducted</strong> every month until it is restored after 15 years. Pensioners outside CGHS areas also receive <strong>Fixed Medical Allowance</strong> of ₹1,000 a month. Finally the bank may deduct <strong>income tax (TDS)</strong> or a recovery.</p>
 <p>Putting the credited amount into a pay-commission calculator therefore overstates or understates the result — usually by a lot. The fitment factor applies only to the basic pension.</p>
 
 <h2>The formula this tool reverses</h2>
@@ -1129,12 +1135,12 @@ where additional pension = basic × age % (rounded up to the next rupee) and DR 
 <div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Item</th><th scope="col">Example 1: age 70, commuted, non-CGHS area</th><th scope="col">Example 2: family pensioner aged 82</th></tr></thead><tbody>
 <tr><td>Basic pension</td><td>₹20,000</td><td>₹15,000</td></tr>
 <tr><td>Additional pension</td><td>— (under 80)</td><td>{inr(EX2[1])} (20%)</td></tr>
-<tr><td>DR at 60%</td><td>{inr(EX1[2])}</td><td>{inr(EX2[2])}</td></tr>
+<tr><td>DR at 63%</td><td>{inr(EX1[2])}</td><td>{inr(EX2[2])}</td></tr>
 <tr><td>Commutation deduction</td><td>−₹8,000 (40% commuted)</td><td>—</td></tr>
 <tr><td>Fixed Medical Allowance</td><td>+₹1,000</td><td>—</td></tr>
 <tr><td><strong>Credited to bank</strong></td><td><strong>{inr(EX1[0])}</strong></td><td><strong>{inr(EX2[0])}</strong></td></tr>
 </tbody></table></div>
-<p>Enter ₹25,000 with age 70, DR 60%, a ₹8,000 commutation deduction and FMA ticked, and the tool returns a basic pension of ₹20,000 — not ₹25,000. At a fitment factor of 2.57 that is the difference between an estimated new basic of ₹51,400 and a wrong ₹64,250.</p>
+<p>Enter ₹25,600 with age 70, DR 63%, a ₹8,000 commutation deduction and FMA ticked, and the tool returns a basic pension of ₹20,000 — not ₹25,600. At a fitment factor of 2.57 that is the difference between an estimated new basic of ₹51,400 and a wrong ₹65,792.</p>
 
 <h2>Using PPO figures instead</h2>
 <ul>
@@ -1146,7 +1152,7 @@ where additional pension = basic × age % (rounded up to the next rupee) and DR 
 <h2>Common mistakes the tool catches</h2>
 <ul>
 <li><strong>Using a month with arrears.</strong> A DR increase is usually paid with arrears for several months at once. That month's credit is not a normal month; pick another.</li>
-<li><strong>Wrong DR rate.</strong> The 60% rate was approved on 18 April 2026 with effect from 1 January 2026. Credits paid before your bank applied it carry 58%.</li>
+<li><strong>Wrong DR rate.</strong> The 63% rate was approved by the Cabinet on 28 October 2026 with effect from 1 July 2026; banks are expected to apply it from about the November 2026 pension. Credits paid before your bank applied it carry 60% (and before about May 2026, 58%).</li>
 <li><strong>Forgetting FMA.</strong> If you live outside a CGHS area, ₹1,000 of your credit is medical allowance, not pension.</li>
 <li><strong>Result below ₹9,000.</strong> No central civil pension is below ₹9,000, so a lower result means a deduction or allowance is missing.</li>
 </ul>
@@ -1154,9 +1160,9 @@ where additional pension = basic × age % (rounded up to the next rupee) and DR 
 
 <section lang="hi">
 <h2>हिंदी में: बैंक में आई पेंशन से मूल पेंशन कैसे निकालें</h2>
-<p>8वें वेतन आयोग का फिटमेंट फैक्टर केवल <strong>मूल पेंशन (basic pension)</strong> पर लगेगा, बैंक में आने वाली कुल रकम पर नहीं। बैंक की रकम में मूल पेंशन के साथ 80 वर्ष से ऊपर की अतिरिक्त पेंशन, 60% महंगाई राहत (DR), CGHS क्षेत्र से बाहर रहने पर ₹1,000 फिक्स्ड मेडिकल अलाउंस जुड़ता है, और कम्यूटेशन की मासिक कटौती व आयकर (TDS) घटता है।</p>
+<p>8वें वेतन आयोग का फिटमेंट फैक्टर केवल <strong>मूल पेंशन (basic pension)</strong> पर लगेगा, बैंक में आने वाली कुल रकम पर नहीं। बैंक की रकम में मूल पेंशन के साथ 80 वर्ष से ऊपर की अतिरिक्त पेंशन, 63% महंगाई राहत (DR, 1 जुलाई 2026 से), CGHS क्षेत्र से बाहर रहने पर ₹1,000 फिक्स्ड मेडिकल अलाउंस जुड़ता है, और कम्यूटेशन की मासिक कटौती व आयकर (TDS) घटता है।</p>
 <p class="note">बैंक में आई रकम = मूल पेंशन + अतिरिक्त पेंशन + DR − कम्यूटेशन कटौती + FMA − अन्य कटौती</p>
-<p><strong>उदाहरण:</strong> 70 वर्ष के पेंशनभोगी के खाते में हर महीने ₹25,000 आते हैं। उन्होंने 40% पेंशन कम्यूट की थी (₹8,000 कटौती) और CGHS क्षेत्र से बाहर रहते हैं (₹1,000 FMA)। ऊपर के टूल में ये आँकड़े डालने पर मूल पेंशन ₹20,000 निकलती है: ₹20,000 + ₹12,000 DR − ₹8,000 + ₹1,000 = ₹25,000। ध्यान दें कि DR पूरी मूल पेंशन (₹20,000) पर मिलती है, कटौती के बाद वाली रकम पर नहीं।</p>
+<p><strong>उदाहरण:</strong> 70 वर्ष के पेंशनभोगी के खाते में हर महीने ₹25,600 आते हैं। उन्होंने 40% पेंशन कम्यूट की थी (₹8,000 कटौती) और CGHS क्षेत्र से बाहर रहते हैं (₹1,000 FMA)। ऊपर के टूल में ये आँकड़े डालने पर मूल पेंशन ₹20,000 निकलती है: ₹20,000 + ₹12,600 DR (63%) − ₹8,000 + ₹1,000 = ₹25,600। ध्यान दें कि DR पूरी मूल पेंशन (₹20,000) पर मिलती है, कटौती के बाद वाली रकम पर नहीं।</p>
 <p>अगर आपके पास PPO है: 2016 या उसके बाद के PPO में लिखी मूल पेंशन सीधे इस्तेमाल करें। पुराने PPO में 31.12.2015 की पेंशन लिखी हो तो उसे 2.57 से गुणा करें (कम से कम ₹9,000)। केवल अंतिम वेतन पता हो तो पेंशन उसका 50% होती है; पारिवारिक पेंशन 30% (सामान्य) या 50% (बढ़ी हुई)। ऊपर "हिंदी" बटन दबाकर पूरा टूल हिंदी में चला सकते हैं। मूल पेंशन मिलने के बाद "8वें आयोग के कैलकुलेटर में डालें" बटन से <a href="/hi/">हिंदी कैलकुलेटर</a> अपने-आप भर जाएगा।</p>
 </section>
 """,
@@ -1214,7 +1220,7 @@ PAGES.append(dict(
 </ul>
 
 <h2>What the 8th Pay Commission could mean for pre-2016 pensioners</h2>
-<p>Whatever method fixed your pension, the result became your <strong>basic pension from 1 January 2016</strong>, and Dearness Relief has been paid on it since (60% from 1 January 2026). The calculator's 8th CPC figure applies the fitment factor you choose to that basic pension — the same approach the 7th CPC took for everyone through Method A. It is an <strong>estimate</strong>: no fitment factor has been announced as of {LAST_UPDATED_HUMAN}, and nobody yet knows whether the 8th CPC will again offer older pensioners a notional-pay option, or a different method altogether. Pensioner associations have raised the treatment of older pensioners in their submissions; the Commission's report is due around May 2027.</p>
+<p>Whatever method fixed your pension, the result became your <strong>basic pension from 1 January 2016</strong>, and Dearness Relief has been paid on it since (63% from 1 July 2026). The calculator's 8th CPC figure applies the fitment factor you choose to that basic pension — the same approach the 7th CPC took for everyone through Method A. It is an <strong>estimate</strong>: no fitment factor has been announced as of {LAST_UPDATED_HUMAN}, and nobody yet knows whether the 8th CPC will again offer older pensioners a notional-pay option, or a different method altogether. Pensioner associations have raised the treatment of older pensioners in their submissions; the Commission's report is due around May 2027.</p>
 <p>For defence pensioners, note that the two OMs above apply to central civil pensioners (including CAPFs, railway and All India Services pensioners). Armed forces pensions were revised through separate Ministry of Defence orders; see the <a href="/defence-pension-calculator/">defence pension page</a>.</p>
 
 <section lang="hi">
@@ -1242,19 +1248,19 @@ dr_rows = "".join(f"<tr><td>{inr(b)}</td><td>{inr(_dr(b, 60))}</td><td>{inr(_dr(
 
 PAGES.append(dict(
     path="/da-dr-calculator/", crumb="DA / DR Calculator", webapp=True, widget=dr_widget("en"),
-    title="DA / DR Calculator for Pensioners with Arrears – July 2026 DR",
-    desc="Dearness Relief calculator for central government pensioners: DR at 60% (from 1 Jan 2026) vs a new rate, monthly increase and arrears. July 2026 DR not announced as of 28 Oct 2026 — 63% shown only as an estimate.",
+    title="DA / DR Calculator for Pensioners – 63% from July 2026, Arrears",
+    desc="DR calculator for central government pensioners: official 63% from 1 July 2026 (Cabinet 28 Oct 2026) vs 60%, monthly increase and July–October arrears.",
     h1="DA / DR Calculator for Pensioners (with Arrears)",
     lead="Dearness Relief is revised twice a year and paid with arrears. Enter your basic pension to see your DR today, what a new rate would add each month, and the arrears you would receive.",
     body=f"""
 <h2>Where DR stands on {LAST_UPDATED_HUMAN}</h2>
 <div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Instalment</th><th scope="col">DR rate</th><th scope="col">Status</th><th scope="col">Order</th></tr></thead><tbody>
 <tr><td>From 1 July 2025</td><td>58%</td><td>Official</td><td>DoPPW OM No. 42/02/2024-P&amp;PW(D) dated 08.10.2025 (as cited in the 24.04.2026 OM)</td></tr>
-<tr><td>From 1 January 2026</td><td><strong>60%</strong></td><td>Official — current rate</td><td>Cabinet decision 18.04.2026; DoPPW OM No. 42/02/2024-P&amp;PW(D)/E-9475 dated 24.04.2026</td></tr>
-<tr><td>From 1 July 2026</td><td>Not announced (about 63% by press / CPI-IW estimates)</td><td>Estimate</td><td>No order on pib.gov.in as of about 2:00 pm IST, 28.10.2026</td></tr>
+<tr><td>From 1 January 2026</td><td>60%</td><td>Official</td><td>Cabinet decision 18.04.2026; DoPPW OM No. 42/02/2024-P&amp;PW(D)/E-9475 dated 24.04.2026</td></tr>
+<tr><td>From 1 July 2026</td><td><strong>63%</strong></td><td>Official — current rate</td><td>Cabinet decision 28.10.2026 (<a href="https://pib.gov.in/PressReleasePage.aspx?PRID=2329485" rel="noopener">PIB release ID 2329485</a>); DoPPW order awaited as of 30.10.2026</td></tr>
 </tbody></table></div>
 <p>The DoPPW order of 24 April 2026 raised DR "from the existing rate of 58% to 60% of the basic pension/family pension (including additional pension/additional family pension)" with effect from 1 January 2026, for all central government pensioners and family pensioners, including armed forces, railway and All India Services pensioners. It also says that a fraction of a rupee in DR is rounded up to the next rupee.</p>
-<p>The July 2026 instalment was still awaited when this page was last updated. The calculator pre-fills 63% only so you can see the likely effect; it is clearly marked as an estimate until the Government announces the real figure, and this page will be updated the same day.</p>
+<p>On 28 October 2026 the Union Cabinet approved an additional instalment of DR to pensioners with effect from 1 July 2026, "representing an increase of 3% over the existing rates of 60%" — taking DR to 63%. The Government put the cost of the DA and DR increase together at Rs 10,016.10 crore a year, benefiting about 48.54 lakh employees and 68.71 lakh pensioners. The DoPPW office memorandum that implements it for pensioners had not been published as of 30 October 2026; this page will cite it once it is out. The calculator pre-fills the official 60% → 63% change.</p>
 
 <h2>How DR and DR arrears are calculated</h2>
 <p class="note">DR = (basic pension + additional pension for age) × DR %, rounded up to the next rupee<br>
@@ -1267,26 +1273,27 @@ Arrears = monthly increase × number of months from the date of effect up to the
 <li><strong>Arrears</strong> are paid in the first month the new rate is credited, so that month's credit looks unusually high. Do not use it to work out your basic pension.</li>
 </ul>
 
-<h2>Ready reckoner: what a 3-point rise would mean (estimate)</h2>
-<p>If DR goes from 60% to 63% from 1 July 2026 and the new rate is first paid in November 2026, arrears would cover four months (July to October). This table is a <strong>hypothetical</strong> illustration for pensioners below 80 years; it is not an announcement.</p>
-<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Basic pension</th><th scope="col">DR at 60%</th><th scope="col">DR at 63%</th><th scope="col">Extra per month</th><th scope="col">Arrears for 4 months</th></tr></thead><tbody>
+<h2>Ready reckoner: DR 60% → 63% from 1 July 2026, with arrears</h2>
+<p>DR rose from 60% to 63% with effect from 1 July 2026. If, as is typical, the new rate is first paid with the November 2026 pension, arrears cover four months (July to October). The exact month depends on when the DoPPW order is issued and your bank applies it, so treat the arrears column as typical rather than certain. Figures are for pensioners below 80 years.</p>
+<div class="tbl-wrap"><table class="data"><thead><tr><th scope="col">Basic pension</th><th scope="col">DR at 60%</th><th scope="col">DR at 63%</th><th scope="col">Extra per month</th><th scope="col">Arrears, Jul–Oct (4 months)</th></tr></thead><tbody>
 {dr_rows}
 </tbody></table></div>
 
 <h2>DR and the 8th Pay Commission</h2>
-<p>When the 7th CPC was implemented, the DR built up by then (125%) was absorbed into the new basic pension through the 2.57 fitment factor, and DR restarted from zero. If the 8th CPC follows the same pattern, every DR instalment granted until implementation (60% now, and the July 2026 and January 2027 instalments) raises the break-even fitment factor: at 60% DR, a factor of 1.60 merely keeps total pension unchanged; at 63%, 1.63. That is why the <a href="/">main 8th CPC calculator</a> lets you change the DR box, and why the July 2026 decision matters for every estimate. The Government told Parliament in December 2025 that there was no proposal to merge DA with basic pay.</p>
+<p>When the 7th CPC was implemented, the DR built up by then (125%) was absorbed into the new basic pension through the 2.57 fitment factor, and DR restarted from zero. If the 8th CPC follows the same pattern, every DR instalment granted until implementation (63% from July 2026, and the January 2027 and later instalments) raises the break-even fitment factor: at 60% DR a factor of 1.60 merely kept total pension unchanged; at today's 63%, 1.63. That is why the <a href="/">main 8th CPC calculator</a> lets you change the DR box, and why every DR decision matters for the estimate. The Government told Parliament in December 2025 that there was no proposal to merge DA with basic pay.</p>
 <p>Not sure of your basic pension? Use the <a href="/basic-pension-finder/">basic pension finder</a>. For our formulas and the official orders behind each rate, see <a href="/how-we-calculate/">How we calculate</a>; every rate change is recorded in the <a href="/changelog/">changelog</a>.</p>
 
 <section lang="hi">
 <h2>हिंदी में: महंगाई राहत (DR) और एरियर</h2>
-<p>1 जनवरी 2026 से केंद्रीय पेंशनभोगियों की DR मूल पेंशन (आयु वाली अतिरिक्त पेंशन सहित) का <strong>60%</strong> है (कैबिनेट निर्णय 18.04.2026; DoPPW OM 24.04.2026)। 1 जुलाई 2026 की किस्त 28 अक्टूबर 2026 (दोपहर लगभग 2 बजे) तक घोषित नहीं हुई है; 63% केवल मीडिया / CPI-IW फ़ॉर्मूले का अनुमान है।</p>
+<p>1 जुलाई 2026 से केंद्रीय पेंशनभोगियों की DR मूल पेंशन (आयु वाली अतिरिक्त पेंशन सहित) का <strong>63%</strong> है — केंद्रीय मंत्रिमंडल ने 28 अक्टूबर 2026 को 60% से 63% की बढ़ोतरी मंज़ूर की (PIB विज्ञप्ति 2329485)। पेंशनभोगियों के लिए DoPPW का आदेश 30 अक्टूबर 2026 तक जारी नहीं हुआ था। इससे पहले 1 जनवरी 2026 से DR 60% थी।</p>
 <p class="note">DR = (मूल पेंशन + अतिरिक्त पेंशन) × DR %, अगले पूरे रुपये तक · एरियर = मासिक बढ़ोतरी × लागू तिथि से भुगतान वाले महीने से पहले तक के महीने</p>
-<p>उदाहरण: ₹20,000 मूल पेंशन पर 60% DR = ₹12,000; 63% होने पर ₹12,600, यानी ₹600 प्रति माह ज़्यादा। अगर नई दर नवंबर 2026 से मिले तो जुलाई–अक्टूबर के 4 महीनों का एरियर ₹2,400 होगा (अनुमान)। कम्यूटेशन कटौती से DR कम नहीं होती — DR पूरी मूल पेंशन पर मिलती है। ऊपर "हिंदी" बटन से कैलकुलेटर हिंदी में चलाएँ।</p>
+<p>उदाहरण: ₹20,000 मूल पेंशन पर 60% DR = ₹12,000; 63% पर ₹12,600, यानी ₹600 प्रति माह ज़्यादा। आम तौर पर नई दर नवंबर 2026 की पेंशन के साथ मिले तो जुलाई–अक्टूबर के 4 महीनों का एरियर ₹2,400 होगा (महीना आदेश और बैंक पर निर्भर)। कम्यूटेशन कटौती से DR कम नहीं होती — DR पूरी मूल पेंशन पर मिलती है। ऊपर "हिंदी" बटन से कैलकुलेटर हिंदी में चलाएँ।</p>
 </section>
 """,
     faqs=[
-        ("What is the current DR for central government pensioners?", "60% of basic pension (including additional pension) from 1 January 2026, under DoPPW OM dated 24.04.2026 following the Cabinet decision of 18.04.2026."),
-        ("Has the July 2026 DA/DR been announced?", "Not as of about 2:00 pm IST on 28 October 2026 — there was no Cabinet decision on pib.gov.in. Press and CPI-IW formula estimates point to about 63%, but that is not official."),
+        ("What is the current DR for central government pensioners?", "63% of basic pension (including additional pension) from 1 July 2026, following the Cabinet decision of 28.10.2026 (PIB release ID 2329485). It was 60% from 1 January 2026 under DoPPW OM dated 24.04.2026."),
+        ("Has the July 2026 DA/DR been announced?", "Yes. The Union Cabinet approved it on 28 October 2026: DA and DR go from 60% to 63% with effect from 1 July 2026. The DoPPW order for pensioners was awaited as of 30 October 2026."),
+        ("When will the July–October DR arrears be paid?", "Typically with the first pension paid at the new rate, often November. It depends on when the DoPPW order is issued and your bank processes it. For ₹20,000 basic pension, 4 months of arrears is ₹2,400."),
         ("How are DR arrears calculated?", "Arrears = (DR at the new rate − DR at the old rate) × the number of months from the date of effect until the month before the new rate is first paid. Each month's DR is rounded up to the next rupee."),
         ("Is DR paid on the commuted part of pension?", "Yes. DR is calculated on the original basic pension before the commutation deduction."),
         ("Do family pensioners get the same DR?", "Yes. The same DR percentage applies to family pension, including additional family pension for those aged 80 and above."),
@@ -1301,7 +1308,7 @@ SOURCES = [
     ("https://8cpc.gov.in/composition/", "8th Central Pay Commission — Composition (Chairperson, part-time Member, Member-Secretary)"),
     ("https://www.pmindia.gov.in/en/news_updates/cabinet-approves-additional-instalment-of-dearness-allowance-to-central-government-employees-and-dearness-relief-dr-to-pensioners-w-e-f-01-01-2026/", "PM India, 18.04.2026 — Cabinet approves DA/DR increase from 58% to 60% w.e.f. 01.01.2026"),
     ("https://documents.doptcirculars.nic.in/D3/D03ppw/DR%20OrderxUYZn.pdf", "DoPPW OM No. 42/02/2024-P&PW(D)/E-9475 dated 24.04.2026 — DR 60% on basic + additional pension; fractions rounded up"),
-    ("https://pib.gov.in/allRel.aspx", "PIB — all press releases (checked 28.10.2026 at about 2:00 pm IST for a July 2026 DA/DR decision; none found)"),
+    ("https://pib.gov.in/PressReleasePage.aspx?PRID=2329485", "PIB release ID 2329485, 28.10.2026 — Cabinet approves DA/DR from 60% to 63% w.e.f. 01.07.2026 (48.54 lakh employees, 68.71 lakh pensioners, Rs 10,016.10 crore a year)"),
     ("https://documents.doptcirculars.nic.in/D3/D03ppw/PPWA_7thCPC3_040816_S.pdf", "DoPPW OM No. 38/37/2016-P&PW(A)(ii) dated 04.08.2016 — pre-2016 pension × 2.57, minimum ₹9,000, ceilings, additional pension slabs"),
     ("https://documents.doptcirculars.nic.in/D3/D03ppw/PPWA_12052017.pdf", "DoPPW OM No. 38/37/2016-P&PW(A) dated 12.05.2017 — notional pay fixation, 50%/30% of notional pay, higher of the two formulations, worked examples"),
     ("https://pensionersportal.gov.in/retire-benefit.aspx", "Pensioners' Portal (DoPPW) — Retirement benefits: minimum ₹9,000 / maximum ₹1,25,000; commutation up to 40%, restored after 15 years, DR on original pension"),
@@ -1317,7 +1324,7 @@ PAGES.append(dict(
     lead="Every result on this site can be checked with a pen and paper. This page lists each formula, what is official, what is an assumption, and the official documents we read — checked on " + LAST_UPDATED_HUMAN + ".",
     body=f"""
 <h2>Official vs estimate</h2>
-<p>Two kinds of numbers appear on this site. <strong>Official</strong> numbers come from a Government order or release we have read: the current DR rate (60%), the minimum and maximum pension, family pension rates, additional pension for age, Fixed Medical Allowance and the 7th CPC pre-2016 methods. <strong>Estimates</strong> are anything about the 8th Pay Commission — the fitment factor, the new minimum and maximum, DR after revision, the date of effect and arrears — and any DR rate not yet announced. Every estimate is labelled "Estimate — not official" on screen.</p>
+<p>Two kinds of numbers appear on this site. <strong>Official</strong> numbers come from a Government order or release we have read: the current DR rate (63% from 1 July 2026), the minimum and maximum pension, family pension rates, additional pension for age, Fixed Medical Allowance and the 7th CPC pre-2016 methods. <strong>Estimates</strong> are anything about the 8th Pay Commission — the fitment factor, the new minimum and maximum, DR after revision, the date of effect and arrears — and any DR rate not yet announced. Every estimate is labelled "Estimate — not official" on screen.</p>
 
 <h2>Rounding</h2>
 <p>Pension, additional pension and DR are rounded <strong>up to the next rupee</strong>. DR orders say so explicitly ("The payment of Dearness Relief involving a fraction of a rupee shall be rounded off to the next higher rupee"), and the 7th CPC orders rounded revised pension "off to next higher rupee". The code first trims floating-point noise (so 23,129.999… becomes 23,130), then rounds up.</p>
@@ -1326,7 +1333,7 @@ PAGES.append(dict(
 <p class="note">Additional pension = basic × age % · DR = (basic + additional) × DR % · Total = basic + additional + DR</p>
 <ul>
 <li>Age %: 20% from 80, 30% from 85, 40% from 90, 50% from 95, 100% from 100 years (OM 04.08.2016 para 4.5; CCS (Pension) Rules, 2021).</li>
-<li>DR: 60% from 01.01.2026, paid on basic plus additional pension (DoPPW OM 24.04.2026).</li>
+<li>DR: 63% from 01.07.2026, paid on basic plus additional pension (Cabinet decision 28.10.2026, PIB release 2329485; DoPPW order awaited). 60% from 01.01.2026 (DoPPW OM 24.04.2026).</li>
 <li>Limits: minimum ₹9,000; maximum ₹1,25,000 for pension and enhanced family pension, ₹75,000 for normal family pension (50% / 30% of the highest pay of ₹2,50,000).</li>
 </ul>
 
@@ -1348,13 +1355,13 @@ Method B = notional pay on 01.01.2016 × 50% (pension, enhanced family pension) 
 
 <h2>DA / DR calculator</h2>
 <p class="note">DR = (basic + additional) × rate, rounded up · Monthly increase = DR(new) − DR(old) · Arrears = increase × months from date of effect to the month before first payment</p>
-<p>Basic pension and age slab are held constant over the arrears period, and arrears are shown before any income-tax deduction. The pre-filled new rate (63%) is an estimate until an order is issued; it is labelled as such.</p>
+<p>Basic pension and age slab are held constant over the arrears period, and arrears are shown before any income-tax deduction. The pre-filled rates are the latest official change, 60% → 63% from 1 July 2026. A rate not yet announced, if you type one, is labelled as an estimate.</p>
 
 <h2>Where the numbers live</h2>
 <p>All rates are kept in one settings block in the site's script, and published in machine-readable form at <a href="/assets/rates.json">/assets/rates.json</a> (generated from the same settings, so the two cannot disagree). When an order changes a rate, we update it, record the change with its date and source on the <a href="/changelog/">changelog</a>, and change the "data last updated" date shown on every page.</p>
 
 <h2>Official sources we read</h2>
-<p>Each link below was opened and checked on {LAST_UPDATED_HUMAN}.</p>
+<p>Each link below was opened and checked on {LAST_UPDATED_HUMAN} or earlier.</p>
 <ul>{src_html}</ul>
 <p>Other references used on the site, not re-opened for this page: CCS (Pension) Rules, 2021 (pensionersportal.gov.in) for family pension and additional pension rules; DoPPW concordance tables OM dated 06.07.2017; news reports (Mint, Economic Times, Financial Express) for union demands such as the 3.833 factor, which are always labelled as demands.</p>
 
@@ -1412,11 +1419,11 @@ LLMS_TXT = """# 8th CPC Pension Calculator
 
 > Free, bilingual (English + Hindi) calculators and guides for Indian central government pensioners and family pensioners to estimate their pension under the 8th Central Pay Commission. Every page exists in English and in Hindi (/hi/...). All 8th CPC figures are estimates: the official fitment factor has not been announced. Published by the independent 8CPC Pension Calculator team; not a government website.
 
-Key facts (as of 28 October 2026, verified against official orders):
+Key facts (as of 30 October 2026, verified against official orders):
 - 8th Central Pay Commission constituted 3 November 2025; chair Justice Ranjana Prakash Desai; report expected around mid-2027.
 - Official 8th CPC fitment factor: not yet announced. 7th CPC factor was 2.57. Common estimates range 1.92 to 2.86; 3.833 is a union (NC-JCM staff side) demand.
 - Date of effect: 1 January 2026 is expected based on past practice, not officially decided.
-- Dearness Relief (DR): 60% from 1 January 2026 (DoPPW OM 24.04.2026). July 2026 DR not officially announced as of 28 October 2026.
+- Dearness Relief (DR): 63% from 1 July 2026 (Cabinet decision 28 October 2026, PIB release ID 2329485; DoPPW order awaited as of 30 October 2026). Previously 60% from 1 January 2026.
 - Formula: new basic pension = current basic pension x fitment factor (rounded up to the next rupee). Additional pension for age 80+ (20%), 85+ (30%), 90+ (40%), 95+ (50%), 100+ (100%).
 - Minimum pension Rs 9,000 (raised from Rs 3,500 in 2016); maximum Rs 1,25,000. Family pension: 30% of last pay (normal), 50% enhanced for a limited period.
 - Commutation: up to 40% of pension; restored after 15 years; DR is paid on the full pension; commuted value = commuted pension x factor (8.194 at age next birthday 61) x 12.

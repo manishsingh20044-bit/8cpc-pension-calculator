@@ -7,7 +7,7 @@ _CFG = json.loads(subprocess.check_output(["node", "-e", "process.stdout.write(J
 AMT_LIST = [9000, 10000, 12000, 15000, 18000, 20000, 22000, 25000, 30000, 35000, 40000, 45000,
             50000, 60000, 70000, 75000, 80000, 100000]
 AMT_FACTORS = [repr(p["value"]) for p in _CFG["presetFactors"]]            # "1.92" … "3.833"
-AMT_DR = _CFG["currentDR"]                                                  # 60
+AMT_DR = _CFG["currentDR"]                                                  # 63
 AMT_NEWDR = _CFG["newDRPercent"]                                            # 0 (assumption)
 AMT_MIN = _CFG["minPension"]
 AMT_MAX = _CFG["maxPension"]
@@ -158,7 +158,7 @@ def amt_page(b, lang):
 <p class="note">{" · ".join(nav_links)}</p>
 <h2>{A} pension at every fitment factor</h2>
 {amt_table(b, "en")}
-<p>The range is wide because the factor is unknown. At the low-end media estimate of {AMT_FACTORS[0]}, the gain over today's {inr(today)} is only {inr(lo['inc'])} a month; at 2.86 it is {inr(r286['inc'])}; at the staff-side demand of 3.833 it is {inr(hi_['inc'])}. Any factor below 1.60 would leave a {A} pensioner with less than today, because the {AMT_DR}% DR is expected to be merged into the new basic.</p>
+<p>The range is wide because the factor is unknown. At the low-end media estimate of {AMT_FACTORS[0]}, the gain over today's {inr(today)} is only {inr(lo['inc'])} a month; at 2.86 it is {inr(r286['inc'])}; at the staff-side demand of 3.833 it is {inr(hi_['inc'])}. Any factor below {1 + AMT_DR / 100:.2f} would leave a {A} pensioner with less than today, because the {AMT_DR}% DR is expected to be merged into the new basic.</p>
 {"".join(f"<p>{x}</p>" for x in sp)}
 <h2>Worked example: {A} at a factor of 2.57</h2>
 <ol>
@@ -223,7 +223,7 @@ def amt_page(b, lang):
 <p class="note">{" · ".join(nav_links)}</p>
 <h2>हर फिटमेंट फैक्टर पर {A} पेंशन</h2>
 {amt_table(b, "hi")}
-<p>फैक्टर तय न होने से दायरा बड़ा है। मीडिया के सबसे कम अनुमान {AMT_FACTORS[0]} पर आज के {inr(today)} से बढ़त सिर्फ़ {inr(lo['inc'])} महीना है; 2.86 पर {inr(r286['inc'])}; और कर्मचारी पक्ष की माँग 3.833 पर {inr(hi_['inc'])}। 1.60 से कम कोई भी फैक्टर {A} वाले पेंशनभोगी को आज से कम देगा, क्योंकि {AMT_DR}% DR नई मूल पेंशन में मिल जाने की उम्मीद है।</p>
+<p>फैक्टर तय न होने से दायरा बड़ा है। मीडिया के सबसे कम अनुमान {AMT_FACTORS[0]} पर आज के {inr(today)} से बढ़त सिर्फ़ {inr(lo['inc'])} महीना है; 2.86 पर {inr(r286['inc'])}; और कर्मचारी पक्ष की माँग 3.833 पर {inr(hi_['inc'])}। {1 + AMT_DR / 100:.2f} से कम कोई भी फैक्टर {A} वाले पेंशनभोगी को आज से कम देगा, क्योंकि {AMT_DR}% DR नई मूल पेंशन में मिल जाने की उम्मीद है।</p>
 {"".join(f"<p>{x}</p>" for x in sp)}
 <h2>उदाहरण: 2.57 फैक्टर पर {A}</h2>
 <ol>
@@ -312,7 +312,7 @@ PAGES.append(dict(
     faqs=[
         ("Which amount should I pick?", "Your basic pension as written on the PPO or pension slip — before DR, additional pension and any commutation deduction."),
         ("Are these figures official?", "No. The 8th Pay Commission has not recommended a fitment factor. Every figure is an estimate using the 7th CPC method."),
-        ("Why is the gain smaller than the jump in basic pension?", f"Because today's {AMT_DR}% DR is expected to be merged into the new basic and restart at zero. A factor of 1.60 would only keep the total the same."),
+        ("Why is the gain smaller than the jump in basic pension?", f"Because today's {AMT_DR}% DR is expected to be merged into the new basic and restart at zero. A factor of {1 + AMT_DR / 100:.2f} would only keep the total the same."),
         ("Do the pages work for family pension?", "The table works for any basic amount, including a basic family pension; each page also explains the family pension that follows a retirement pension."),
     ],
     sources=["om_0816", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
@@ -339,7 +339,7 @@ PAGES.append(dict(
     faqs=[
         ("मुझे कौन-सी राशि चुननी चाहिए?", "PPO या पेंशन स्लिप में लिखी मूल पेंशन — DR, अतिरिक्त पेंशन और कम्यूटेशन कटौती से पहले की।"),
         ("क्या ये आँकड़े आधिकारिक हैं?", "नहीं। 8वें वेतन आयोग ने अभी कोई फिटमेंट फैक्टर नहीं सुझाया है। हर आँकड़ा 7वें आयोग के तरीके से बना अनुमान है।"),
-        ("बढ़त मूल पेंशन की छलाँग से कम क्यों है?", f"क्योंकि आज की {AMT_DR}% DR नई मूल पेंशन में मिलकर शून्य से शुरू होने की उम्मीद है। 1.60 का फैक्टर सिर्फ़ कुल रकम बराबर रखेगा।"),
+        ("बढ़त मूल पेंशन की छलाँग से कम क्यों है?", f"क्योंकि आज की {AMT_DR}% DR नई मूल पेंशन में मिलकर शून्य से शुरू होने की उम्मीद है। {1 + AMT_DR / 100:.2f} का फैक्टर सिर्फ़ कुल रकम बराबर रखेगा।"),
         ("क्या ये पेज पारिवारिक पेंशन के लिए भी हैं?", "तालिका किसी भी मूल राशि पर चलती है, मूल पारिवारिक पेंशन पर भी; हर पेज यह भी बताता है कि सेवानिवृत्ति पेंशन के बाद पारिवारिक पेंशन कितनी होगी।"),
     ],
     sources=["om_0816", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
