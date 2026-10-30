@@ -269,7 +269,7 @@ def amt_page(b, lang):
                   rel_hi("/", "/fitment-factor-calculator/", "/pension-chart/")
     return dict(path=amt_path(b, lang), lang=lang, crumb=crumb, parents=parents, title=title, desc=desc, h1=h1, lead=lead,
                 body=body, faqs=faqs, related=related, lastmod="2026-10-29", published="2026-10-29",
-                sources=["om_0816", "om_dr", "pm_dr", "pib_tor", "cpc8_comp", "portal_rb", "portal_faq", "comm_table"])
+                sources=["om_0816", "pib_dr63", "om_dr", "pm_dr", "pib_tor", "cpc8_comp", "portal_rb", "portal_faq", "comm_table"])
 
 
 for _b in AMT_LIST:
@@ -315,7 +315,7 @@ PAGES.append(dict(
         ("Why is the gain smaller than the jump in basic pension?", f"Because today's {AMT_DR}% DR is expected to be merged into the new basic and restart at zero. A factor of {1 + AMT_DR / 100:.2f} would only keep the total the same."),
         ("Do the pages work for family pension?", "The table works for any basic amount, including a basic family pension; each page also explains the family pension that follows a retirement pension."),
     ],
-    sources=["om_0816", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
+    sources=["om_0816", "pib_dr63", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
     related=rel("/", "/pension-chart/", "/fitment-factor-calculator/", "/basic-pension-finder/", "/minimum-pension-8th-pay-commission/"),
 ))
 PAGES.append(dict(
@@ -342,7 +342,7 @@ PAGES.append(dict(
         ("बढ़त मूल पेंशन की छलाँग से कम क्यों है?", f"क्योंकि आज की {AMT_DR}% DR नई मूल पेंशन में मिलकर शून्य से शुरू होने की उम्मीद है। {1 + AMT_DR / 100:.2f} का फैक्टर सिर्फ़ कुल रकम बराबर रखेगा।"),
         ("क्या ये पेज पारिवारिक पेंशन के लिए भी हैं?", "तालिका किसी भी मूल राशि पर चलती है, मूल पारिवारिक पेंशन पर भी; हर पेज यह भी बताता है कि सेवानिवृत्ति पेंशन के बाद पारिवारिक पेंशन कितनी होगी।"),
     ],
-    sources=["om_0816", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
+    sources=["om_0816", "pib_dr63", "om_dr", "pm_dr", "pib_tor", "portal_rb"],
     related=rel_hi("/", "/pension-chart/", "/fitment-factor-calculator/", "/basic-pension-finder/", "/minimum-pension-8th-pay-commission/"),
 ))
 

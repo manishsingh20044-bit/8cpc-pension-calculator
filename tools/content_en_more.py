@@ -133,7 +133,7 @@ extend("/family-pension-calculator/", body=f"""
     ("Is family pension paid to a divorced daughter?", "Yes, subject to the rules, including where divorce proceedings were filed during the lifetime of the employee, pensioner or spouse and the divorce took place after their death (DoPPW OM dated 19.07.2017)."),
     ("Do family pensioners get Fixed Medical Allowance?", "Family pensioners living in areas not covered by CGHS, and not using CGHS for OPD, receive Fixed Medical Allowance of ₹1,000 a month."),
     ("Is enhanced family pension available if the employee had less than seven years of service?", "Yes. Since 1 October 2019 the enhanced rate is payable to the family of an employee who dies in service even before completing seven years."),
-], sources=["portal_faq", "pib_min", "om_dr", "om_0816", "doppw", "pib_tor", "cpc8_comp"], related_add=("/life-certificate/",))
+], sources=["portal_faq", "pib_min", "pib_dr63", "om_dr", "om_0816", "doppw", "pib_tor", "cpc8_comp"], related_add=("/life-certificate/",))
 
 # ------------------------------------------------------------------ defence
 _dr_rows = [[inr(b), inr(b + up(Decimal(b) * 63 / 100)), inr(ceil_mul(b, "2.57")), inr(ceil_mul(b, "2.86")), inr(ceil_mul(b, "3.833"))] for b in (9000, 18000, 25000, 40000)]
@@ -165,7 +165,7 @@ extend("/defence-pension-calculator/", body=f"""
     ("Will OROP be revised along with the 8th Pay Commission?", "OROP revisions are carried out separately by the Ministry of Defence. How an 8th CPC revision and a future OROP revision would interact is not known."),
     ("Is there a rank-wise 8th CPC pension table for Sepoy, Havildar or JCOs?", "No official table exists as of " + LAST_UPDATED_HUMAN + ". Tables circulating on social media are not official."),
     ("What is the SPARSH helpline number?", "The SPARSH website lists the helpline 1800-180-5325 and warns that no WhatsApp numbers are authorised for SPARSH queries."),
-], sources=["sparsh", "desw", "om_dr", "pm_dr", "pib_tor", "cpc8_comp", "uidai_lc", "doe"], related_add=("/life-certificate/",))
+], sources=["sparsh", "desw", "pib_dr63", "om_dr", "pm_dr", "pib_tor", "cpc8_comp", "uidai_lc", "doe"], related_add=("/life-certificate/",))
 
 # ------------------------------------------------------------------ chart
 extend("/pension-chart/", body=f"""
@@ -191,7 +191,7 @@ extend("/pension-chart/", body=f"""
     ("Does the chart apply to defence pensioners?", "It shows the arithmetic for any basic pension, but armed forces pensions are revised by separate Ministry of Defence orders and OROP tables."),
     ("Why are the values rounded up?", "Official revision orders round revised pension and DR to the next higher rupee, so the chart does the same."),
     ("Can I download or print the chart?", "Yes — use your browser's print option to save it as a PDF. The values are also generated from the same settings published at /assets/rates.json."),
-], sources=["om_0816", "om_0517", "pib_tor", "cpc8_comp", "om_dr", "portal_rb"], related_add=("/minimum-pension-8th-pay-commission/", "/commutation-calculator/"))
+], sources=["om_0816", "om_0517", "pib_tor", "cpc8_comp", "pib_dr63", "om_dr", "portal_rb"], related_add=("/minimum-pension-8th-pay-commission/", "/commutation-calculator/"))
 
 # ------------------------------------------------------------------ basic pension finder
 _p = page_by_path("/basic-pension-finder/")
@@ -211,7 +211,7 @@ extend("/basic-pension-finder/", body="""
     ("What if the tool shows two possible basic pensions?", "Because DR is rounded up to the next rupee, two neighbouring basic pensions can give the same credit. Check your PPO or pension slip to pick the right one; the difference is usually one rupee."),
     ("Does income tax deducted by the bank matter?", "Yes. Enter any TDS or recovery under 'other deductions' so the tool adds it back."),
     ("Is Fixed Medical Allowance part of basic pension?", "No. FMA of ₹1,000 a month is paid only to pensioners in non-CGHS areas who do not use CGHS for OPD, and it does not attract DR."),
-], sources=["portal_rb", "portal_faq", "om_dr", "om_0816", "om_0517", "pm_dr"], related_add=("/commutation-calculator/",))
+], sources=["portal_rb", "portal_faq", "pib_dr63", "om_dr", "om_0816", "om_0517", "pm_dr"], related_add=("/commutation-calculator/",))
 
 # ------------------------------------------------------------------ pre-2016
 _p = page_by_path("/pre-2016-pensioners/")
@@ -239,7 +239,7 @@ extend("/pre-2016-pensioners/", body="""
     ("Do the 2016 and 2017 orders apply to armed forces pensioners?", "No. Both OMs say separate orders will be issued by the Ministry of Defence for armed forces pensioners and family pensioners."),
     ("Did banks revise pre-2016 pensions automatically?", "Banks applied the 2.57 multiplier automatically under the 04.08.2016 OM. The notional-pay revision needed a revised authority from the Head of Department / PAO under the existing PPO number."),
     ("Is the minimum ₹9,000 applied before or after additional pension?", "The minimum ₹9,000 excludes additional pension. Additional pension for age is then added on the revised basic."),
-], sources=["om_0816", "om_0517", "portal_faq", "pgportal", "pib_tor", "cpc8_comp", "om_dr"])
+], sources=["om_0816", "om_0517", "portal_faq", "pgportal", "pib_tor", "cpc8_comp", "pib_dr63", "om_dr"])
 
 # ------------------------------------------------------------------ DA/DR
 _p = page_by_path("/da-dr-calculator/")
@@ -285,7 +285,7 @@ _p["body"] = _p["body"].replace("<h2>Found an error?</h2>", """<h2>Commutation a
 extend("/how-we-calculate/", faqs=[
     ("How is the commuted value of pension calculated?", "Commuted value = commuted monthly pension × commutation factor for age next birthday × 12. For a ₹12,000 monthly commutation at 8.194, that is ₹11,79,936."),
     ("Do you use any data that is not official?", "Union demands (such as 3.833) and media estimates appear only as labelled scenarios. Every current rule comes from an official order linked on this page."),
-], sources=["pib_tor", "om_dr", "om_0816", "om_0517", "portal_rb", "portal_faq", "comm_table", "pm_dr"], related_add=("/editorial-policy/",))
+], sources=["pib_tor", "pib_dr63", "om_dr", "om_0816", "om_0517", "portal_rb", "portal_faq", "comm_table", "pm_dr"], related_add=("/editorial-policy/",))
 
 _p = page_by_path("/about/")
 _p["body"] = f"""
@@ -405,7 +405,7 @@ PAGES.append(dict(
         ("Can a family pensioner commute family pension?", "No. Commutation applies to the retiring government servant's pension, not to family pension."),
         ("Can I commute a further part of my pension later?", "No. There is no second option once the first commutation has become absolute."),
     ],
-    sources=["portal_rb", "portal_faq", "comm_table", "om_0816", "om_0517", "om_dr", "pgportal", "pib_tor"],
+    sources=["portal_rb", "portal_faq", "comm_table", "om_0816", "om_0517", "pib_dr63", "om_dr", "pgportal", "pib_tor"],
     related=rel("/", "/basic-pension-finder/", "/da-dr-calculator/", "/pre-2016-pensioners/", "/how-we-calculate/"),
 ))
 
@@ -459,7 +459,7 @@ PAGES.append(dict(
         ("Is the ₹69,000 minimum pay demand official?", "No. It is the reported demand of the NC-JCM staff side, which gives the 3.833 factor. It has no official status."),
         ("Do minimum pensioners get Fixed Medical Allowance?", "If they live in a non-CGHS area and do not use CGHS for OPD, yes — ₹1,000 a month, without DR."),
     ],
-    sources=["om_0816", "om_0517", "pib_min", "portal_rb", "om_dr", "pm_dr", "pib_tor", "cpc8_comp"],
+    sources=["om_0816", "om_0517", "pib_min", "portal_rb", "pib_dr63", "om_dr", "pm_dr", "pib_tor", "cpc8_comp"],
     related=rel("/", "/pension-chart/", "/family-pension-calculator/", "/fitment-factor-calculator/", "/commutation-calculator/"),
 ))
 
@@ -596,7 +596,7 @@ PAGES.append(dict(
         ("How quickly are mistakes corrected?", "Verified errors in rules or calculations are fixed promptly and logged on the changelog with the date."),
         ("Do you accept paid content?", "No. No one can pay to change figures, rankings or wording."),
     ],
-    sources=["pib_tor", "om_dr", "om_0517", "doppw", "doe", "cpc8"],
+    sources=["pib_tor", "pib_dr63", "om_dr", "om_0517", "doppw", "doe", "cpc8"],
     related=rel("/about/", "/how-we-calculate/", "/changelog/", "/contact/"),
 ))
 
